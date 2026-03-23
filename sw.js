@@ -1,10 +1,10 @@
 const CACHE_NAME = 'mydonelist-v1';
 const ASSETS = [
-  '/my-done-list/',
-  '/my-done-list/index.html',
-  '/my-done-list/manifest.json',
-  '/my-done-list/icon-192.png',
-  '/my-done-list/icon-512.png',
+  '/My-done-list/',
+  '/My-done-list/index.html',
+  '/My-done-list/manifest.json',
+  '/My-done-list/icon-192.png',
+  '/My-done-list/icon-512.png',
   'https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap',
 ];
 
@@ -32,7 +32,7 @@ self.addEventListener('fetch', (event) => {
 
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request).catch(() => caches.match('/my-done-list/index.html'))
+      fetch(request).catch(() => caches.match('/My-done-list/index.html'))
     );
     return;
   }

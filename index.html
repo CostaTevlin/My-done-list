@@ -99,6 +99,11 @@
   @keyframes slide-out-left {
     to { transform: translateX(-100%); opacity: 0; }
   }
+  @keyframes confetti-pop {
+    0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0); opacity: 1; }
+    20% { opacity: 1; transform: translateY(-40vh) translateX(calc(var(--drift) * 0.3)) rotate(90deg) scale(1); }
+    100% { transform: translateY(-85vh) translateX(var(--drift)) rotate(280deg) scale(0.4); opacity: 0; }
+  }
 
   .reveal {
     opacity: 0;
@@ -479,6 +484,36 @@ function SwipeItem({ item, index, total, onDelete }) {
   );
 }
 
+/* ── Mini confetti ── */
+const fireConfetti = () => {
+  const colors = ['#161A14', '#8A8A87', '#B8B8B5', '#D1D1D1', '#E8E8E8'];
+  const container = document.createElement('div');
+  container.style.cssText = 'position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden';
+  document.body.appendChild(container);
+
+  const count = 35;
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement('div');
+    const size = 4 + Math.random() * 5;
+    const x = 30 + Math.random() * 40; // center-ish spread
+    const drift = -60 + Math.random() * 120;
+    const delay = Math.random() * 200;
+    const dur = 700 + Math.random() * 500;
+    dot.style.cssText = `
+      position:absolute;
+      left:${x}%;bottom:0;
+      width:${size}px;height:${size}px;
+      border-radius:${Math.random() > 0.5 ? '50%' : '1px'};
+      background:${colors[i % colors.length]};
+      opacity:0;
+      animation:confetti-pop ${dur}ms ${delay}ms cubic-bezier(.2,.9,.3,1) forwards;
+      --drift:${drift}px;
+    `;
+    container.appendChild(dot);
+  }
+  setTimeout(() => container.remove(), 1400);
+};
+
 /* ── App ── */
 function App() {
   const [allItems, setAllItems] = useState(() => pruneOld(loadItems()));
@@ -554,6 +589,7 @@ function App() {
     }]);
     setNewText('');
     setShowModal(false);
+    setTimeout(fireConfetti, 250);
   }, [newText, isValid]);
 
   const removeItem = useCallback((id) => {

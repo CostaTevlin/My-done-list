@@ -341,32 +341,80 @@ const getTodayKey = () => new Date().toISOString().slice(0, 10);
 
 /* ── Context-aware copy ── */
 const getMessage = (count) => {
+  // Use hour as additional seed so messages rotate throughout the day
+  const h = new Date().getHours();
+  const seed = (count * 7 + h) % 5;
   if (count === 0) return '';
-  if (count === 1) return 'The first one is always the hardest.';
-  if (count === 2) return 'Two down. You\'re on your way.';
+  if (count === 1) return [
+    'First win of the day. Let\'s go.',
+    'And so it begins.',
+    'The hardest one is behind you.',
+    'That\'s the spark. Keep going.',
+    'One down. You\'re officially unstoppable.',
+  ][seed];
+  if (count === 2) return [
+    'Two for two. You\'re warming up.',
+    'A pattern is forming.',
+    'Twice as productive as zero. Math checks out.',
+    'Double trouble (the good kind).',
+    'You didn\'t stop at one. Respect.',
+  ][seed];
   if (count <= 4) return [
-    'You\'re building momentum.',
-    'Every small thing counts.',
-    'One thing at a time — and you\'re doing it.',
-  ][count % 3];
+    'You\'re on a roll now.',
+    'Small wins stack up fast.',
+    'Your future self is already thanking you.',
+    'Look at you go.',
+    'This is what showing up looks like.',
+  ][seed];
   if (count <= 7) return [
-    'Look at what you\'ve done today.',
-    'Progress, not perfection.',
-    'Not everything needs to be big — but this is.',
-  ][count % 3];
+    'Okay, you\'re actually crushing it.',
+    'Today is listening to you.',
+    'You turned "meh" into momentum.',
+    'Not bad? No — this is great.',
+    'High five. Seriously.',
+  ][seed];
   return [
-    'Seriously impressive day.',
-    'You showed up in a big way today.',
-    'This is what momentum looks like.',
-  ][count % 3];
+    'Legend status: unlocked.',
+    'Your done list has a done list.',
+    'Peak productivity. Screenshot this.',
+    'You showed up and didn\'t stop.',
+    'Tomorrow\'s gonna be jealous of today.',
+  ][seed];
 };
 
 const getReflectNote = (count) => {
-  if (count === 0) return 'Tomorrow is a fresh start.';
-  if (count === 1) return 'You showed up. That counts.';
-  if (count <= 3) return 'Solid progress. Every task matters.';
-  if (count <= 6) return 'What a productive day. Be proud of yourself.';
-  return 'An extraordinary day. You should feel this.';
+  const h = new Date().getHours();
+  const seed = (count * 3 + h) % 4;
+  if (count === 0) return [
+    'Tomorrow is a fresh start.',
+    'Rest is productive too.',
+    'Some days are for recharging.',
+    'A blank page is still a page.',
+  ][seed];
+  if (count === 1) return [
+    'You showed up. That\'s the whole game.',
+    'One thing done is infinitely more than zero.',
+    'That one thing? It mattered.',
+    'You started. Most people didn\'t.',
+  ][seed];
+  if (count <= 3) return [
+    'Solid day. Every task counted.',
+    'Steady wins the race.',
+    'You kept going. That\'s the superpower.',
+    'Quality over quantity. Always.',
+  ][seed];
+  if (count <= 6) return [
+    'What a day. Be proud of yourself.',
+    'You made today count.',
+    'This is what a good day looks like.',
+    'Impressive. Full stop.',
+  ][seed];
+  return [
+    'An extraordinary day. Feel that.',
+    'You were on fire today.',
+    'Today was your masterpiece.',
+    'Take a bow. You earned it.',
+  ][seed];
 };
 
 /* ── Swipeable Item ── */
@@ -465,7 +513,7 @@ function App() {
   const items = useMemo(() =>
     allItems
       .filter(i => i.date === todayKey)
-      .sort((a, b) => parseTime(b.time) - parseTime(a.time)),
+      .sort((a, b) => b.id - a.id),
     [allItems, todayKey]
   );
 
@@ -473,9 +521,23 @@ function App() {
   const timeline = useMemo(() =>
     allItems
       .filter(i => i.date === todayKey)
-      .sort((a, b) => parseTime(a.time) - parseTime(b.time)),
+      .sort((a, b) => a.id - b.id),
     [allItems, todayKey]
   );
+
+  // Weekly chart data — last 7 days
+  const weekData = useMemo(() => {
+    const days = [];
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const key = d.toISOString().slice(0, 10);
+      const count = allItems.filter(it => it.date === key).length;
+      days.push({ key, label: i === 0 ? 'Today' : dayNames[d.getDay()], count });
+    }
+    return days;
+  }, [allItems, todayKey]);
 
   const isValid = newText.trim().length >= MIN_INPUT_LENGTH;
 
@@ -500,7 +562,12 @@ function App() {
 
   useEffect(() => {
     if (showModal && inputRef.current) {
-      setTimeout(() => inputRef.current?.focus(), 100);
+      // Use requestAnimationFrame + short delay to ensure sheet is rendered before focus
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          inputRef.current?.focus();
+        }, 50);
+      });
     }
   }, [showModal]);
 
@@ -521,8 +588,8 @@ function App() {
           <div style={contentPad}>
             <header className="reveal">
               <p className="label">{getGreeting()}</p>
-              <h1 className="display" style={{ fontSize: 44, marginTop: 16 }}>
-                My done<br />list
+              <h1 className="display" style={{ fontSize: 44, marginTop: 16, whiteSpace: 'nowrap' }}>
+                My done list
               </h1>
             </header>
 
@@ -531,7 +598,7 @@ function App() {
                 {pad(items.length)}
               </span>
               {note && (
-                <p className="display-sub" style={{ fontSize: 16, marginTop: 14, maxWidth: 240 }}>
+                <p style={{ fontSize: 17, fontWeight: 400, marginTop: 16, maxWidth: 260, lineHeight: 1.45, color: 'var(--dark)', letterSpacing: '-0.01em' }}>
                   {note}
                 </p>
               )}
@@ -591,15 +658,80 @@ function App() {
             </header>
 
             <div className="reveal" style={{ marginTop: 32, animationDelay: '80ms' }}>
-              <p className="display-sub" style={{ fontSize: 18, maxWidth: 280 }}>
+              <p style={{ fontSize: 18, fontWeight: 400, maxWidth: 300, lineHeight: 1.45, color: 'var(--dark)', letterSpacing: '-0.01em' }}>
                 {getReflectNote(items.length)}
               </p>
             </div>
 
-            <div className="reveal" style={{ marginTop: 32, borderTop: '1px solid var(--border)', animationDelay: '120ms' }}></div>
+            {/* Weekly productivity chart */}
+            <div className="reveal" style={{ marginTop: 32, animationDelay: '120ms' }}>
+              <p className="label" style={{ marginBottom: 16 }}>This week</p>
+              <div style={{
+                display: 'flex',
+                overflowX: 'auto',
+                gap: 10,
+                paddingBottom: 4,
+                scrollbarWidth: 'none',
+                WebkitOverflowScrolling: 'touch',
+                msOverflowStyle: 'none',
+              }}>
+                {weekData.map((day) => {
+                  const maxCount = Math.max(...weekData.map(d => d.count), 1);
+                  const barHeight = Math.max(day.count > 0 ? (day.count / maxCount) * 100 : 4, 4);
+                  const isToday = day.key === todayKey;
+                  return (
+                    <div key={day.key} style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      minWidth: 44,
+                      flex: '1 0 44px',
+                    }}>
+                      <span style={{
+                        fontSize: 14,
+                        fontWeight: 500,
+                        fontVariantNumeric: 'tabular-nums',
+                        color: isToday ? 'var(--charcoal)' : day.count > 0 ? 'var(--dark)' : 'var(--light)',
+                        marginBottom: 8,
+                      }}>
+                        {day.count}
+                      </span>
+                      <div style={{
+                        width: 28,
+                        height: 120,
+                        display: 'flex',
+                        alignItems: 'flex-end',
+                        borderRadius: 14,
+                        background: 'var(--off-white)',
+                        overflow: 'hidden',
+                      }}>
+                        <div style={{
+                          width: '100%',
+                          height: `${barHeight}%`,
+                          background: isToday ? 'var(--charcoal)' : day.count > 0 ? 'var(--border)' : 'transparent',
+                          borderRadius: 14,
+                          transition: 'height 0.4s cubic-bezier(0.2, 0.9, 0.3, 1)',
+                        }} />
+                      </div>
+                      <span style={{
+                        fontSize: 11,
+                        fontWeight: isToday ? 600 : 400,
+                        color: isToday ? 'var(--charcoal)' : 'var(--light)',
+                        marginTop: 8,
+                        letterSpacing: '0.02em',
+                      }}>
+                        {day.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="reveal" style={{ marginTop: 32, borderTop: '1px solid var(--border)', animationDelay: '180ms' }}></div>
 
             {timeline.length > 0 && (
-              <div className="reveal" style={{ marginTop: 20, animationDelay: '180ms' }}>
+              <div className="reveal" style={{ marginTop: 20, animationDelay: '240ms' }}>
                 {timeline.map((item, idx) => (
                   <div key={item.id} style={{
                     display: 'flex',
@@ -621,14 +753,14 @@ function App() {
             )}
 
             {timeline.length === 0 && (
-              <div className="reveal" style={{ padding: '48px 0', animationDelay: '180ms' }}>
+              <div className="reveal" style={{ padding: '48px 0', animationDelay: '240ms' }}>
                 <p style={{ fontSize: 14, color: 'var(--mid)', lineHeight: 1.5 }}>
                   Nothing to reflect on yet. Go to Today and log your first win.
                 </p>
               </div>
             )}
 
-            <div className="reveal" style={{ marginTop: 40, animationDelay: '280ms' }}>
+            <div className="reveal" style={{ marginTop: 40, animationDelay: '340ms' }}>
               <p style={{ fontSize: 13, color: 'var(--light)' }}>See you tomorrow</p>
             </div>
           </div>
@@ -720,11 +852,14 @@ function App() {
         <button
           className="pill-btn tab-center-btn"
           style={{
-            height: 40,
-            padding: '0 20px',
+            height: 48,
+            padding: '0 32px',
             background: 'var(--charcoal)',
             color: 'var(--white)',
-            fontSize: 13,
+            fontSize: 15,
+            fontWeight: 500,
+            letterSpacing: '0.02em',
+            boxShadow: '0 2px 12px rgba(22,26,20,0.15)',
           }}
           onClick={() => setShowModal(true)}
           aria-label="Log something you did"

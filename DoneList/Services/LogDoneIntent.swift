@@ -4,6 +4,17 @@
 //
 // Phase: 7
 // See: decisions/0008 — 4.2 risk mitigation  ·  appstore/Review notes draft.md
+//
+// ────────────────────────────────────────────────────────────────────────────
+// Until Phase 7, this file compiles to nothing so the AppIntents SSU training
+// step doesn't try to extract metadata from a stub that lacks its supporting
+// infrastructure (App Group, shared SwiftData store, AppShortcutsProvider).
+//
+// At Phase 7: change `#if false` → `#if true` (or remove the guard entirely)
+// and implement `perform()`.
+// ────────────────────────────────────────────────────────────────────────────
+
+#if false
 
 import AppIntents
 import Foundation
@@ -20,3 +31,5 @@ struct LogDoneIntent: AppIntent {
         return .result()
     }
 }
+
+#endif

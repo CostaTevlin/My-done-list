@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    REFERENCE ONLY — DO NOT add this file to the Xcode build.
+
+    Modern Xcode auto-generates Info.plist from the target's Info tab + General
+    tab + Build Settings. Adding this hand-rolled file as INFOPLIST_FILE leaves
+    out system keys (CFBundleExecutable, CFBundleName, CFBundlePackageType) and
+    causes "Missing bundle ID" install errors.
+
+    Use this file as a checklist of keys to add via the Info tab in Xcode.
+    See: engineering/Phase 1 — project setup.md (section A.7)
+-->
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>

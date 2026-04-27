@@ -1,6 +1,6 @@
 // DoneStore.swift
 // @Observable façade over the SwiftData ModelContext.
-// Owns: prune, todayKey, week aggregation, confetti fire counter.
+// Owns: CRUD · prune · todayKey · week aggregation · confetti fire counter.
 //
 // Phase: 2
 // See: engineering/Architecture.md  ·  engineering/Testing strategy.md
@@ -11,56 +11,155 @@ import Observation
 
 @Observable
 final class DoneStore {
+
+    // MARK: - Shared container
+
+    /// App-wide SwiftData container. Phase 2 uses local-only persistence; Phase 9
+    /// flips this to `cloudKitDatabase: .private` (see ADR-0009).
+    @MainActor
+    static let container: ModelContainer = {
+        let schema = Schema([DoneItem.self])
+        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        do {
+            return try ModelContainer(for: schema, configurations: [config])
+        } catch {
+            fatalError("DoneStore: failed to create ModelContainer — \(error)")
+        }
+    }()
+
+    // MARK: - Observable state
+
+    /// Bumped on every successful log so `ConfettiOverlay` can react via `.task(id:)`.
     private(set) var confettiFireCount: Int = 0
-    var todayKeyValue: String = ""
+
+    /// Cached `todayKey()` so views can react to midnight rollover without
+    /// recomputing per render.
+    private(set) var todayKeyValue: String
+
+    // MARK: - Storage
 
     private let context: ModelContext
 
+    /// Production initializer using the shared container.
+    /// `@MainActor` so it can touch `container.mainContext` safely.
+    @MainActor
+    convenience init() {
+        self.init(context: DoneStore.container.mainContext)
+    }
+
+    /// Test initializer accepting any context (typically an in-memory one).
+    /// Plain `init` — no actor isolation — so tests can run without MainActor pinning.
     init(context: ModelContext) {
         self.context = context
-        self.todayKeyValue = todayKey()
+        self.todayKeyValue = Self.todayKey()
     }
 
-    // MARK: - Date helpers
+    // MARK: - Date helpers (pure, static, side-effect free)
 
-    func todayKey(now: Date = .now) -> String {
+    /// Stable `yyyy-MM-dd` formatter using POSIX locale so the string format
+    /// is independent of the user's regional settings, but in the user's
+    /// local time zone so the day boundary matches their experience.
+    private static let dayFormatter: DateFormatter = {
         let f = DateFormatter()
-        f.dateFormat = "yyyy-MM-dd"
-        f.locale = .current
+        f.locale = Locale(identifier: "en_US_POSIX")
         f.timeZone = .current
-        return f.string(from: now)
+        f.dateFormat = "yyyy-MM-dd"
+        return f
+    }()
+
+    private static let timeFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = .current
+        f.dateFormat = "HH:mm"
+        return f
+    }()
+
+    static func todayKey(now: Date = .now) -> String {
+        return dayFormatter.string(from: now)
     }
 
-    func recomputeTodayKey() {
-        todayKeyValue = todayKey()
+    static func timeKey(now: Date = .now) -> String {
+        return timeFormatter.string(from: now)
     }
 
-    func padded(_ n: Int) -> String {
+    static func padded(_ n: Int) -> String {
         return n < 10 ? "0\(n)" : "\(n)"
     }
 
-    // MARK: - CRUD (Phase 2 stubs)
+    /// Returns the last 7 day-keys in ascending order, ending with today.
+    /// Used by Reflect's weekly chart aggregation.
+    static func weekRange(now: Date = .now) -> [String] {
+        let cal = Calendar.current
+        return (0..<7).reversed().compactMap { offset in
+            guard let date = cal.date(byAdding: .day, value: -offset, to: now) else {
+                return nil
+            }
+            return todayKey(now: date)
+        }
+    }
 
+    func recomputeTodayKey() {
+        todayKeyValue = Self.todayKey()
+    }
+
+    // MARK: - CRUD
+
+    /// Add a new done item with the current time + todayKey. Mirrors the PWA's
+    /// 2-character minimum gate (`index.html` line ~440).
     func add(text: String) {
-        // Phase 2 implementation
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.count >= 2 else { return }
+
+        let now = Date.now
+        let item = DoneItem(
+            text: trimmed,
+            time: Self.timeKey(now: now),
+            date: Self.todayKey(now: now),
+            createdAt: now
+        )
+        context.insert(item)
+        try? context.save()
     }
 
     func delete(_ item: DoneItem) {
-        // Phase 2 implementation
+        context.delete(item)
+        try? context.save()
     }
 
     // MARK: - Maintenance
 
-    func pruneOlderThan(days: Int) {
-        // Phase 2 implementation
+    /// Removes items older than `days` days, comparing against `createdAt`.
+    /// Default 30 days — enough to power Reflect's 7-day chart with headroom.
+    func pruneOlderThan(days: Int = 30) {
+        guard let cutoff = Calendar.current.date(byAdding: .day, value: -days, to: .now) else {
+            return
+        }
+        let predicate = #Predicate<DoneItem> { item in
+            item.createdAt < cutoff
+        }
+        let descriptor = FetchDescriptor<DoneItem>(predicate: predicate)
+        guard let stale = try? context.fetch(descriptor) else { return }
+        for item in stale {
+            context.delete(item)
+        }
+        try? context.save()
     }
 
-    func pruneIfNeeded() {
-        // Phase 2: only prune once per day to keep launch fast
+    /// Prune at most once per day to keep launch fast. Tracked via UserDefaults.
+    func pruneIfNeeded(days: Int = 30) {
+        let key = "DoneStore.lastPruneDay"
+        let today = Self.todayKey()
+        let last = UserDefaults.standard.string(forKey: key)
+        guard last != today else { return }
+        pruneOlderThan(days: days)
+        UserDefaults.standard.set(today, forKey: key)
     }
 
     // MARK: - Confetti
 
+    /// Bumped by LogSheet after a successful submit. ConfettiOverlay observes
+    /// this counter via `.task(id:)` and renders one variant per increment.
     func fireConfetti() {
         confettiFireCount &+= 1
     }

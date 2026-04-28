@@ -47,14 +47,28 @@ struct TodayView: View {
     // MARK: - Body
 
     var body: some View {
-        Group {
-            if todayItems.isEmpty {
-                emptyState
-            } else {
-                populatedList
+        NavigationStack {
+            Group {
+                if todayItems.isEmpty {
+                    emptyState
+                } else {
+                    populatedList
+                }
             }
+            .background(Color.tokenWhite.ignoresSafeArea())
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                            .foregroundStyle(Color.tokenCharcoal)
+                    }
+                    .accessibilityLabel("Settings")
+                }
+            }
+            .toolbarBackground(.hidden, for: .navigationBar)
         }
-        .background(Color.tokenWhite.ignoresSafeArea())
     }
 
     // MARK: - Populated list

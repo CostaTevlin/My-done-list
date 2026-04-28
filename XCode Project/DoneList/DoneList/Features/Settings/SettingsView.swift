@@ -72,6 +72,36 @@ struct SettingsView: View {
         } message: {
             Text("This permanently deletes every item you've logged. This cannot be undone.")
         }
+        // Reminder lifecycle — keep `UNUserNotificationCenter` in sync with
+        // the Settings toggle and time picker. First-time enable triggers the
+        // permission ask; denial flips the toggle back off.
+        .onChange(of: reminderEnabled) { _, enabled in
+            if enabled {
+                Task {
+                    let granted = await NotificationScheduler.requestAuthorization()
+                    if granted {
+                        NotificationScheduler.scheduleDailyReminder(
+                            at: reminderHour,
+                            minute: reminderMinute
+                        )
+                    } else {
+                        reminderEnabled = false
+                    }
+                }
+            } else {
+                NotificationScheduler.cancelDailyReminder()
+            }
+        }
+        .onChange(of: reminderHour) { _, _ in rescheduleIfNeeded() }
+        .onChange(of: reminderMinute) { _, _ in rescheduleIfNeeded() }
+    }
+
+    private func rescheduleIfNeeded() {
+        guard reminderEnabled else { return }
+        NotificationScheduler.scheduleDailyReminder(
+            at: reminderHour,
+            minute: reminderMinute
+        )
     }
 
     // MARK: - Sections

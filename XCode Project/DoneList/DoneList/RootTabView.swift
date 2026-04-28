@@ -29,9 +29,8 @@ struct RootTabView: View {
                     .padding(.bottom, 60)
             }
         }
-        .overlay {
-            ConfettiOverlay(fireCount: store.confettiFireCount)
-        }
+        // ConfettiOverlay lives on `DoneListApp`'s WindowGroup since Phase 7
+        // so onboarding's first-log step also gets the burst.
         .sheet(isPresented: $showLog) {
             LogSheet()
                 .environment(store)

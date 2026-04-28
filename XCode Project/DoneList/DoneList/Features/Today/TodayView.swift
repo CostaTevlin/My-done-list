@@ -47,16 +47,14 @@ struct TodayView: View {
     // MARK: - Body
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if todayItems.isEmpty {
-                    emptyState
-                } else {
-                    populatedList
-                }
+        Group {
+            if todayItems.isEmpty {
+                emptyState
+            } else {
+                populatedList
             }
-            .background(Color.tokenWhite.ignoresSafeArea())
         }
+        .background(Color.tokenWhite.ignoresSafeArea())
     }
 
     // MARK: - Populated list
@@ -134,25 +132,22 @@ struct TodayView: View {
 
             Spacer().frame(height: 32)                       // spec literal
 
-            HStack {
-                Spacer(minLength: 0)
-                BigNumeral(value: todayItems.count)
-                    .animation(reduceMotion ? nil : Motion.snappy, value: todayItems.count)
-                Spacer(minLength: 0)
-            }
+            // Numeral is left-aligned to match the PWA reference (index.html
+            // line 712 — default block flow under the title).
+            BigNumeral(value: todayItems.count)
+                .animation(reduceMotion ? nil : Motion.snappy, value: todayItems.count)
 
             Spacer().frame(height: Spacing.lg)               // 16
 
-            // Motivational copy is centered like the numeral above to keep the
-            // hero stack visually aligned. It's deliberately limited to a few
-            // lines so the layout never reflows past the items.
+            // Motivational copy mirrors the PWA: left-aligned, capped at
+            // 260pt so it doesn't run the full width.
             if !motivational.isEmpty {
                 Text(motivational)
                     .font(.tokenMotivational)
                     .kerning(TypographyKerning.motivational)
                     .foregroundStyle(Color.tokenDark)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: 260, alignment: .leading)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -171,10 +166,10 @@ struct TodayView: View {
                     .kerning(TypographyKerning.displaySub)
                     .foregroundStyle(Color.tokenCharcoal)
 
-                Text("What's one thing you've already done today?")
+                Text("What's one thing you've already done today? Even getting out of bed counts.")
                     .font(.tokenBodySub)
                     .foregroundStyle(Color.tokenMid)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: 260, alignment: .leading)
 
                 Spacer().frame(height: Spacing.lg)
 

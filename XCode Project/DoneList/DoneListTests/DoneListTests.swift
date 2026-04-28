@@ -66,6 +66,92 @@ struct DoneStoreTests {
         }
     }
 
+    // MARK: weekData
+
+    @Test("weekData returns 7 ordered buckets ending with today")
+    func weekData_shape() throws {
+        let week = DoneStore.weekData(items: [])
+        #expect(week.count == 7)
+        #expect(week.last?.key == DoneStore.todayKey())
+        #expect(week.last?.label == "Today")
+        #expect(week.last?.isToday == true)
+        for i in 1..<week.count {
+            #expect(week[i - 1].key <= week[i].key)
+        }
+        // Only the last bucket is flagged today.
+        for i in 0..<(week.count - 1) {
+            #expect(week[i].isToday == false)
+        }
+    }
+
+    @Test("weekData empty input gives all zero counts")
+    func weekData_emptyCounts() {
+        let week = DoneStore.weekData(items: [])
+        for day in week {
+            #expect(day.count == 0)
+        }
+    }
+
+    @Test("weekData buckets items into the correct days")
+    func weekData_bucketing() throws {
+        let cal = Calendar.current
+        let now = Date.now
+        let today = DoneStore.todayKey(now: now)
+
+        guard
+            let yesterday = cal.date(byAdding: .day, value: -1, to: now),
+            let twoDaysAgo = cal.date(byAdding: .day, value: -2, to: now)
+        else {
+            Issue.record("calendar arithmetic failed")
+            return
+        }
+        let yKey = DoneStore.todayKey(now: yesterday)
+        let dKey = DoneStore.todayKey(now: twoDaysAgo)
+
+        let items: [DoneItem] = [
+            DoneItem(text: "a", time: "10:00", date: today, createdAt: now),
+            DoneItem(text: "b", time: "11:00", date: today, createdAt: now),
+            DoneItem(text: "c", time: "09:00", date: yKey, createdAt: yesterday),
+            DoneItem(text: "d", time: "08:00", date: dKey, createdAt: twoDaysAgo),
+            DoneItem(text: "e", time: "07:00", date: dKey, createdAt: twoDaysAgo),
+            DoneItem(text: "f", time: "06:00", date: dKey, createdAt: twoDaysAgo),
+        ]
+
+        let week = DoneStore.weekData(items: items, now: now)
+        let map = Dictionary(uniqueKeysWithValues: week.map { ($0.key, $0.count) })
+        #expect(map[today] == 2)
+        #expect(map[yKey] == 1)
+        #expect(map[dKey] == 3)
+    }
+
+    @Test("weekData ignores items outside the 7-day window")
+    func weekData_ignoresStaleItems() throws {
+        let cal = Calendar.current
+        let now = Date.now
+        guard let tenDaysAgo = cal.date(byAdding: .day, value: -10, to: now) else {
+            Issue.record("calendar arithmetic failed")
+            return
+        }
+        let staleKey = DoneStore.todayKey(now: tenDaysAgo)
+        let items: [DoneItem] = [
+            DoneItem(text: "old", time: "10:00", date: staleKey, createdAt: tenDaysAgo)
+        ]
+        let week = DoneStore.weekData(items: items, now: now)
+        for day in week {
+            #expect(day.count == 0)
+            #expect(day.key != staleKey)
+        }
+    }
+
+    @Test("weekData earlier days use short weekday labels (not 'Today')")
+    func weekData_labels() {
+        let week = DoneStore.weekData(items: [])
+        let validLabels: Set<String> = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        for day in week.dropLast() {
+            #expect(validLabels.contains(day.label))
+        }
+    }
+
     // MARK: CRUD
 
     @Test("add inserts item with current time and todayKey")

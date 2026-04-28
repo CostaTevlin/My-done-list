@@ -81,7 +81,6 @@ struct LogSheet: View {
             }
             .brandPillStyle()
             .disabled(!canSubmit)
-            .opacity(canSubmit ? 1 : 0.5)
             .padding(.bottom, Spacing.xl)
         }
         .padding(.horizontal, Spacing.xxl)

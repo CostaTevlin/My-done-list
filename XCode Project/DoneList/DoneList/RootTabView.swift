@@ -1,11 +1,14 @@
 // RootTabView.swift
-// Top-level navigation shell: TabView with Today + Reflect tabs, the floating
-// "+ Log" pill (Liquid Glass on iOS 26 / overlay fallback on iOS 18-25), the
-// LogSheet bottom sheet, and the full-screen ConfettiOverlay.
+// Top-level navigation shell: native `TabView` (Today + Reflect tabs) with
+// the "+ Log" pill attached as a right-aligned accessory — placed where
+// iOS 26's search-role tab would normally live.
 //
-// Phase: 3 (shell), Phase 4 (Log + confetti wired here)
-// See: engineering/Architecture.md  ·  design-system/Liquid Glass mapping.md
-//      design-system/Components.md (TabBarPill)  ·  ADR-0005, ADR-0006
+// On iOS 26 the pill rides inside `.tabViewBottomAccessory` (Liquid Glass).
+// On iOS 18-25 it floats trailing-aligned above the tab bar via a ZStack.
+//
+// Phase: 3 (shell), 4 (Log + confetti wired here), 5 (Log moved to trailing edge)
+// See: engineering/Architecture.md  · design-system/Liquid Glass mapping.md
+//      design-system/Components.md (TabBarPill)  · ADR-0005, ADR-0006
 
 import SwiftUI
 import DesignSystem
@@ -16,12 +19,13 @@ struct RootTabView: View {
     @State private var showLog: Bool = false
 
     var body: some View {
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .bottomTrailing) {
             tabs
             // Fallback log pill — iOS 18-25 only. iOS 26 attaches the pill via
             // `.tabViewBottomAccessory` (see `tabs` below).
             if #unavailable(iOS 26.0) {
                 LogPill { showLog = true }
+                    .padding(.trailing, Spacing.lg)
                     .padding(.bottom, 60)
             }
         }
@@ -33,8 +37,7 @@ struct RootTabView: View {
                 .environment(store)
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
-                .presentationBackground(.regularMaterial)
-                .presentationCornerRadius(14)
+                .presentationCornerRadius(Radius.card)
         }
     }
 
@@ -50,7 +53,14 @@ struct RootTabView: View {
 
         if #available(iOS 26.0, *) {
             view.tabViewBottomAccessory {
-                LogPill { showLog = true }
+                // Right-align the pill inside the accessory so it occupies
+                // the trailing edge of the tab bar — the slot where iOS 26's
+                // search-role tab usually sits.
+                HStack(spacing: 0) {
+                    Spacer(minLength: 0)
+                    LogPill { showLog = true }
+                }
+                .padding(.trailing, Spacing.lg)
             }
         } else {
             view
@@ -60,8 +70,9 @@ struct RootTabView: View {
 
 // MARK: - Floating "+ Log" pill
 
-/// Brand pill above the tab bar. On iOS 26 it lives inside
-/// `.tabViewBottomAccessory`; on iOS 18-25 it floats via the ZStack above.
+/// Brand pill anchored to the trailing edge of the tab bar. On iOS 26 it
+/// lives inside `.tabViewBottomAccessory`; on iOS 18-25 it floats via the
+/// ZStack above.
 private struct LogPill: View {
     let action: () -> Void
 

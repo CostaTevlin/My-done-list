@@ -152,4 +152,104 @@ struct CopyBankTests {
         // count=8, h=0 → seed = (56+0) % 5 = 1 → pool[1] for count 8+
         #expect(CopyBank.message(count: 8, hour: 0) == "Your done list has a done list.")
     }
+
+    // MARK: - Reflect note
+
+    @Test("reflectNote is non-empty for every (count, hour) pair, including count == 0")
+    func reflectNote_alwaysNonEmpty() {
+        for count in 0...20 {
+            for h in 0..<24 {
+                #expect(!CopyBank.reflectNote(count: count, hour: h).isEmpty,
+                        "empty reflectNote for count=\(count) hour=\(h)")
+            }
+        }
+    }
+
+    @Test("reflectNote count == 0 picks from the rest-day pool")
+    func reflectNote_zeroPool() {
+        let pool = [
+            "Tomorrow is a fresh start.",
+            "Rest is productive too.",
+            "Some days are for recharging.",
+            "A blank page is still a page."
+        ]
+        for h in 0..<24 {
+            #expect(pool.contains(CopyBank.reflectNote(count: 0, hour: h)))
+        }
+    }
+
+    @Test("reflectNote counts 2 and 3 share a pool")
+    func reflectNote_tierTwoThree() {
+        let pool = [
+            "Solid day. Every task counted.",
+            "Steady wins the race.",
+            "You kept going. That's the superpower.",
+            "Quality over quantity. Always."
+        ]
+        for count in 2...3 {
+            for h in 0..<24 {
+                #expect(pool.contains(CopyBank.reflectNote(count: count, hour: h)))
+            }
+        }
+    }
+
+    @Test("reflectNote counts 4-6 share a pool")
+    func reflectNote_tierFourSix() {
+        let pool = [
+            "What a day. Be proud of yourself.",
+            "You made today count.",
+            "This is what a good day looks like.",
+            "Impressive. Full stop."
+        ]
+        for count in 4...6 {
+            for h in 0..<24 {
+                #expect(pool.contains(CopyBank.reflectNote(count: count, hour: h)))
+            }
+        }
+    }
+
+    @Test("reflectNote count >= 7 picks from the extraordinary pool")
+    func reflectNote_tierSevenPlus() {
+        let pool = [
+            "An extraordinary day. Feel that.",
+            "You were on fire today.",
+            "Today was your masterpiece.",
+            "Take a bow. You earned it."
+        ]
+        for count in [7, 8, 25, 99] {
+            for h in 0..<24 {
+                #expect(pool.contains(CopyBank.reflectNote(count: count, hour: h)))
+            }
+        }
+    }
+
+    @Test("reflectNote is deterministic for the same (count, hour)")
+    func reflectNote_isStable() {
+        for count in 0...10 {
+            for h in 0..<24 {
+                #expect(CopyBank.reflectNote(count: count, hour: h)
+                        == CopyBank.reflectNote(count: count, hour: h))
+            }
+        }
+    }
+
+    @Test("reflectNote seed formula matches PWA `(count * 3 + hour) % 4`")
+    func reflectNote_seedFormulaParity() {
+        // PWA: const seed = (count * 3 + h) % 4
+        //
+        // count=0, h=0 → seed = 0 → pool[0] for count==0
+        #expect(CopyBank.reflectNote(count: 0, hour: 0) == "Tomorrow is a fresh start.")
+
+        // count=1, h=1 → seed = (3+1) % 4 = 0 → pool[0] for count-1
+        #expect(CopyBank.reflectNote(count: 1, hour: 1) == "You showed up. That's the whole game.")
+
+        // count=2, h=2 → seed = (6+2) % 4 = 0 → pool[0] for count 2-3
+        #expect(CopyBank.reflectNote(count: 2, hour: 2) == "Solid day. Every task counted.")
+
+        // count=4, h=3 → seed = (12+3) % 4 = 3 → pool[3] for count 4-6
+        #expect(CopyBank.reflectNote(count: 4, hour: 3) == "Impressive. Full stop.")
+
+        // count=7, h=0 → seed = 21 % 4 = 1 → pool[1] for count 7+
+        #expect(CopyBank.reflectNote(count: 7, hour: 0) == "You were on fire today.")
+    }
 }

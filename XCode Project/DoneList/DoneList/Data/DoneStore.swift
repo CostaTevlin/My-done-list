@@ -99,6 +99,48 @@ final class DoneStore {
         }
     }
 
+    /// One day in the Reflect weekly chart — mirrors the PWA's `{key, label, count}`
+    /// trio plus an `isToday` flag for the highlight state.
+    struct WeekDay: Equatable, Identifiable {
+        let key: String
+        let label: String
+        let count: Int
+        let isToday: Bool
+        var id: String { key }
+    }
+
+    /// Aggregates the supplied items into 7 ordered buckets ending with today.
+    /// Pure / static so the view layer can call it from a `@Query` result and
+    /// the unit tests can verify it without spinning up a ModelContext.
+    /// Mirrors PWA `weekData` (index.html line 568-579) but uses local-time
+    /// day keys to stay consistent with `todayKey()`.
+    static func weekData(items: [DoneItem], now: Date = .now) -> [WeekDay] {
+        let cal = Calendar.current
+        let today = todayKey(now: now)
+        let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+        // Bucket once — O(n) instead of N filter passes.
+        var counts: [String: Int] = [:]
+        for item in items {
+            counts[item.date, default: 0] += 1
+        }
+
+        return (0..<7).reversed().compactMap { offset in
+            guard let date = cal.date(byAdding: .day, value: -offset, to: now) else {
+                return nil
+            }
+            let key = todayKey(now: date)
+            let weekdayIndex = cal.component(.weekday, from: date) - 1   // 0…Sun
+            let label = (offset == 0) ? "Today" : dayNames[weekdayIndex]
+            return WeekDay(
+                key: key,
+                label: label,
+                count: counts[key] ?? 0,
+                isToday: key == today
+            )
+        }
+    }
+
     func recomputeTodayKey() {
         todayKeyValue = Self.todayKey()
     }

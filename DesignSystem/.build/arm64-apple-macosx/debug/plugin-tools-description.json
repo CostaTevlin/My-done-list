@@ -45,6 +45,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift"
         },
         {
@@ -89,6 +93,7 @@
       "moduleOutputPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule",
       "objects" : [
         "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o",
+        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o",
         "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o",
         "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swift.o",
         "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+Outfit.swift.o",
@@ -148,6 +153,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o"
         },
         {
@@ -182,6 +191,7 @@
       "prepareForIndexing" : false,
       "sources" : [
         "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
+        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
         "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
         "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift",
         "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+Outfit.swift",
@@ -383,6 +393,7 @@
       "designsystem",
       "-c",
       "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
+      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
       "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
       "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift",
       "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+Outfit.swift",
@@ -591,6 +602,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift"
         },
         {
@@ -644,6 +659,10 @@
         {
           "kind" : "file",
           "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o"
         },
         {
           "kind" : "file",

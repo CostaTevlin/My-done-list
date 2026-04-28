@@ -9,6 +9,13 @@
     "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.dia"
   },
+  "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift": {
+    "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.d",
+    "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.dia"
+  },
   "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift": {
     "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.d",
     "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o",

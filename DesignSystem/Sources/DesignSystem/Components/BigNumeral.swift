@@ -23,7 +23,11 @@ public struct BigNumeral: View {
             .kerning(TypographyKerning.bigNumeral)
             .foregroundStyle(Color.tokenCharcoal)
             .contentTransition(.numericText())
-            .accessibilityLabel("\(value) things logged today")
+            // 120pt + system Dynamic Type scaling can pass 200pt at
+            // accessibility sizes — hard cap so the hero numeral never
+            // bursts the screen. Body / labels still scale fully.
+            .dynamicTypeSize(.xSmall ... DynamicTypeSize.xxLarge)
+            .accessibilityLabel("\(value) \(value == 1 ? "thing" : "things") logged today")
     }
 
     private func padded(_ n: Int) -> String {

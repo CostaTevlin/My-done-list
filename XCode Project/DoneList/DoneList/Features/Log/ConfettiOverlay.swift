@@ -39,6 +39,7 @@ struct ConfettiOverlay: View {
         }
         .ignoresSafeArea()
         .allowsHitTesting(false)
+        .accessibilityHidden(true)   // purely decorative — VoiceOver skip
         // React to fire bumps. Skip entirely under Reduce Motion.
         .task(id: fireCount) {
             guard fireCount > 0, !reduceMotion else { return }

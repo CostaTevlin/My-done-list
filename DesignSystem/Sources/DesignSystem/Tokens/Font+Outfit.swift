@@ -13,7 +13,16 @@ import SwiftUI
 public extension Font {
     /// Returns an Outfit font at the given size + weight. Falls back to system
     /// regular if a weight outside Outfit's shipped 5 cuts is requested.
-    static func outfit(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
+    ///
+    /// `relativeTo:` anchors the size to a system text style so SwiftUI's
+    /// Dynamic Type scaling kicks in. Without it, custom fonts ignore
+    /// Settings → Display & Brightness → Text Size, which fails the
+    /// accessibility audit. Tokens below pick the closest system style.
+    static func outfit(
+        _ size: CGFloat,
+        _ weight: Font.Weight = .regular,
+        relativeTo style: Font.TextStyle = .body
+    ) -> Font {
         let name: String
         switch weight {
         case .ultraLight, .thin:           name = "Outfit-ExtraLight"  // 200
@@ -24,43 +33,43 @@ public extension Font {
              .heavy, .black:               name = "Outfit-SemiBold"    // 600
         default:                           name = "Outfit-Regular"
         }
-        return .custom(name, size: size)
+        return .custom(name, size: size, relativeTo: style)
     }
 
     // MARK: - Named tokens (mirrors Tokens.md type scale)
 
     /// 44pt · 200 · -0.05em kerning · top page title
-    static let tokenDisplay       = Font.outfit(44, .ultraLight)
+    static let tokenDisplay       = Font.outfit(44, .ultraLight, relativeTo: .largeTitle)
 
     /// 28pt · 300 · -0.03em · empty state heading / modal title
-    static let tokenDisplaySub    = Font.outfit(28, .light)
+    static let tokenDisplaySub    = Font.outfit(28, .light, relativeTo: .title)
 
     /// 120pt · 200 · -0.05em · the big counter
-    static let tokenBigNumeral    = Font.outfit(120, .ultraLight)
+    static let tokenBigNumeral    = Font.outfit(120, .ultraLight, relativeTo: .largeTitle)
 
     /// 17pt · 400 · -0.01em · body text
-    static let tokenBody          = Font.outfit(17, .regular)
+    static let tokenBody          = Font.outfit(17, .regular, relativeTo: .body)
 
     /// 14pt · 400 · -0.01em · sub-copy
-    static let tokenBodySub       = Font.outfit(14, .regular)
+    static let tokenBodySub       = Font.outfit(14, .regular, relativeTo: .subheadline)
 
     /// 17pt · 300 · -0.01em · rotating motivational copy
-    static let tokenMotivational  = Font.outfit(17, .light)
+    static let tokenMotivational  = Font.outfit(17, .light, relativeTo: .body)
 
     /// 10pt · 500 · zero-padded item rank
-    static let tokenNum           = Font.outfit(10, .medium).monospacedDigit()
+    static let tokenNum           = Font.outfit(10, .medium, relativeTo: .caption2).monospacedDigit()
 
     /// 11pt · 400 · HH:mm timestamps
-    static let tokenTime          = Font.outfit(11, .regular).monospacedDigit()
+    static let tokenTime          = Font.outfit(11, .regular, relativeTo: .caption2).monospacedDigit()
 
     /// 11pt · 500 · 0.08em · uppercase labels / greetings
-    static let tokenLabel         = Font.outfit(11, .medium)
+    static let tokenLabel         = Font.outfit(11, .medium, relativeTo: .caption)
 
     /// 13pt · 500 · count above each chart bar
-    static let tokenChartCount    = Font.outfit(13, .medium).monospacedDigit()
+    static let tokenChartCount    = Font.outfit(13, .medium, relativeTo: .footnote).monospacedDigit()
 
     /// 11pt · 400 · day labels under chart bars
-    static let tokenChartDayLabel = Font.outfit(11, .regular)
+    static let tokenChartDayLabel = Font.outfit(11, .regular, relativeTo: .caption2)
 }
 
 /// Suggested kerning per token. Apply via `.kerning(.tokenDisplay)` at the call site —

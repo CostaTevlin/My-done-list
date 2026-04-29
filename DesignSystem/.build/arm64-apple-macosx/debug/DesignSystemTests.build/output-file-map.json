@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/primary.swiftdeps"
+  },
+  "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift": {
+    "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.d",
+    "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.dia"
+  }
+}

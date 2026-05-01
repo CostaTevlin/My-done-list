@@ -26,16 +26,23 @@ public struct PillButtonStyle: ButtonStyle {
 }
 
 public extension View {
-    /// Brand pill that auto-upgrades to `.buttonStyle(.glass)` on iOS 26
-    /// while keeping the charcoal `PillButtonStyle` on iOS 18-25.
+    /// Brand pill that auto-upgrades to `.buttonStyle(.glassProminent)` on
+    /// iOS 26 (filled glass — the tint color carries the brand) while keeping
+    /// the charcoal `PillButtonStyle` on iOS 18-25.
+    ///
+    /// `.glass` (clear) was tried first, but on the app's white surfaces it
+    /// renders nearly invisible — clear glass needs something colorful to
+    /// refract. `.glassProminent` keeps the Liquid Glass material treatment
+    /// (inner highlight, edge sheen) while filling with `tokenCharcoal`, so
+    /// the CTA reads with the same visual weight as the iOS 18-25 pill.
     ///
     /// On non-iOS host builds (macOS during `swift build` verification) we
-    /// always use the fallback — `.glass` is iOS-26-only.
+    /// always use the fallback — glass styles are iOS-26-only.
     @ViewBuilder
     func brandPillStyle() -> some View {
         #if os(iOS)
         if #available(iOS 26.0, *) {
-            self.buttonStyle(.glass).tint(Color.tokenCharcoal)
+            self.buttonStyle(.glassProminent).tint(Color.tokenCharcoal)
         } else {
             self.buttonStyle(PillButtonStyle())
         }

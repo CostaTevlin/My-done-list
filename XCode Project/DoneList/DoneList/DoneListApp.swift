@@ -29,14 +29,29 @@ struct DoneListApp: App {
             .environment(store)
             // Confetti is global — fires on Log sheet AND on the
             // onboarding first-log step (same store.fireConfetti() path).
+            // Gated on `confettiFireCount > 0` so the overlay stays out of
+            // the view hierarchy on cold start. The counter resets to 0
+            // each launch (not persisted), so this is always-off at startup
+            // and only attaches once the first log of the session fires.
             .overlay {
-                ConfettiOverlay(fireCount: store.confettiFireCount)
+                if store.confettiFireCount > 0 {
+                    ConfettiOverlay(fireCount: store.confettiFireCount)
+                }
             }
         }
         .modelContainer(DoneStore.container)
         .onChange(of: phase) { _, newPhase in
-            if newPhase == .active {
-                store.recomputeTodayKey()
+            guard newPhase == .active else { return }
+            store.recomputeTodayKey()
+
+            // Defer the daily prune past first paint. `pruneIfNeeded` does
+            // a SwiftData fetch + N deletes + save on the MainActor —
+            // running it synchronously on `.active` blocks the launch frame
+            // on the day it fires. 500ms pushes it past the interactive
+            // moment. For a fully-decoupled version, switch `pruneIfNeeded`
+            // to a detached background ModelContext.
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(500))
                 store.pruneIfNeeded()
             }
         }

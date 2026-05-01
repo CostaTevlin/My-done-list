@@ -49,29 +49,35 @@ struct RootTabView: View {
         }
     }
 
-    // MARK: - iOS 26: Native TabView with charcoal tint + Liquid Glass
+    // MARK: - iOS 26: Native TabView with charcoal tint + floating glass pill
 
     @ViewBuilder
     private var ios26Shell: some View {
         #if os(iOS)
         if #available(iOS 26.0, *) {
-            let view = TabView {
-                TodayView(onLogTap: { showLog = true })
-                    .tabItem { Label("Today", systemImage: "circle.fill") }
+            ZStack(alignment: .bottomTrailing) {
+                TabView {
+                    TodayView(onLogTap: { showLog = true })
+                        .tabItem {
+                            Label("Today", systemImage: "calendar.badge.checkmark")
+                        }
 
-                ReflectView()
-                    .tabItem { Label("Reflect", systemImage: "chart.bar.fill") }
-            }
-            .tint(Color.tokenCharcoal)
-
-            view.tabViewBottomAccessory {
-                // Right-align the pill inside the Liquid Glass accessory,
-                // occupying the trailing edge (iOS 26's search-role tab slot).
-                HStack(spacing: 0) {
-                    Spacer(minLength: 0)
-                    LogPill { showLog = true }
+                    ReflectView()
+                        .tabItem {
+                            Label("Reflect", systemImage: "chart.bar.xaxis")
+                        }
                 }
-                .padding(.trailing, Spacing.lg)
+                .tint(Color.tokenCharcoal)
+
+                // Float the "+ Log" pill above the iOS 26 glass tab bar
+                // instead of using `.tabViewBottomAccessory`. The accessory's
+                // full-width chrome reads as an empty search slot and dilutes
+                // the brand language. `brandPillStyle()` already maps to
+                // `.buttonStyle(.glass)` on iOS 26, so the floating pill
+                // stays native to Liquid Glass.
+                LogPill { showLog = true }
+                    .padding(.trailing, Spacing.lg)
+                    .padding(.bottom, 110)
             }
         }
         #endif
@@ -99,9 +105,9 @@ struct RootTabView: View {
 
 // MARK: - Floating "+ Log" pill
 
-/// Brand pill anchored to the trailing edge of the tab bar. On iOS 26 it
-/// lives inside `.tabViewBottomAccessory`; on iOS 18-25 it floats via the
-/// ZStack above.
+/// Brand pill that floats above the iOS 26 glass tab bar (trailing edge).
+/// On iOS 18-25 the pill is the center slot of `BrandTabBar` and does not
+/// use this wrapper.
 private struct LogPill: View {
     let action: () -> Void
 

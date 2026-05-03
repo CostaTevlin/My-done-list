@@ -56,17 +56,6 @@ struct TodayView: View {
                 }
             }
             .background(Color.tokenWhite.ignoresSafeArea())
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        Image(systemName: "gearshape")
-                            .foregroundStyle(Color.tokenCharcoal)
-                    }
-                    .accessibilityLabel("Settings")
-                }
-            }
             .toolbarBackground(.hidden, for: .navigationBar)
         }
     }

@@ -22,9 +22,34 @@ struct DoneListExport: Codable, Equatable {
         let time: String
         let date: String
         let createdAt: Date
+
+        private enum CodingKeys: String, CodingKey { case text, time, date, createdAt }
+
+        nonisolated func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(text, forKey: .text)
+            try container.encode(time, forKey: .time)
+            try container.encode(date, forKey: .date)
+            try container.encode(createdAt, forKey: .createdAt)
+        }
     }
 
     static let currentVersion = 1
+
+    nonisolated static func defaultFilename(for date: Date) -> String {
+        "done-list-\(yyyyMMdd(date)).json"
+    }
+
+    nonisolated static func yyyyMMdd(_ date: Date) -> String {
+        // Thread-safe date formatting without shared DateFormatter.
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = .current
+        let comps = cal.dateComponents([.year, .month, .day], from: date)
+        let y = comps.year ?? 1970
+        let m = comps.month ?? 1
+        let d = comps.day ?? 1
+        return String(format: "%04d-%02d-%02d", y, m, d)
+    }
 
     /// Build an export from a `DoneItem` array — sorted ascending by
     /// `createdAt` so the file reads chronologically.
@@ -39,21 +64,20 @@ struct DoneListExport: Codable, Equatable {
         )
     }
 
-    static let encoder: JSONEncoder = {
+    private enum CodingKeys: String, CodingKey { case exportVersion, exportedAt, items }
+
+    nonisolated func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(exportVersion, forKey: .exportVersion)
+        try container.encode(exportedAt, forKey: .exportedAt)
+        try container.encode(items, forKey: .items)
+    }
+
+    nonisolated func encoded() throws -> Data {
         let e = JSONEncoder()
         e.outputFormatting = [.prettyPrinted, .sortedKeys]
         e.dateEncodingStrategy = .iso8601
-        return e
-    }()
-
-    static let decoder: JSONDecoder = {
-        let d = JSONDecoder()
-        d.dateDecodingStrategy = .iso8601
-        return d
-    }()
-
-    func encoded() throws -> Data {
-        try Self.encoder.encode(self)
+        return try e.encode(self)
     }
 }
 
@@ -65,19 +89,8 @@ extension DoneListExport: Transferable {
             try export.encoded()
         }
         .suggestedFileName { _ in
-            "done-list-\(yyyyMMdd(.now)).json"
+            DoneListExport.defaultFilename(for: Date())
         }
     }
 }
 
-private let exportDayFormatter: DateFormatter = {
-    let f = DateFormatter()
-    f.locale = Locale(identifier: "en_US_POSIX")
-    f.timeZone = .current
-    f.dateFormat = "yyyy-MM-dd"
-    return f
-}()
-
-private func yyyyMMdd(_ date: Date) -> String {
-    exportDayFormatter.string(from: date)
-}

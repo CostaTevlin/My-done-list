@@ -1,16 +1,15 @@
 // BrandTabBar.swift
-// Editorial navigation shell for iOS 18-25. Replaces native TabView to preserve
-// brand typographic confidence — avoids Liquid Glass system tint that destroys
-// the monochrome design language. On iOS 26, RootTabView uses native TabView with
-// charcoal tint instead.
+// Editorial navigation shell for iOS 18-25 (and macOS host build). On iOS 26
+// `RootTabView` uses the native floating glass TabView instead — this fallback
+// preserves brand fidelity where Liquid Glass isn't available, and is sized
+// to feel as substantial as the native pill.
 //
-// Layout: HStack of Today label · "+ Log" pill · Reflect label, all full-width.
-// Active state: uppercase label + animated charcoal underline. Touch targets ≥44pt.
+// Layout: floating pill container (Today · Reflect · More) + circle Log FAB,
+// both on a single HStack so vertical centers always agree.
+// Active state: white filled capsule behind the icon+label. Touch targets ≥44pt.
 // Respects Dynamic Type and Reduce Motion.
 //
-// Phase: 1 (iOS 18-25 fallback), 3 (shell refactor)
-// See: design-system/Components.md (BrandTabBar)  ·  design-system/Liquid Glass mapping.md
-//      ADR-0006 (Two-branch shell)
+// See: design-system/Components.md (BrandTabBar)  ·  ADR-0006 (Two-branch shell)
 
 import SwiftUI
 
@@ -18,6 +17,7 @@ public struct BrandTabBar: View {
     public enum Tab: Hashable {
         case today
         case reflect
+        case more
     }
 
     @Binding public var selection: Tab
@@ -31,90 +31,74 @@ public struct BrandTabBar: View {
     }
 
     public var body: some View {
-        VStack(spacing: 0) {
-            // Top divider
-            Rectangle()
-                .fill(Color.tokenBorderLight)
-                .frame(height: 1)
-
+        HStack(alignment: .center, spacing: Spacing.md) {
+            // Floating pill container holding the three nav tabs.
+            // Expands to fill available width so the pill spans most of
+            // the bar (matches the iOS 26 native floating pill proportions);
+            // tab items inside share that width equally.
             HStack(spacing: 0) {
-                // MARK: - Today slot
-                todaySlot
-                    .frame(maxWidth: .infinity)
-
-                // MARK: - Center pill
-                Button(action: onLog) {
-                    Text("+ Log")
-                        .font(.tokenBody.weight(.medium))
-                }
-                .brandPillStyle()
-                .accessibilityLabel("Log something you did")
-
-                // MARK: - Reflect slot
-                reflectSlot
-                    .frame(maxWidth: .infinity)
+                tabItem(.today,   label: "Today",   icon: "calendar.badge.checkmark")
+                tabItem(.reflect, label: "Reflect", icon: "chart.bar.xaxis")
+                tabItem(.more,    label: "More",    icon: "ellipsis")
             }
-            .padding(.top, Spacing.lg)
-            .padding(.bottom, Spacing.lg)
-            .padding(.bottom, Spacing.sm)
-            .background(Color.tokenWhite)
+            .padding(Spacing.sm)
+            .frame(maxWidth: .infinity)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(Color.tokenBorderLight)
+            )
+
+            // Circle Log FAB — brand charcoal, white plus.
+            // Lifted above the pill so the FAB-to-pill gap matches the
+            // pill-to-screen-bottom margin (`Spacing.lg`). The offset value
+            // = pill_height/2 + FAB_height/2 + gap
+            //   ≈ 38.5  + 30 + 16  = ~85pt.
+            // Centers can't be perfectly aligned with the pill in this
+            // layout, so we go the other way and float the FAB clearly
+            // above the bar (matching iOS 26's floating accessory feel).
+            Button(action: onLog) {
+                Image(systemName: "plus")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundStyle(Color.tokenWhite)
+                    .frame(width: 60, height: 60)
+                    .background(
+                        Circle()
+                            .fill(Color.tokenCharcoal)
+                            .shadow(color: Color.tokenCharcoal.opacity(0.18), radius: 10, y: 4)
+                    )
+            }
+            .offset(y: -85)
+            .accessibilityLabel("Log something you did")
         }
+        .padding(.horizontal, Spacing.lg)
+        .padding(.top, Spacing.md)
+        .padding(.bottom, Spacing.lg)
+        .background(Color.tokenWhite)
     }
 
-    private var todaySlot: some View {
-        Button(action: { selection = .today }) {
+    private func tabItem(_ tab: Tab, label: String, icon: String) -> some View {
+        Button(action: { selection = tab }) {
             VStack(spacing: 4) {
-                Text("Today")
+                Image(systemName: icon)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(selection == tab ? Color.tokenCharcoal : Color.tokenMid)
+                Text(label)
                     .font(.tokenLabel)
-                    .kerning(TypographyKerning.label)
-                    .textCase(.uppercase)
-                    .foregroundStyle(selection == .today ? Color.tokenCharcoal : Color.tokenMid)
-
-                if selection == .today {
-                    Capsule()
-                        .fill(Color.tokenCharcoal)
-                        .frame(width: 24, height: 2)
-                        .transition(.scale(scale: 0.8).combined(with: .opacity))
-                } else {
-                    Capsule()
-                        .fill(Color.clear)
-                        .frame(width: 24, height: 2)
+                    .foregroundStyle(selection == tab ? Color.tokenCharcoal : Color.tokenMid)
+            }
+            .padding(.vertical, Spacing.sm + 2)
+            .frame(maxWidth: .infinity, minHeight: 52)
+            .background {
+                if selection == tab {
+                    Capsule(style: .continuous)
+                        .fill(Color.tokenWhite)
+                        .shadow(color: Color.tokenCharcoal.opacity(0.06), radius: 4, y: 1)
                 }
             }
-            .frame(minHeight: 44)
             .contentShape(Rectangle())
         }
-        .accessibilityLabel("Today tab")
-        .accessibilityAddTraits(selection == .today ? .isSelected : [])
-        .buttonStyle(PlainButtonStyle())
-        .animation(reduceMotion ? .none : Motion.snappy, value: selection)
-    }
-
-    private var reflectSlot: some View {
-        Button(action: { selection = .reflect }) {
-            VStack(spacing: 4) {
-                Text("Reflect")
-                    .font(.tokenLabel)
-                    .kerning(TypographyKerning.label)
-                    .textCase(.uppercase)
-                    .foregroundStyle(selection == .reflect ? Color.tokenCharcoal : Color.tokenMid)
-
-                if selection == .reflect {
-                    Capsule()
-                        .fill(Color.tokenCharcoal)
-                        .frame(width: 24, height: 2)
-                        .transition(.scale(scale: 0.8).combined(with: .opacity))
-                } else {
-                    Capsule()
-                        .fill(Color.clear)
-                        .frame(width: 24, height: 2)
-                }
-            }
-            .frame(minHeight: 44)
-            .contentShape(Rectangle())
-        }
-        .accessibilityLabel("Reflect tab")
-        .accessibilityAddTraits(selection == .reflect ? .isSelected : [])
+        .accessibilityLabel("\(label) tab")
+        .accessibilityAddTraits(selection == tab ? .isSelected : [])
         .buttonStyle(PlainButtonStyle())
         .animation(reduceMotion ? .none : Motion.snappy, value: selection)
     }
@@ -130,6 +114,12 @@ public struct BrandTabBar: View {
 
 #Preview("Reflect selected") {
     @Previewable @State var selection: BrandTabBar.Tab = .reflect
+    BrandTabBar(selection: $selection, onLog: {})
+        .background(Color.tokenOffWhite)
+}
+
+#Preview("More selected") {
+    @Previewable @State var selection: BrandTabBar.Tab = .more
     BrandTabBar(selection: $selection, onLog: {})
         .background(Color.tokenOffWhite)
 }

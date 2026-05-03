@@ -11,11 +11,19 @@
 import SwiftUI
 import SwiftData
 
+#Preview("Confetti") {
+    @Previewable @State var show = false
+    Button("Fire 🎉") { show = true }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .overlay { ConfettiView(isPresented: $show) }
+}
+
 @main
 struct DoneListApp: App {
     @Environment(\.scenePhase) private var phase
     @State private var store = DoneStore()
     @AppStorage("hasOnboarded") private var hasOnboarded: Bool = false
+    @State private var showConfetti = false
 
     var body: some Scene {
         WindowGroup {
@@ -27,16 +35,10 @@ struct DoneListApp: App {
                 }
             }
             .environment(store)
-            // Confetti is global — fires on Log sheet AND on the
-            // onboarding first-log step (same store.fireConfetti() path).
-            // Gated on `confettiFireCount > 0` so the overlay stays out of
-            // the view hierarchy on cold start. The counter resets to 0
-            // each launch (not persisted), so this is always-off at startup
-            // and only attaches once the first log of the session fires.
-            .overlay {
-                if store.confettiFireCount > 0 {
-                    ConfettiOverlay(fireCount: store.confettiFireCount)
-                }
+            .overlay { ConfettiView(isPresented: $showConfetti) }
+            .onChange(of: store.confettiFireCount) { _, newCount in
+                guard newCount > 0 else { return }
+                showConfetti = true
             }
         }
         .modelContainer(DoneStore.container)

@@ -23,7 +23,16 @@ struct DoneListApp: App {
     @Environment(\.scenePhase) private var phase
     @State private var store = DoneStore()
     @AppStorage("hasOnboarded") private var hasOnboarded: Bool = false
+    @AppStorage("colorSchemePreference") private var colorSchemePreference: String = "dark"
     @State private var showConfetti = false
+
+    private var preferredColorScheme: ColorScheme? {
+        switch colorSchemePreference {
+        case "dark":  return .dark
+        case "light": return .light
+        default:      return nil
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -35,6 +44,7 @@ struct DoneListApp: App {
                 }
             }
             .environment(store)
+            .preferredColorScheme(preferredColorScheme)
             .overlay { ConfettiView(isPresented: $showConfetti) }
             .onChange(of: store.confettiFireCount) { _, newCount in
                 guard newCount > 0 else { return }

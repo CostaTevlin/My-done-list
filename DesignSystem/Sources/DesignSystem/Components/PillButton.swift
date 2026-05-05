@@ -8,20 +8,30 @@
 import SwiftUI
 
 public struct PillButtonStyle: ButtonStyle {
+    @Environment((\.colorScheme)) private var colorScheme
     public init() {}
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.tokenBody.weight(.medium))
-            .foregroundStyle(Color.tokenWhite)
+            .foregroundStyle(colorScheme == .dark ? Color.tokenCharcoal : Color.tokenWhite)
             .padding(.horizontal, Spacing.xl + 4)   // 28
             .padding(.vertical, Spacing.md + 2)     // 14
-            .background(
-                Capsule()
-                    .fill(Color.tokenCharcoal.opacity(configuration.isPressed ? 0.85 : 1.0))
-            )
+            .background(pillBackground(isPressed: configuration.isPressed))
             .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
             .animation(Motion.snappy, value: configuration.isPressed)
+    }
+
+    @ViewBuilder
+    private func pillBackground(isPressed: Bool) -> some View {
+        if colorScheme == .dark {
+            // Endel-style: white stroke ring, transparent fill
+            Capsule()
+                .strokeBorder(Color.tokenCharcoal.opacity(isPressed ? 0.5 : 1.0), lineWidth: 1.5)
+        } else {
+            Capsule()
+                .fill(Color.tokenCharcoal.opacity(isPressed ? 0.85 : 1.0))
+        }
     }
 }
 
@@ -42,7 +52,9 @@ public extension View {
     func brandPillStyle() -> some View {
         #if os(iOS)
         if #available(iOS 26.0, *) {
-            self.buttonStyle(.glassProminent).tint(Color.tokenCharcoal)
+            // Always tint with the raw charcoal value — tokenCharcoal resolves
+            // to white in dark mode, which would invert the pill unintentionally.
+            self.buttonStyle(.glassProminent).tint(Color(red: 22/255, green: 26/255, blue: 20/255))
         } else {
             self.buttonStyle(PillButtonStyle())
         }

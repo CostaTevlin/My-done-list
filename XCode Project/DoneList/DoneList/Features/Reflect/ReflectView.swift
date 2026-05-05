@@ -21,13 +21,23 @@ struct ReflectView: View {
     @Environment(DoneStore.self) private var store
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Query(sort: \DoneItem.createdAt, order: .reverse) private var allItems: [DoneItem]
+    @State private var selectedDayOffset: Int? = nil    // 0 = today, negative = past days
 
     // MARK: - Derived state
 
     /// Today's items ordered earliest → latest, matching the PWA's "timeline".
     private var timeline: [DoneItem] {
-        allItems
-            .filter { $0.date == store.todayKeyValue }
+        let cal = Calendar.current
+        let base = Date.now
+        let targetDate: Date
+        if let offset = selectedDayOffset {
+            targetDate = cal.date(byAdding: .day, value: offset, to: base) ?? base
+        } else {
+            targetDate = base
+        }
+        let key = DoneStore.todayKey(now: targetDate)
+        return allItems
+            .filter { $0.date == key }
             .sorted { $0.createdAt < $1.createdAt }
     }
 
@@ -122,18 +132,33 @@ struct ReflectView: View {
 
         // 7 columns flex to fill the strip — mirrors the PWA's
         // `display:flex; flex: 1 0 44px` so "Today" never gets clipped.
+        let todayIndex: Int = week.firstIndex(where: { $0.isToday }) ?? max(week.count - 1, 0)
+
         HStack(alignment: .bottom, spacing: Spacing.sm) {
-            ForEach(week) { day in
-                ChartBar(
-                    count: day.count,
+            ForEach(Array(week.enumerated()), id: \.offset) { pair in
+                let idx = pair.offset
+                let day = pair.element
+                let dayCount: Int = day.count
+                let fraction: Double = Double(dayCount) / Double(maxCount)
+                let offset: Int = idx - todayIndex   // today = 0
+                let isSelected: Bool = (selectedDayOffset == offset)
+
+                WeeklyBarCell(
+                    count: dayCount,
                     label: day.label,
                     isToday: day.isToday,
-                    fraction: Double(day.count) / Double(maxCount)
+                    fraction: fraction,
+                    isSelected: isSelected,
+                    reduceMotion: reduceMotion,
+                    onTap: {
+                        if selectedDayOffset == offset {
+                            selectedDayOffset = nil
+                        } else {
+                            selectedDayOffset = offset
+                        }
+                    }
                 )
-                .animation(
-                    reduceMotion ? nil : Motion.entranceCurve,
-                    value: day.count
-                )
+                .accessibilityAddTraits(isSelected ? .isSelected : [])
             }
         }
         .frame(maxWidth: .infinity)
@@ -158,7 +183,7 @@ struct ReflectView: View {
     private var timelineSection: some View {
         if timeline.isEmpty {
             Spacer().frame(height: 48)
-            Text("Nothing to reflect on yet. Go to Today and log your first win.")
+            Text(selectedDayOffset == nil ? "Nothing to reflect on yet. Go to Today and log your first win." : "No items for that day.")
                 .font(.tokenBody)
                 .kerning(TypographyKerning.body)
                 .foregroundStyle(Color.tokenMid)
@@ -166,6 +191,12 @@ struct ReflectView: View {
             Spacer().frame(height: 48)
         } else {
             Spacer().frame(height: 20)
+            if selectedDayOffset != nil {
+                Button("Clear filter") { selectedDayOffset = nil }
+                    .font(.outfit(13, .regular))
+                    .foregroundStyle(Color.tokenLight)
+                    .padding(.bottom, Spacing.sm)
+            }
             VStack(spacing: 0) {
                 ForEach(Array(timeline.enumerated()), id: \.element.persistentModelID) { offset, item in
                     let isLast = offset == timeline.count - 1
@@ -173,7 +204,7 @@ struct ReflectView: View {
                 }
             }
             Spacer().frame(height: Spacing.xl)
-            Text("\(todayCount) \(todayCount == 1 ? "thing" : "things") done today")
+            Text("\(todayCount) \(todayCount == 1 ? "thing" : "things") done \(selectedDayOffset == nil ? "today" : "that day")")
                 .font(.outfit(13, .regular))
                 .foregroundStyle(Color.tokenLight)
         }
@@ -213,6 +244,44 @@ struct ReflectView: View {
         Text("See you tomorrow")
             .font(.outfit(13, .regular))
             .foregroundStyle(Color.tokenLight)
+    }
+}
+
+private struct WeeklyBarCell: View {
+    let count: Int
+    let label: String
+    let isToday: Bool
+    let fraction: Double
+    let isSelected: Bool
+    let reduceMotion: Bool
+    let onTap: () -> Void
+
+    var body: some View {
+        VStack(spacing: 6) {
+            ChartBar(
+                count: count,
+                label: label,
+                isToday: isToday,
+                fraction: fraction
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 6)
+                    .stroke(isSelected ? Color.tokenCharcoal.opacity(0.25) : .clear, lineWidth: 1)
+            )
+            .contentShape(Rectangle())
+            .onTapGesture(perform: onTap)
+            .animation(
+                reduceMotion ? nil : Motion.entranceCurve,
+                value: count
+            )
+
+            Circle()
+                .fill(isSelected ? Color.tokenCharcoal : .clear)
+                .frame(width: 4, height: 4)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(label), \(count) \(count == 1 ? "item" : "items")")
     }
 }
 
@@ -274,3 +343,4 @@ struct ReflectView: View {
         .modelContainer(container)
         .environment(DoneStore(context: container.mainContext))
 }
+

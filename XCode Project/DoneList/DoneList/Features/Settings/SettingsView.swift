@@ -25,6 +25,7 @@ struct SettingsView: View {
     // MARK: - AppStorage
 
     @AppStorage(HapticEngine.settingsKey) private var hapticsEnabled: Bool = true
+    @AppStorage("colorSchemePreference") private var colorSchemePreference: String = "dark"
     @AppStorage("reminderEnabled") private var reminderEnabled: Bool = false
     @AppStorage("reminderHour") private var reminderHour: Int = 21      // 9 PM
     @AppStorage("reminderMinute") private var reminderMinute: Int = 0
@@ -59,12 +60,13 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
+            accountSection
             reminderSection
             experienceSection
             dataSection
             aboutSection
         }
-        .navigationTitle("Settings")
+        .navigationTitle("Account")
         .navigationBarTitleDisplayMode(.inline)
         .alert("Reset all data?", isPresented: $showResetAlert) {
             Button("Reset", role: .destructive, action: resetAllData)
@@ -107,6 +109,34 @@ struct SettingsView: View {
     // MARK: - Sections
 
     @ViewBuilder
+    private var accountSection: some View {
+        // iCloud sync arrives in ADR-0009. Until the iCloud capability is
+        // enabled in Xcode (Signing & Capabilities → +Capability → iCloud,
+        // tick CloudKit), CKContainer.accountStatus() spams CK errors
+        // because the app is missing com.apple.developer.icloud-services.
+        // For now: static "on this device" label. Swap to a CKContainer
+        // check once the entitlement is wired.
+        Section {
+            HStack(spacing: Spacing.md) {
+                Image(systemName: "person.crop.circle.fill")
+                    .font(.system(size: 36))
+                    .foregroundStyle(Color.tokenCharcoal)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Your done list")
+                        .font(.tokenBody)
+                        .foregroundStyle(Color.tokenCharcoal)
+                    Text("Saved on this device")
+                        .font(.tokenBodySub)
+                        .foregroundStyle(Color.tokenMid)
+                }
+            }
+            .padding(.vertical, Spacing.xs)
+            .accessibilityElement(children: .combine)
+        }
+    }
+
+    @ViewBuilder
     private var reminderSection: some View {
         Section("Reminder") {
             DatePicker(
@@ -123,6 +153,13 @@ struct SettingsView: View {
     @ViewBuilder
     private var experienceSection: some View {
         Section("Experience") {
+            Picker("Appearance", selection: $colorSchemePreference) {
+                Text("Light").tag("light")
+                Text("Dark").tag("dark")
+                Text("System").tag("system")
+            }
+            .pickerStyle(.segmented)
+
             Toggle("Haptics", isOn: $hapticsEnabled)
 
             Stepper(value: $dailyTarget, in: 0...20) {
@@ -130,7 +167,7 @@ struct SettingsView: View {
                     Text("Daily target")
                     Spacer()
                     Text(dailyTarget == 0 ? "Off" : "\(dailyTarget)")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.tokenMid)
                         .monospacedDigit()
                 }
             }

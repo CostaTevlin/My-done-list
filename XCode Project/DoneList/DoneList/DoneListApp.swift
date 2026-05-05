@@ -11,11 +11,28 @@
 import SwiftUI
 import SwiftData
 
+#Preview("Confetti") {
+    @Previewable @State var show = false
+    Button("Fire 🎉") { show = true }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .overlay { ConfettiView(isPresented: $show) }
+}
+
 @main
 struct DoneListApp: App {
     @Environment(\.scenePhase) private var phase
     @State private var store = DoneStore()
     @AppStorage("hasOnboarded") private var hasOnboarded: Bool = false
+    @AppStorage("colorSchemePreference") private var colorSchemePreference: String = "dark"
+    @State private var showConfetti = false
+
+    private var preferredColorScheme: ColorScheme? {
+        switch colorSchemePreference {
+        case "dark":  return .dark
+        case "light": return .light
+        default:      return nil
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -27,16 +44,26 @@ struct DoneListApp: App {
                 }
             }
             .environment(store)
-            // Confetti is global — fires on Log sheet AND on the
-            // onboarding first-log step (same store.fireConfetti() path).
-            .overlay {
-                ConfettiOverlay(fireCount: store.confettiFireCount)
+            .preferredColorScheme(preferredColorScheme)
+            .overlay { ConfettiView(isPresented: $showConfetti) }
+            .onChange(of: store.confettiFireCount) { _, newCount in
+                guard newCount > 0 else { return }
+                showConfetti = true
             }
         }
         .modelContainer(DoneStore.container)
         .onChange(of: phase) { _, newPhase in
-            if newPhase == .active {
-                store.recomputeTodayKey()
+            guard newPhase == .active else { return }
+            store.recomputeTodayKey()
+
+            // Defer the daily prune past first paint. `pruneIfNeeded` does
+            // a SwiftData fetch + N deletes + save on the MainActor —
+            // running it synchronously on `.active` blocks the launch frame
+            // on the day it fires. 500ms pushes it past the interactive
+            // moment. For a fully-decoupled version, switch `pruneIfNeeded`
+            // to a detached background ModelContext.
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(500))
                 store.pruneIfNeeded()
             }
         }

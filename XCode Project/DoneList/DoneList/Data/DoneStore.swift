@@ -169,6 +169,13 @@ final class DoneStore {
         try? context.save()
     }
 
+    func update(_ item: DoneItem, text: String) {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.count >= 2 else { return }
+        item.text = trimmed
+        try? context.save()
+    }
+
     // MARK: - Maintenance
 
     /// Removes items older than `days` days, comparing against `createdAt`.

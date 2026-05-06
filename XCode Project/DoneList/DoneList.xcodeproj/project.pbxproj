@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7A984E912F9FE50D0096ED65 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 7A984E902F9FE50D0096ED65 /* DesignSystem */; };
-		7AAED40B2FA7F76500E932EE /* UnionConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = 7AAED40A2FA7F76500E932EE /* UnionConfetti */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AAED40B2FA7F76500E932EE /* UnionConfetti in Frameworks */,
 				7A984E912F9FE50D0096ED65 /* DesignSystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,7 +132,6 @@
 			name = DoneList;
 			packageProductDependencies = (
 				7A984E902F9FE50D0096ED65 /* DesignSystem */,
-				7AAED40A2FA7F76500E932EE /* UnionConfetti */,
 			);
 			productName = DoneList;
 			productReference = 7A984E252F9FE23F0096ED65 /* DoneList.app */;
@@ -220,7 +217,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7A984E8F2F9FE50D0096ED65 /* XCLocalSwiftPackageReference "../../DesignSystem" */,
-				7AAED4092FA7F76500E932EE /* XCLocalSwiftPackageReference "../../../union-confetti" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7A984E262F9FE23F0096ED65 /* Products */;
@@ -613,20 +609,12 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../DesignSystem;
 		};
-		7AAED4092FA7F76500E932EE /* XCLocalSwiftPackageReference "../../../union-confetti" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../union-confetti";
-		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		7A984E902F9FE50D0096ED65 /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;
-		};
-		7AAED40A2FA7F76500E932EE /* UnionConfetti */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = UnionConfetti;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

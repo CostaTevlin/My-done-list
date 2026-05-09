@@ -6,8 +6,8 @@
 // `List`. We use a single `List` with hidden separators + clear backgrounds so
 // the visual matches the spec while we keep the system swipe gesture for free.
 //
-// Phase: 3
-// See: design-system/Screen specs.md (Today)  ·  Copy bank.md  ·  ADR-0007
+// Phase: 3, updated Phase 5 (ADR-0011 — ADHD hero block)
+// See: design-system/Screen specs.md (Today)  ·  Copy bank.md  ·  ADR-0007  ·  ADR-0011
 
 import SwiftUI
 import SwiftData
@@ -40,10 +40,6 @@ struct TodayView: View {
         CopyBank.greeting(hour: hour)
     }
 
-    private var motivational: String {
-        CopyBank.message(count: todayItems.count, hour: hour)
-    }
-
     // MARK: - Body
 
     var body: some View {
@@ -65,7 +61,7 @@ struct TodayView: View {
     @ViewBuilder
     private var populatedList: some View {
         List {
-            // Header section — greeting, title, big numeral, motivational copy.
+            // Header section — greeting, title, hero block (count + label + insight).
             header
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets(
@@ -114,7 +110,7 @@ struct TodayView: View {
         .animation(reduceMotion ? nil : Motion.entranceCurve, value: todayItems.count)
     }
 
-    // MARK: - Header (greeting + title + numeral + motivational copy)
+    // MARK: - Header (greeting + title + hero block)
 
     @ViewBuilder
     private var header: some View {
@@ -135,23 +131,11 @@ struct TodayView: View {
 
             Spacer().frame(height: 32)                       // spec literal
 
-            // Numeral is left-aligned to match the PWA reference (index.html
-            // line 712 — default block flow under the title).
-            BigNumeral(value: todayItems.count)
-                .animation(reduceMotion ? nil : Motion.snappy, value: todayItems.count)
-
-            Spacer().frame(height: Spacing.lg)               // 16
-
-            // Motivational copy mirrors the PWA: left-aligned, capped at
-            // 260pt so it doesn't run the full width.
-            if !motivational.isEmpty {
-                Text(motivational)
-                    .font(.tokenMotivational)
-                    .kerning(TypographyKerning.motivational)
-                    .foregroundStyle(Color.tokenDark)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: 260, alignment: .leading)
-            }
+            HeroBlock(
+                count: todayItems.count,
+                supportingLabel: CopyBank.todayHeroSupportingLabel(count: todayItems.count),
+                insight: CopyBank.todayHeroInsight(count: todayItems.count, hour: hour)
+            )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

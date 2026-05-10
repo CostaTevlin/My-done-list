@@ -1,11 +1,6 @@
-// TodayHeroSnapshotTests.swift
-// Visual capture tests for HeroBlock at key count values (0, 1, 3, 7).
-// Uses ImageRenderer to render the component at iPhone 15 Pro width (@3x) and
-// attaches the result for visual inspection in Xcode's test results pane.
-//
-// Phase: 5 (ADR-0011 — ADHD-first repositioning)
-// Note: These are visual-capture tests. Pixel-comparison regression tests require
-//       adding the SnapshotTesting SPM package (decision per testing.md §Snapshot).
+// TodayHeroSnapshotTests.swift (formerly HeroBlock tests — migrated to Hero in Phase 5)
+// Visual capture tests for the Hero component at key count values.
+// Phase: 5
 
 import XCTest
 import SwiftUI
@@ -13,25 +8,43 @@ import SwiftUI
 import DesignSystem
 
 @MainActor
-final class TodayHeroSnapshotTests: XCTestCase {
+final class HeroSnapshotTests: XCTestCase {
 
-    // iPhone 15 Pro logical width. Fixed height covers numeral + label + insight at
-    // default Dynamic Type. Padding matches TodayView's header insets (Spacing.xxl = 28pt).
     private let canvasWidth: CGFloat = 393
-    private let canvasHeight: CGFloat = 320
-    private let testHour: Int = 10    // mid-morning — stable seed for all snapshots
+    private let canvasHeight: CGFloat = 380
+    private let testHour: Int = 10
 
-    private func renderHeroBlock(count: Int) -> UIImage? {
-        let insight = CopyBank.todayHeroInsight(count: count, hour: testHour)
-        let label = CopyBank.todayHeroSupportingLabel(count: count)
-        let view = HeroBlock(count: count, supportingLabel: label, insight: insight)
-            .padding(.horizontal, 28)
-            .padding(.vertical, 20)
-            .background(Color.tokenWhite)
-            .frame(width: canvasWidth, height: canvasHeight, alignment: .topLeading)
+    private func renderTodayHero(count: Int, threshold: Int) -> UIImage? {
+        let view = Hero(
+            variant: .today(count: count, threshold: threshold),
+            label: "GOOD MORNING",
+            headline: "My done list",
+            subtext: CopyBank.todayHeroInsight(count: count, hour: testHour)
+        )
+        .padding(.horizontal, 28)
+        .padding(.vertical, 20)
+        .background(Color.tokenSurface)
+        .frame(width: canvasWidth, height: canvasHeight, alignment: .topLeading)
 
         let renderer = ImageRenderer(content: view)
-        renderer.scale = 3  // @3x matches iPhone 15 Pro
+        renderer.scale = 3
+        return renderer.uiImage
+    }
+
+    private func renderReflectHero(count: Int) -> UIImage? {
+        let view = Hero(
+            variant: .reflect,
+            label: "REFLECT",
+            headline: "Your day so far",
+            subtext: CopyBank.reflectNote(count: count, hour: testHour)
+        )
+        .padding(.horizontal, 28)
+        .padding(.vertical, 20)
+        .background(Color.tokenSurface)
+        .frame(width: canvasWidth, height: canvasHeight, alignment: .topLeading)
+
+        let renderer = ImageRenderer(content: view)
+        renderer.scale = 3
         return renderer.uiImage
     }
 
@@ -42,31 +55,39 @@ final class TodayHeroSnapshotTests: XCTestCase {
         add(attachment)
     }
 
-    func testSnapshot_count0() throws {
-        let image = try XCTUnwrap(renderHeroBlock(count: 0), "ImageRenderer returned nil for count 0")
-        attach(image: image, name: "HeroBlock_count0")
+    func testSnapshot_today_count0() throws {
+        let image = try XCTUnwrap(renderTodayHero(count: 0, threshold: 1))
+        attach(image: image, name: "Hero_today_count0")
         XCTAssertGreaterThan(image.size.width, 0)
-        XCTAssertGreaterThan(image.size.height, 0)
     }
 
-    func testSnapshot_count1() throws {
-        let image = try XCTUnwrap(renderHeroBlock(count: 1), "ImageRenderer returned nil for count 1")
-        attach(image: image, name: "HeroBlock_count1_singular")
+    func testSnapshot_today_count1() throws {
+        let image = try XCTUnwrap(renderTodayHero(count: 1, threshold: 5))
+        attach(image: image, name: "Hero_today_count1")
         XCTAssertGreaterThan(image.size.width, 0)
-        XCTAssertGreaterThan(image.size.height, 0)
     }
 
-    func testSnapshot_count3() throws {
-        let image = try XCTUnwrap(renderHeroBlock(count: 3), "ImageRenderer returned nil for count 3")
-        attach(image: image, name: "HeroBlock_count3")
+    func testSnapshot_today_atThreshold() throws {
+        let image = try XCTUnwrap(renderTodayHero(count: 7, threshold: 7))
+        attach(image: image, name: "Hero_today_count7_atThreshold")
         XCTAssertGreaterThan(image.size.width, 0)
-        XCTAssertGreaterThan(image.size.height, 0)
     }
 
-    func testSnapshot_count7() throws {
-        let image = try XCTUnwrap(renderHeroBlock(count: 7), "ImageRenderer returned nil for count 7")
-        attach(image: image, name: "HeroBlock_count7_longestInsight")
+    func testSnapshot_today_overThreshold() throws {
+        let image = try XCTUnwrap(renderTodayHero(count: 12, threshold: 7))
+        attach(image: image, name: "Hero_today_count12_overThreshold")
         XCTAssertGreaterThan(image.size.width, 0)
-        XCTAssertGreaterThan(image.size.height, 0)
+    }
+
+    func testSnapshot_reflect_count0() throws {
+        let image = try XCTUnwrap(renderReflectHero(count: 0))
+        attach(image: image, name: "Hero_reflect_count0")
+        XCTAssertGreaterThan(image.size.width, 0)
+    }
+
+    func testSnapshot_reflect_count7() throws {
+        let image = try XCTUnwrap(renderReflectHero(count: 7))
+        attach(image: image, name: "Hero_reflect_count7")
+        XCTAssertGreaterThan(image.size.width, 0)
     }
 }

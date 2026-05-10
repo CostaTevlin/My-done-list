@@ -1,6 +1,6 @@
 // DoneListApp.swift
 // @main entry point.
-// Phase 1: shows "Hello" verifying Outfit fonts + tokens load.
+// Phase 1: shows "Hello" verifying tokens load.
 // Phase 2: wires the SwiftData ModelContainer + scenePhase rollover + prune.
 // Phase 3: replaces HelloView with RootTabView.
 // Phase 7: gates the root content on `hasOnboarded`; lifts ConfettiOverlay

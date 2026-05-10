@@ -2,7 +2,7 @@
 // Dashed-border row acting as a text-mode entry point for the Log sheet.
 // Tap opens LogSheet in .text mode (ADR-0010).
 //
-// Phase: 9
+// Phase: 9, Phase 5 (token migration to sage palette)
 // See: decisions/0010 — Voice-first input + FAB navigation.md
 
 import SwiftUI
@@ -16,11 +16,11 @@ struct GhostInputRow: View {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "plus")
                     .font(.system(size: 14, weight: .regular))
-                    .foregroundStyle(Color.tokenLight)
+                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
 
                 Text("Type something you did\u{2026}")
-                    .font(.tokenBody)
-                    .foregroundStyle(Color.tokenLight)
+                    .font(.body)
+                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.horizontal, Spacing.lg)
@@ -31,7 +31,7 @@ struct GhostInputRow: View {
                     .strokeBorder(
                         style: StrokeStyle(lineWidth: 1, dash: [5, 4])
                     )
-                    .foregroundStyle(Color.tokenBorder)
+                    .foregroundStyle(Color.tokenMist)
             )
         }
         .buttonStyle(.plain)
@@ -47,5 +47,5 @@ struct GhostInputRow: View {
         GhostInputRow {}
     }
     .padding(.horizontal, Spacing.xxl)
-    .background(Color.tokenWhite)
+    .background(Color.tokenSurface)
 }

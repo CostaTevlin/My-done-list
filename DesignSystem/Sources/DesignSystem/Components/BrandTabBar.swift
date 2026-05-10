@@ -6,9 +6,10 @@
 //
 // Layout: floating pill container (Today · Reflect · More) + circle Log FAB,
 // both on a single HStack so vertical centers always agree.
-// Active state: white filled capsule behind the icon+label. Touch targets ≥44pt.
+// Active state: tokenSurface filled capsule behind the icon+label. Touch targets ≥44pt.
 // Respects Dynamic Type and Reduce Motion.
 //
+// Phase: 5 (token migration to sage palette)
 // See: design-system/Components.md (BrandTabBar)  ·  ADR-0006 (Two-branch shell)
 
 import SwiftUI
@@ -45,10 +46,10 @@ public struct BrandTabBar: View {
             .frame(maxWidth: .infinity)
             .background(
                 Capsule(style: .continuous)
-                    .fill(Color.tokenBorderLight)
+                    .fill(Color.tokenMist)
             )
 
-            // Circle Log FAB — brand charcoal, white plus.
+            // Circle Log FAB — brand tokenInk, tokenSurface plus.
             // Lifted above the pill so the FAB-to-pill gap matches the
             // pill-to-screen-bottom margin (`Spacing.lg`). The offset value
             // = pill_height/2 + FAB_height/2 + gap
@@ -59,12 +60,12 @@ public struct BrandTabBar: View {
             Button(action: onLog) {
                 Image(systemName: "plus")
                     .font(.system(size: 24, weight: .semibold))
-                    .foregroundStyle(Color.tokenWhite)
+                    .foregroundStyle(Color.tokenSurface)
                     .frame(width: 60, height: 60)
                     .background(
                         Circle()
-                            .fill(Color.tokenCharcoal)
-                            .shadow(color: Color.tokenCharcoal.opacity(0.18), radius: 10, y: 4)
+                            .fill(Color.tokenInk)
+                            .shadow(color: Color.tokenInk.opacity(0.18), radius: 10, y: 4)
                     )
             }
             .offset(y: -85)
@@ -73,7 +74,7 @@ public struct BrandTabBar: View {
         .padding(.horizontal, Spacing.lg)
         .padding(.top, Spacing.md)
         .padding(.bottom, Spacing.lg)
-        .background(Color.tokenWhite)
+        .background(Color.tokenSurface)
     }
 
     private func tabItem(_ tab: Tab, label: String, icon: String) -> some View {
@@ -81,18 +82,18 @@ public struct BrandTabBar: View {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 20, weight: .semibold))
-                    .foregroundStyle(selection == tab ? Color.tokenCharcoal : Color.tokenMid)
+                    .foregroundStyle(selection == tab ? Color.tokenInk : Color.tokenSlate)
                 Text(label)
-                    .font(.tokenLabel)
-                    .foregroundStyle(selection == tab ? Color.tokenCharcoal : Color.tokenMid)
+                    .font(.label)
+                    .foregroundStyle(selection == tab ? Color.tokenInk : Color.tokenSlate)
             }
             .padding(.vertical, Spacing.sm + 2)
             .frame(maxWidth: .infinity, minHeight: 52)
             .background {
                 if selection == tab {
                     Capsule(style: .continuous)
-                        .fill(Color.tokenWhite)
-                        .shadow(color: Color.tokenCharcoal.opacity(0.06), radius: 4, y: 1)
+                        .fill(Color.tokenSurface)
+                        .shadow(color: Color.tokenInk.opacity(0.06), radius: 4, y: 1)
                 }
             }
             .contentShape(Rectangle())
@@ -109,17 +110,17 @@ public struct BrandTabBar: View {
 #Preview("Today selected") {
     @Previewable @State var selection: BrandTabBar.Tab = .today
     BrandTabBar(selection: $selection, onLog: {})
-        .background(Color.tokenOffWhite)
+        .background(Color.tokenSurface)
 }
 
 #Preview("Reflect selected") {
     @Previewable @State var selection: BrandTabBar.Tab = .reflect
     BrandTabBar(selection: $selection, onLog: {})
-        .background(Color.tokenOffWhite)
+        .background(Color.tokenSurface)
 }
 
 #Preview("More selected") {
     @Previewable @State var selection: BrandTabBar.Tab = .more
     BrandTabBar(selection: $selection, onLog: {})
-        .background(Color.tokenOffWhite)
+        .background(Color.tokenSurface)
 }

@@ -163,7 +163,7 @@ struct LogSheet: View {
 
             // Live transcript or status hint
             Text(transcriptDisplayText)
-                .font(.body)
+                .font(.bodyText)
                 .foregroundStyle(text.isEmpty ? Color.tokenSlate.opacity(0.6) : Color.tokenInk)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
@@ -219,7 +219,7 @@ struct LogSheet: View {
                     prompt: Text("Took a 10-min walk")
                         .foregroundStyle(Color.tokenSlate.opacity(0.6))
                 )
-                .font(.body)
+                .font(.bodyText)
                 .foregroundStyle(Color.tokenInk)
                 .focused($textFocused)
                 .submitLabel(.done)

@@ -155,7 +155,7 @@ struct ReflectView: View {
         if timeline.isEmpty {
             Spacer().frame(height: 48)
             Text(selectedDayOffset == nil ? "Nothing to reflect on yet. Go to Today and log your first win." : "No items for that day.")
-                .font(.body)
+                .font(.bodyText)
                 .foregroundStyle(Color.tokenSlate)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer().frame(height: 48)

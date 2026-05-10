@@ -29,7 +29,7 @@ struct ItemRow: View {
                     .foregroundStyle(Color.tokenInk)
 
                 Text(text)
-                    .font(.body)
+                    .font(.bodyText)
                     .foregroundStyle(Color.tokenInk)
                     .lineLimit(1)
                     .truncationMode(.tail)

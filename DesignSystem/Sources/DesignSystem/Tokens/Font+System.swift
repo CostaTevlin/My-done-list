@@ -14,7 +14,7 @@ public extension Font {
     /// 96pt · Regular · the big counter (monospaced digits)
     static let bigNumeral   = Font.system(size: 96, weight: .regular,  design: .default).monospacedDigit()
     /// 17pt · Regular · body text
-    static let body         = Font.system(size: 17, weight: .regular,  design: .default)
+    static let bodyText     = Font.system(size: 17, weight: .regular,  design: .default)
     /// 14pt · Regular · sub-copy
     static let bodySub      = Font.system(size: 14, weight: .regular,  design: .default)
     /// 17pt · Regular · rotating motivational copy

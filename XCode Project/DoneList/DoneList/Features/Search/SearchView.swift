@@ -58,7 +58,7 @@ struct SearchView: View {
                         } label: {
                             HStack(alignment: .firstTextBaseline, spacing: Spacing.md) {
                                 Text(item.text)
-                                    .font(.body)
+                                    .font(.bodyText)
                                     .foregroundStyle(Color.tokenInk)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Text(item.time)

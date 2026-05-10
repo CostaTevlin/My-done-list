@@ -19,7 +19,7 @@ struct GhostInputRow: View {
                     .foregroundStyle(Color.tokenSlate.opacity(0.6))
 
                 Text("Type something you did\u{2026}")
-                    .font(.body)
+                    .font(.bodyText)
                     .foregroundStyle(Color.tokenSlate.opacity(0.6))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }

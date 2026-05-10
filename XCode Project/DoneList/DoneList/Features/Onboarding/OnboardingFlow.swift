@@ -119,7 +119,7 @@ private struct FirstLogStep: View {
                     prompt: Text("Took a 10-min walk")
                         .foregroundStyle(Color.tokenSlate.opacity(0.6))
                 )
-                .font(.body)
+                .font(SwiftUI.Font.body)
                 .foregroundStyle(Color.tokenInk)
                 .focused($focused)
                 .submitLabel(.done)
@@ -210,7 +210,7 @@ private struct NotificationsStep: View {
 
             HStack {
                 Text("Reminder time")
-                    .font(.body)
+                    .font(.bodyText)
                     .foregroundStyle(Color.tokenInk)
                 Spacer()
                 DatePicker(

@@ -13,7 +13,7 @@ public struct PillButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.body.weight(.medium))
+            .font(.bodyText.weight(.medium))
             .foregroundStyle(colorScheme == .dark ? Color.tokenInk : Color.tokenSurface)
             .padding(.horizontal, Spacing.xl + 4)   // 28
             .padding(.vertical, Spacing.md + 2)     // 14

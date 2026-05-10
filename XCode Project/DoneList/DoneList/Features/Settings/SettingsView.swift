@@ -124,7 +124,7 @@ struct SettingsView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Your done list")
-                        .font(.body)
+                        .font(.bodyText)
                         .foregroundStyle(Color.tokenInk)
                     Text("Saved on this device")
                         .font(.bodySub)

@@ -127,7 +127,7 @@ private struct IOS26ShellContent: View {
                 Color.clear // unused; we revert before this could appear
             }
         }
-        .tint(Color.tokenCharcoal)
+        .tint(Color.tokenInk)
         .onChange(of: selection) { oldValue, newValue in
             guard newValue == .log else {
                 lastRealTab = newValue

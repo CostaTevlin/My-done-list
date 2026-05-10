@@ -1,9 +1,9 @@
 // ChartBar.swift
 // One day column in Reflect's weekly chart: count label · fill bar in a 14pt
-// rounded track · day label. Today's bar uses charcoal; previous days with
-// activity use border grey; empty days draw nothing inside the track.
+// rounded track · day label. Today's bar uses tokenInk; previous days with
+// activity use tokenMist; empty days draw nothing inside the track.
 //
-// Phase: 5
+// Phase: 5 (token migration to sage palette)
 // See: design-system/Components.md (ChartBar)
 //      index.html lines 705-792 (PWA reference)
 //
@@ -36,17 +36,17 @@ public struct ChartBar: View {
     private var hasActivity: Bool { count > 0 }
 
     private var countColor: Color {
-        if isToday { return .tokenCharcoal }
-        return hasActivity ? .tokenDark : .tokenLight
+        if isToday { return .tokenInk }
+        return hasActivity ? .tokenInk : .tokenSlate.opacity(0.6)
     }
 
     private var barColor: Color {
-        if isToday { return .tokenCharcoal }
-        return hasActivity ? .tokenBorder : .clear
+        if isToday { return .tokenInk }
+        return hasActivity ? .tokenMist : .clear
     }
 
     private var labelColor: Color {
-        isToday ? .tokenCharcoal : .tokenLight
+        isToday ? .tokenInk : .tokenSlate.opacity(0.6)
     }
 
     private var barFraction: CGFloat {
@@ -61,7 +61,7 @@ public struct ChartBar: View {
     public var body: some View {
         VStack(spacing: 0) {
             Text("\(count)")
-                .font(.tokenChartCount)
+                .font(.chartCount)
                 .foregroundStyle(countColor)
                 .padding(.bottom, Spacing.sm)
                 .accessibilityHidden(true)
@@ -69,7 +69,7 @@ public struct ChartBar: View {
             // Track
             ZStack(alignment: .bottom) {
                 RoundedRectangle(cornerRadius: Radius.card, style: .continuous)
-                    .fill(Color.tokenOffWhite)
+                    .fill(Color.tokenSurface)
 
                 // Fill bar — grows from the bottom, capped to the track radius.
                 GeometryReader { proxy in
@@ -91,7 +91,7 @@ public struct ChartBar: View {
             .frame(width: Self.barWidth, height: Self.trackHeight)
 
             Text(label)
-                .font(.tokenChartDayLabel)
+                .font(.chartDayLabel)
                 .fontWeight(isToday ? .semibold : .regular)
                 .foregroundStyle(labelColor)
                 .padding(.top, Spacing.sm)

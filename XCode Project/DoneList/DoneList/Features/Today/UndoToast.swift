@@ -2,7 +2,7 @@
 // 4-second bottom toast shown after swipe-to-delete.
 // Tap "Undo" to re-insert the deleted item.
 //
-// Phase: 9
+// Phase: 9, Phase 5 (token migration to sage palette)
 // See: decisions/0010 — Voice-first input + FAB navigation.md
 
 import SwiftUI
@@ -17,24 +17,24 @@ struct UndoToast: View {
     var body: some View {
         HStack(spacing: Spacing.lg) {
             Text("Deleted")
-                .font(.tokenBodySub)
-                .foregroundStyle(Color.tokenWhite)
+                .font(.bodySub)
+                .foregroundStyle(Color.tokenSurface)
 
             Spacer()
 
             Button("Undo") {
                 onUndo()
             }
-            .font(.tokenBodySub)
+            .font(.bodySub)
             .fontWeight(.semibold)
-            .foregroundStyle(Color.tokenWhite)
+            .foregroundStyle(Color.tokenSurface)
             .accessibilityLabel("Undo delete")
         }
         .padding(.horizontal, Spacing.xl)
         .padding(.vertical, Spacing.md)
         .background(
             Capsule()
-                .fill(Color.tokenCharcoal)
+                .fill(Color.tokenInk)
                 .shadow(color: Color.black.opacity(0.15), radius: 8, y: 3)
         )
         .padding(.horizontal, Spacing.xxl)
@@ -61,7 +61,7 @@ struct UndoToast: View {
 
 #Preview {
     ZStack(alignment: .bottom) {
-        Color.tokenWhite.ignoresSafeArea()
+        Color.tokenSurface.ignoresSafeArea()
         UndoToast(onUndo: {}, onDismiss: {})
             .padding(.bottom, Spacing.lg)
     }

@@ -2,7 +2,7 @@
 // Full-store search + browse-by-date.
 // Each section header is the long date; tapping a result opens it for editing.
 //
-// Phase: 9
+// Phase: 9, Phase 5 (token migration to sage palette)
 // See: decisions/0010 — Voice-first input + FAB navigation.md
 
 import SwiftUI
@@ -48,8 +48,8 @@ struct SearchView: View {
         List {
             ForEach(grouped, id: \.key) { section in
                 Section(header: Text(sectionTitle(for: section.key))
-                    .font(.tokenLabel)
-                    .foregroundStyle(Color.tokenMid)
+                    .font(.label)
+                    .foregroundStyle(Color.tokenSlate)
                     .textCase(.none)
                 ) {
                     ForEach(section.items, id: \.persistentModelID) { item in
@@ -58,12 +58,12 @@ struct SearchView: View {
                         } label: {
                             HStack(alignment: .firstTextBaseline, spacing: Spacing.md) {
                                 Text(item.text)
-                                    .font(.tokenBody)
-                                    .foregroundStyle(Color.tokenCharcoal)
+                                    .font(.bodyText)
+                                    .foregroundStyle(Color.tokenInk)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Text(item.time)
-                                    .font(.tokenTime)
-                                    .foregroundStyle(Color.tokenMid)
+                                    .font(.time)
+                                    .foregroundStyle(Color.tokenSlate)
                             }
                             .contentShape(Rectangle())
                         }

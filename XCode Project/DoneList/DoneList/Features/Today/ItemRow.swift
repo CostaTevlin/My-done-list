@@ -2,7 +2,7 @@
 // Single row in the Today list: zero-padded rank · text · HH:mm timestamp.
 // Draws its own bottom divider so the host List can hide the system separator.
 //
-// Phase: 3
+// Phase: 3, Phase 5 (token migration to sage palette)
 // See: design-system/Components.md (ItemRow)  ·  decisions/0007 — Native swipeActions
 
 import SwiftUI
@@ -25,27 +25,26 @@ struct ItemRow: View {
         VStack(spacing: 0) {
             HStack(alignment: .firstTextBaseline, spacing: Spacing.md) {
                 Text(padded(rank))
-                    .font(.tokenNum)
-                    .foregroundStyle(Color.tokenCharcoal)
+                    .font(.num)
+                    .foregroundStyle(Color.tokenInk)
 
                 Text(text)
-                    .font(.tokenBody)
-                    .kerning(TypographyKerning.body)
-                    .foregroundStyle(Color.tokenCharcoal)
+                    .font(.bodyText)
+                    .foregroundStyle(Color.tokenInk)
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(time)
-                    .font(.tokenTime)
-                    .foregroundStyle(Color.tokenLight)
+                    .font(.time)
+                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
             }
             .padding(.vertical, 14)
             .contentShape(Rectangle())   // full-row swipe hit-target
 
             if showsDivider {
                 Rectangle()
-                    .fill(Color.tokenBorderLight)
+                    .fill(Color.tokenMist)
                     .frame(height: 1)
             }
         }
@@ -65,5 +64,5 @@ struct ItemRow: View {
         ItemRow(rank: 5, text: "Replied to overdue emails", time: "10:02", showsDivider: false)
     }
     .padding(.horizontal, Spacing.xxl)
-    .background(Color.tokenWhite)
+    .background(Color.tokenSurface)
 }

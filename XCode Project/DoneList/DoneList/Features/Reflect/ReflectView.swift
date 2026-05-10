@@ -1,12 +1,11 @@
 // ReflectView.swift
 // Weekly bar chart + today's timeline + reflection note.
 //
-// Layout (top to bottom): label · "Your day so far" display · reflectNote ·
-// "This week" weekly chart (horizontal scroll, 7 days, today highlighted) ·
+// Layout (top to bottom): Hero(reflect) · "This week" weekly chart ·
 // rule · chronological timeline (earliest first, time + text rows) ·
 // "X things done today" · "See you tomorrow".
 //
-// Phase: 5
+// Phase: 5 (Hero integration + token migration to sage palette)
 // See: design-system/Screen specs.md (Reflect)  · design-system/Components.md (ChartBar)
 //      index.html lines 688-825 (PWA parity reference)
 
@@ -60,8 +59,7 @@ struct ReflectView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                header
-                note
+                heroBlock
                 weeklyChart
                 divider
                 timelineSection
@@ -72,58 +70,31 @@ struct ReflectView: View {
             .padding(.top, 20)
             .padding(.bottom, Spacing.bottomSafe)
         }
-        .background(Color.tokenWhite.ignoresSafeArea())
+        .background(Color.tokenSurface.ignoresSafeArea())
     }
 
-    // MARK: - Header
+    // MARK: - Hero block
 
     @ViewBuilder
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("Reflect")
-                .font(.tokenLabel)
-                .kerning(TypographyKerning.label)
-                .textCase(.uppercase)
-                .foregroundStyle(Color.tokenLight)
-
-            Spacer().frame(height: Spacing.lg)
-
-            // PWA splits the title onto two lines deliberately ("Your day\nso far").
-            // Negative lineSpacing collapses the leading toward
-            // `TypographyLineHeight.display` (0.9×) so the two-line title
-            // reads tight, matching the PWA.
-            Text("Your day\nso far")
-                .font(.tokenDisplay)
-                .kerning(TypographyKerning.display)
-                .foregroundStyle(Color.tokenCharcoal)
-                .multilineTextAlignment(.leading)
-                .lineSpacing(-12)
-        }
-    }
-
-    // MARK: - Reflect note
-
-    @ViewBuilder
-    private var note: some View {
+    private var heroBlock: some View {
+        Hero(
+            variant: .reflect,
+            label: "REFLECT",
+            headline: "Your day so far",
+            subtext: reflectNote
+        )
         Spacer().frame(height: 32)
-        Text(reflectNote)
-            .font(.tokenBody)
-            .kerning(TypographyKerning.body)
-            .foregroundStyle(Color.tokenDark)
-            .frame(maxWidth: 300, alignment: .leading)
-            .accessibilityLabel(reflectNote)
     }
 
     // MARK: - Weekly chart
 
     @ViewBuilder
     private var weeklyChart: some View {
-        Spacer().frame(height: 32)
         Text("This week")
-            .font(.tokenLabel)
+            .font(.label)
             .kerning(TypographyKerning.label)
             .textCase(.uppercase)
-            .foregroundStyle(Color.tokenLight)
+            .foregroundStyle(Color.tokenSlate.opacity(0.6))
 
         Spacer().frame(height: Spacing.lg)
 
@@ -173,7 +144,7 @@ struct ReflectView: View {
     private var divider: some View {
         Spacer().frame(height: 32)
         Rectangle()
-            .fill(Color.tokenBorder)
+            .fill(Color.tokenMist)
             .frame(height: 1)
     }
 
@@ -184,17 +155,16 @@ struct ReflectView: View {
         if timeline.isEmpty {
             Spacer().frame(height: 48)
             Text(selectedDayOffset == nil ? "Nothing to reflect on yet. Go to Today and log your first win." : "No items for that day.")
-                .font(.tokenBody)
-                .kerning(TypographyKerning.body)
-                .foregroundStyle(Color.tokenMid)
+                .font(.bodyText)
+                .foregroundStyle(Color.tokenSlate)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer().frame(height: 48)
         } else {
             Spacer().frame(height: 20)
             if selectedDayOffset != nil {
                 Button("Clear filter") { selectedDayOffset = nil }
-                    .font(.outfit(13, .regular))
-                    .foregroundStyle(Color.tokenLight)
+                    .font(Font.system(size: 13, weight: .regular))
+                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
                     .padding(.bottom, Spacing.sm)
             }
             VStack(spacing: 0) {
@@ -205,8 +175,8 @@ struct ReflectView: View {
             }
             Spacer().frame(height: Spacing.xl)
             Text("\(todayCount) \(todayCount == 1 ? "thing" : "things") done \(selectedDayOffset == nil ? "today" : "that day")")
-                .font(.outfit(13, .regular))
-                .foregroundStyle(Color.tokenLight)
+                .font(Font.system(size: 13, weight: .regular))
+                .foregroundStyle(Color.tokenSlate.opacity(0.6))
         }
     }
 
@@ -215,20 +185,20 @@ struct ReflectView: View {
         VStack(spacing: 0) {
             HStack(alignment: .firstTextBaseline, spacing: Spacing.lg) {
                 Text(time)
-                    .font(.tokenTime)
-                    .foregroundStyle(Color.tokenLight)
+                    .font(.time)
+                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
                     .frame(minWidth: 40, alignment: .leading)
 
                 Text(text)
-                    .font(.outfit(15, .regular))
-                    .foregroundStyle(Color.tokenCharcoal)
+                    .font(Font.system(size: 15, weight: .regular))
+                    .foregroundStyle(Color.tokenInk)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.vertical, 14)
 
             if showsDivider {
                 Rectangle()
-                    .fill(Color.tokenBorderLight)
+                    .fill(Color.tokenMist)
                     .frame(height: 1)
             }
         }
@@ -242,8 +212,8 @@ struct ReflectView: View {
     private var footer: some View {
         Spacer().frame(height: Spacing.xxxl)
         Text("See you tomorrow")
-            .font(.outfit(13, .regular))
-            .foregroundStyle(Color.tokenLight)
+            .font(Font.system(size: 13, weight: .regular))
+            .foregroundStyle(Color.tokenSlate.opacity(0.6))
     }
 }
 
@@ -266,7 +236,7 @@ private struct WeeklyBarCell: View {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(isSelected ? Color.tokenCharcoal.opacity(0.25) : .clear, lineWidth: 1)
+                    .stroke(isSelected ? Color.tokenInk.opacity(0.25) : .clear, lineWidth: 1)
             )
             .contentShape(Rectangle())
             .onTapGesture(perform: onTap)
@@ -276,7 +246,7 @@ private struct WeeklyBarCell: View {
             )
 
             Circle()
-                .fill(isSelected ? Color.tokenCharcoal : .clear)
+                .fill(isSelected ? Color.tokenInk : .clear)
                 .frame(width: 4, height: 4)
                 .accessibilityHidden(true)
         }
@@ -343,4 +313,3 @@ private struct WeeklyBarCell: View {
         .modelContainer(container)
         .environment(DoneStore(context: container.mainContext))
 }
-

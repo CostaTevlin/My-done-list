@@ -1,9 +1,9 @@
 // FloatingLogButton.swift
-// Charcoal 56pt circle FAB with plus glyph.
+// tokenInk 56pt circle FAB with plus glyph.
 // Primary entry point for the Log sheet (voice-first by default — ADR-0010).
 // Plus glyph keeps the affordance generic; voice surfaces inside the sheet.
 //
-// Phase: 9
+// Phase: 9, Phase 5 (token migration to sage palette)
 // See: decisions/0010 — Voice-first input + FAB navigation.md
 
 import SwiftUI
@@ -18,11 +18,11 @@ struct FloatingLogButton: View {
         Button(action: action) {
             Image(systemName: "plus")
                 .font(.system(size: 24, weight: .semibold))
-                .foregroundStyle(Color.tokenWhite)
+                .foregroundStyle(Color.tokenSurface)
                 .frame(width: 56, height: 56)
                 .background(
                     Circle()
-                        .fill(Color.tokenCharcoal)
+                        .fill(Color.tokenInk)
                         .shadow(
                             color: Color.black.opacity(0.2),
                             radius: 12,
@@ -52,7 +52,7 @@ private struct FABButtonStyle: ButtonStyle {
 
 #Preview {
     ZStack {
-        Color.tokenWhite.ignoresSafeArea()
+        Color.tokenSurface.ignoresSafeArea()
         FloatingLogButton {}
     }
 }

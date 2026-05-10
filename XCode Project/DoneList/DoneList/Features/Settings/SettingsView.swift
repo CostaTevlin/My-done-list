@@ -7,7 +7,7 @@
 //   • `reminderHour` / `reminderMinute` — same
 //   • `dailyTarget`        — reserved for future Today indicator
 //
-// Phase: 6
+// Phase: 6, Phase 5 (token migration to sage palette)
 // See: design-system/Screen specs.md (Settings)  · Architecture.md (Notifications)
 
 import SwiftUI
@@ -120,15 +120,15 @@ struct SettingsView: View {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "person.crop.circle.fill")
                     .font(.system(size: 36))
-                    .foregroundStyle(Color.tokenCharcoal)
+                    .foregroundStyle(Color.tokenInk)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Your done list")
-                        .font(.tokenBody)
-                        .foregroundStyle(Color.tokenCharcoal)
+                        .font(.bodyText)
+                        .foregroundStyle(Color.tokenInk)
                     Text("Saved on this device")
-                        .font(.tokenBodySub)
-                        .foregroundStyle(Color.tokenMid)
+                        .font(.bodySub)
+                        .foregroundStyle(Color.tokenSlate)
                 }
             }
             .padding(.vertical, Spacing.xs)
@@ -167,7 +167,7 @@ struct SettingsView: View {
                     Text("Daily target")
                     Spacer()
                     Text(dailyTarget == 0 ? "Off" : "\(dailyTarget)")
-                        .foregroundStyle(Color.tokenMid)
+                        .foregroundStyle(Color.tokenSlate)
                         .monospacedDigit()
                 }
             }
@@ -209,14 +209,6 @@ struct SettingsView: View {
             Link(destination: URL(string: "https://donelist-app.github.io/support")!) {
                 Label("Support", systemImage: "questionmark.circle")
             }
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Outfit by Smith Studio")
-                Text("Open Font License 1.1")
-            }
-            .font(.tokenBodySub)
-            .foregroundStyle(Color.tokenLight)
-            .accessibilityElement(children: .combine)
         }
     }
 

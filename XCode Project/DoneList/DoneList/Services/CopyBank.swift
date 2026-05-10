@@ -3,6 +3,7 @@
 // Stable per (count, hour) within a session.
 //
 // Phase: 3 (Today uses message), 5 (Reflect uses reflectNote)
+// v2: ADHD momentum tier added 2026-05-09 per ADR-0011 (todayHeroInsight, todayHeroSupportingLabel).
 // See: design-system/Copy bank.md  · index.html lines 336-423
 
 import Foundation
@@ -127,6 +128,62 @@ enum CopyBank {
                 "You were on fire today.",
                 "Today was your masterpiece.",
                 "Take a bow. You earned it."
+            ]
+        }
+    }
+
+    // MARK: - Today hero insight (ADHD momentum tier — v2, per ADR-0011)
+
+    /// Returns an ADHD-voice insight line for the Today hero block.
+    /// Same `(count * 7 + hour) % poolSize` rotation as `message(_:hour:)`.
+    /// Pool size is 4. Never returns an empty string.
+    static func todayHeroInsight(count: Int, hour: Int) -> String {
+        let pool = heroInsightPool(for: count)
+        let seed = ((count * 7) + hour) % pool.count
+        return pool[seed]
+    }
+
+    /// Returns `"win today"` for count == 1, `"wins today"` otherwise.
+    static func todayHeroSupportingLabel(count: Int) -> String {
+        count == 1 ? "win today" : "wins today"
+    }
+
+    private static func heroInsightPool(for count: Int) -> [String] {
+        switch count {
+        case 0:
+            return [
+                "Your day starts here.",
+                "One small thing, whenever you're ready.",
+                "Nothing to prove. Just notice.",
+                "A blank list isn't a verdict."
+            ]
+        case 1:
+            return [
+                "That's the start. Momentum builds from here.",
+                "Small actions count.",
+                "One thing logged is one more than nothing.",
+                "You moved. That's the whole point."
+            ]
+        case 2...3:
+            return [
+                "You're building momentum.",
+                "Small progress still counts.",
+                "Your day has shape.",
+                "Two or three is more than zero. That math matters."
+            ]
+        case 4...6:
+            return [
+                "You kept moving today.",
+                "This is what a day with momentum looks like.",
+                "You're showing up for yourself.",
+                "Steady is its own kind of strong."
+            ]
+        default: // 7+
+            return [
+                "Your brain may forget this. The list won't.",
+                "That's a full day of forward motion.",
+                "Look at the shape of your day.",
+                "You did more than you'll remember tomorrow."
             ]
         }
     }

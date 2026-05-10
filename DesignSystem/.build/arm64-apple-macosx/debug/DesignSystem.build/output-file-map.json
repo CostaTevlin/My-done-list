@@ -2,6 +2,13 @@
   "": {
     "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/primary.swiftdeps"
   },
+  "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift": {
+    "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.d",
+    "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.dia"
+  },
   "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift": {
     "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.d",
     "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o",
@@ -9,12 +16,33 @@
     "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.dia"
   },
+  "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift": {
+    "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.d",
+    "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.dia"
+  },
   "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift": {
     "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.d",
     "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o",
     "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar~partial.swiftmodule",
     "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.dia"
+  },
+  "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift": {
+    "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.d",
+    "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.dia"
+  },
+  "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift": {
+    "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.d",
+    "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.dia"
   },
   "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift": {
     "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.d",
@@ -30,12 +58,12 @@
     "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.dia"
   },
-  "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+Outfit.swift": {
-    "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+Outfit.d",
-    "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+Outfit.swift.o",
-    "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+Outfit~partial.swiftmodule",
-    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+Outfit.swiftdeps",
-    "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+Outfit.dia"
+  "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift": {
+    "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.d",
+    "object": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.dia"
   },
   "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift": {
     "dependencies": "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Motion.d",

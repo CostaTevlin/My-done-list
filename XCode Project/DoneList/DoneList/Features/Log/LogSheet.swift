@@ -2,7 +2,7 @@
 // Bottom sheet — voice input primary, with a toggle to plain text.
 // Voice mode auto-starts on open if permission is granted.
 //
-// Phase: 4
+// Phase: 4, Phase 5 (token migration to sage palette)
 // See: design-system/Screen specs.md (Log sheet)
 //      design-system/Copy bank.md (sheet copy)
 //      decisions/0006 — Confetti  ·  decisions/0005 — Liquid Glass
@@ -22,7 +22,7 @@ private struct PulseRing: View {
 
     var body: some View {
         Circle()
-            .stroke(Color.tokenCharcoal.opacity(opacity), lineWidth: 1.5)
+            .stroke(Color.tokenInk.opacity(opacity), lineWidth: 1.5)
             .scaleEffect(scale)
             .frame(width: 80, height: 80)
             .onAppear {
@@ -144,14 +144,13 @@ struct LogSheet: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("What's one thing you did?")
-                .font(.tokenDisplaySub)
-                .kerning(TypographyKerning.displaySub)
-                .foregroundStyle(Color.tokenCharcoal)
+                .font(.displaySub)
+                .foregroundStyle(Color.tokenInk)
                 .padding(.top, Spacing.xl)
 
             Text("Even something small. It all counts.")
-                .font(.tokenBodySub)
-                .foregroundStyle(Color.tokenMid)
+                .font(.bodySub)
+                .foregroundStyle(Color.tokenSlate)
                 .padding(.bottom, Spacing.xxl)
         }
     }
@@ -164,9 +163,8 @@ struct LogSheet: View {
 
             // Live transcript or status hint
             Text(transcriptDisplayText)
-                .font(.tokenBody)
-                .kerning(TypographyKerning.body)
-                .foregroundStyle(text.isEmpty ? Color.tokenLight : Color.tokenCharcoal)
+                .font(.bodyText)
+                .foregroundStyle(text.isEmpty ? Color.tokenSlate.opacity(0.6) : Color.tokenInk)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
                 .frame(minHeight: 52)
@@ -180,13 +178,13 @@ struct LogSheet: View {
                     }
 
                     Circle()
-                        .fill(speech.isRecording ? Color.tokenCharcoal : Color.clear)
-                        .overlay { Circle().stroke(Color.tokenCharcoal, lineWidth: 1.5) }
+                        .fill(speech.isRecording ? Color.tokenInk : Color.clear)
+                        .overlay { Circle().stroke(Color.tokenInk, lineWidth: 1.5) }
                         .frame(width: 72, height: 72)
 
                     Image(systemName: speech.isRecording ? "waveform" : "mic")
                         .font(.system(size: 26, weight: .medium))
-                        .foregroundStyle(speech.isRecording ? Color.tokenWhite : Color.tokenCharcoal)
+                        .foregroundStyle(speech.isRecording ? Color.tokenSurface : Color.tokenInk)
                         .symbolEffect(.variableColor.iterative, isActive: speech.isRecording)
                 }
                 .frame(width: 88, height: 88)
@@ -196,8 +194,8 @@ struct LogSheet: View {
 
             Button(action: switchToText) {
                 Text("Type instead")
-                    .font(.tokenBodySub)
-                    .foregroundStyle(Color.tokenMid)
+                    .font(.bodySub)
+                    .foregroundStyle(Color.tokenSlate)
             }
             .buttonStyle(.plain)
 
@@ -219,11 +217,10 @@ struct LogSheet: View {
                     "",
                     text: $text,
                     prompt: Text("Took a 10-min walk")
-                        .foregroundStyle(Color.tokenLight)
+                        .foregroundStyle(Color.tokenSlate.opacity(0.6))
                 )
-                .font(.tokenBody)
-                .kerning(TypographyKerning.body)
-                .foregroundStyle(Color.tokenCharcoal)
+                .font(.bodyText)
+                .foregroundStyle(Color.tokenInk)
                 .focused($textFocused)
                 .submitLabel(.done)
                 .onSubmit(submit)
@@ -231,7 +228,7 @@ struct LogSheet: View {
                 .accessibilityLabel("What did you do?")
 
                 Rectangle()
-                    .fill(textFocused ? Color.tokenCharcoal : Color.tokenBorder)
+                    .fill(textFocused ? Color.tokenInk : Color.tokenMist)
                     .frame(height: 1)
                     .animation(reduceMotion ? nil : Motion.snappy, value: textFocused)
             }
@@ -239,7 +236,7 @@ struct LogSheet: View {
             Button(action: switchToVoice) {
                 Image(systemName: "mic")
                     .font(.system(size: 18))
-                    .foregroundStyle(Color.tokenMid)
+                    .foregroundStyle(Color.tokenSlate)
                     .padding(.leading, Spacing.sm)
                     .padding(.bottom, Spacing.md)
             }

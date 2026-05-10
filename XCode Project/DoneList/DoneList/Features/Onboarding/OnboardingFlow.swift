@@ -5,7 +5,7 @@
 // flipping `@AppStorage("hasOnboarded")` to `true`, regardless of the
 // notification permission outcome (per Screen specs).
 //
-// Phase: 7
+// Phase: 7, Phase 5 (token migration to sage palette)
 // See: design-system/Screen specs.md (Onboarding)  · Copy bank.md
 //      decisions/0008 — 4.2 risk mitigation
 
@@ -21,7 +21,7 @@ struct OnboardingFlow: View {
 
     var body: some View {
         ZStack {
-            Color.tokenWhite.ignoresSafeArea()
+            Color.tokenSurface.ignoresSafeArea()
 
             switch step {
             case 0:
@@ -57,14 +57,12 @@ private struct WelcomeStep: View {
             Spacer()
 
             Text("My done list")
-                .font(.tokenDisplay)
-                .kerning(TypographyKerning.display)
-                .foregroundStyle(Color.tokenCharcoal)
+                .font(.display)
+                .foregroundStyle(Color.tokenInk)
 
             Text("A quiet place for the things you actually got done.")
-                .font(.tokenMotivational)
-                .kerning(TypographyKerning.motivational)
-                .foregroundStyle(Color.tokenDark)
+                .font(.motivational)
+                .foregroundStyle(Color.tokenInk)
                 .frame(maxWidth: 300, alignment: .leading)
 
             Spacer()
@@ -107,32 +105,29 @@ private struct FirstLogStep: View {
             Spacer().frame(height: Spacing.xxxl)
 
             Text("Try it out")
-                .font(.tokenDisplay)
-                .kerning(TypographyKerning.display)
-                .foregroundStyle(Color.tokenCharcoal)
+                .font(.display)
+                .foregroundStyle(Color.tokenInk)
 
             Text("Type something you did today.")
-                .font(.tokenMotivational)
-                .kerning(TypographyKerning.motivational)
-                .foregroundStyle(Color.tokenDark)
+                .font(.motivational)
+                .foregroundStyle(Color.tokenInk)
 
             VStack(alignment: .leading, spacing: 0) {
                 TextField(
                     "",
                     text: $text,
                     prompt: Text("Took a 10-min walk")
-                        .foregroundStyle(Color.tokenLight)
+                        .foregroundStyle(Color.tokenSlate.opacity(0.6))
                 )
-                .font(.tokenBody)
-                .kerning(TypographyKerning.body)
-                .foregroundStyle(Color.tokenCharcoal)
+                .font(SwiftUI.Font.body)
+                .foregroundStyle(Color.tokenInk)
                 .focused($focused)
                 .submitLabel(.done)
                 .onSubmit(submit)
                 .padding(.vertical, Spacing.md)
 
                 Rectangle()
-                    .fill(focused ? Color.tokenCharcoal : Color.tokenBorder)
+                    .fill(focused ? Color.tokenInk : Color.tokenMist)
                     .frame(height: 1)
                     .animation(reduceMotion ? nil : Motion.snappy, value: focused)
             }
@@ -148,8 +143,8 @@ private struct FirstLogStep: View {
             .disabled(!canSubmit)
 
             Button("Skip for now", action: onSkip)
-                .font(.tokenBodySub)
-                .foregroundStyle(Color.tokenMid)
+                .font(.bodySub)
+                .foregroundStyle(Color.tokenSlate)
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, Spacing.lg)
         }
@@ -205,20 +200,18 @@ private struct NotificationsStep: View {
             Spacer().frame(height: Spacing.xxxl)
 
             Text("Get a daily nudge")
-                .font(.tokenDisplay)
-                .kerning(TypographyKerning.display)
-                .foregroundStyle(Color.tokenCharcoal)
+                .font(.display)
+                .foregroundStyle(Color.tokenInk)
 
             Text("We'll send a single, quiet reminder at the time you choose. Nothing else. Ever.")
-                .font(.tokenMotivational)
-                .kerning(TypographyKerning.motivational)
-                .foregroundStyle(Color.tokenDark)
+                .font(.motivational)
+                .foregroundStyle(Color.tokenInk)
                 .frame(maxWidth: 320, alignment: .leading)
 
             HStack {
                 Text("Reminder time")
-                    .font(.tokenBody)
-                    .foregroundStyle(Color.tokenCharcoal)
+                    .font(.bodyText)
+                    .foregroundStyle(Color.tokenInk)
                 Spacer()
                 DatePicker(
                     "Reminder time",
@@ -239,8 +232,8 @@ private struct NotificationsStep: View {
             .disabled(requesting)
 
             Button("Maybe later", action: onComplete)
-                .font(.tokenBodySub)
-                .foregroundStyle(Color.tokenMid)
+                .font(.bodySub)
+                .foregroundStyle(Color.tokenSlate)
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, Spacing.lg)
         }

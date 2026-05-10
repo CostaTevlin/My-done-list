@@ -1,38 +1,32 @@
 // Color+Tokens.swift
-// Brand color tokens. Single source of truth: design-system/Tokens.md.
-// Light values ported verbatim from PWA index.html lines 28-100.
-// Dark values are the Phase-9 proposal — to be validated on hardware.
-//
-// Phase: 1
-// See: design-system/Tokens.md (Color)
+// Brand color tokens — sage palette (Phase 5 migration from charcoal).
+// Source of truth: design-system/Tokens.md §Color.
+// Phase: 5 (replaces Phase 1 charcoal palette)
 
 import SwiftUI
 
 public extension Color {
-    /// Primary background. Light `#FFFFFF` · Dark `#000000` (OLED black)
-    static let tokenWhite       = Color("tokenWhite", bundle: .module)
+    /// Primary text, headlines, ring stroke at threshold. Light #1C1C1E · Dark #F2F2F2
+    static let tokenInk     = Color("tokenInk",     bundle: .module)
 
-    /// Subtle secondary bg / card surface. Light `#FAFAFA` · Dark `#111111`
-    static let tokenOffWhite    = Color("tokenOffWhite", bundle: .module)
+    /// Secondary text, supporting labels, subtext. Light #6B6B6B · Dark #9A9A9A
+    static let tokenSlate   = Color("tokenSlate",   bundle: .module)
 
-    /// Divider lines / dashed borders. Light `#D1D1D1` · Dark `#333333`
-    static let tokenBorder      = Color("tokenBorder", bundle: .module)
+    /// Dividers, ring track, soft surfaces. Light #E8E9E6 · Dark #2A2A2A
+    static let tokenMist    = Color("tokenMist",    bundle: .module)
 
-    /// Lighter dividers / row separators. Light `#E8E8E8` · Dark `#1C1C1C`
-    static let tokenBorderLight = Color("tokenBorderLight", bundle: .module)
+    /// Low-progress ring fill, reward halo. Light #DDE7DA · Dark #1F2A22
+    static let tokenSage50  = Color("tokenSage50",  bundle: .module)
 
-    /// Primary text + active UI + today bar. Light `#161A14` · Dark `#FFFFFF`
-    static let tokenCharcoal    = Color("tokenCharcoal", bundle: .module)
+    /// Mid-progress ring fill. Light #A7C5A1 · Dark #5C8466
+    static let tokenSage300 = Color("tokenSage300", bundle: .module)
 
-    /// Secondary text + motivational copy. Light `#32373C` · Dark `#AAAAAA`
-    static let tokenDark        = Color("tokenDark", bundle: .module)
+    /// Ring at/over threshold, primary accent. Light #4F8A61 · Dark #7CB089
+    static let tokenSage600 = Color("tokenSage600", bundle: .module)
 
-    /// Tertiary text + metadata. Light `#8A8A87` · Dark `#666666`
-    static let tokenMid         = Color("tokenMid", bundle: .module)
+    /// App background, card surfaces. Light #FAFAFA · Dark #0E1110
+    static let tokenSurface = Color("tokenSurface", bundle: .module)
 
-    /// Faint text + labels + timestamps. Light `#B8B8B5` · Dark `#484848`
-    static let tokenLight       = Color("tokenLight", bundle: .module)
-
-    /// Delete / destructive accent. Light `#CC4444` · Dark `#E66666`
-    static let tokenDanger      = Color("tokenDanger", bundle: .module)
+    /// Destructive (swipe-to-delete only). Light #CC4444 · Dark #E66666
+    static let tokenDanger  = Color("tokenDanger",  bundle: .module)
 }

@@ -13,7 +13,7 @@ public struct BigNumeral: View {
     }
 
     public var body: some View {
-        Text(padded(value))
+        Text(display(value))
             .font(.bigNumeral)
             .foregroundStyle(Color.tokenInk)
             .contentTransition(.numericText())
@@ -21,7 +21,7 @@ public struct BigNumeral: View {
             .accessibilityLabel("\(value) \(value == 1 ? "thing" : "things") logged today")
     }
 
-    private func padded(_ n: Int) -> String {
-        return n < 10 ? "0\(n)" : "\(n)"
+    private func display(_ n: Int) -> String {
+        return n >= 100 ? "99+" : "\(n)"
     }
 }

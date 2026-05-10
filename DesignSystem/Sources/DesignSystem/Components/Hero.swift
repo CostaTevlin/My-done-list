@@ -44,46 +44,50 @@ public struct Hero: View {
     @ViewBuilder
     private func todayHero(count: Int, threshold: Int) -> some View {
         let progress = threshold > 0 ? Double(count) / Double(threshold) : 0
-        let thingLabel = count == 1 ? "thing today" : "things today"
+        let thingLabel = count == 1 ? "thing\ntoday" : "things\ntoday"
 
         VStack(alignment: .leading, spacing: 0) {
             labelView
             Spacer().frame(height: 8)
             headlineView
-            Spacer().frame(height: 32)
+            Spacer().frame(height: 24)
 
             if isAccessibilitySize {
                 VStack(alignment: .leading, spacing: 12) {
-                    ringCluster(count: count, progress: progress)
+                    BigNumeral(value: count)
+                        .animation(reduceMotion ? nil : Motion.snappy, value: count)
                     Text(thingLabel)
                         .font(.bodySub)
                         .foregroundStyle(Color.tokenSlate)
+                    ActivityRing(progress: progress, diameter: 120, strokeWidth: 10)
                 }
             } else {
-                HStack(spacing: 16) {
-                    ringCluster(count: count, progress: progress)
-                    Text(thingLabel)
-                        .font(.bodySub)
-                        .foregroundStyle(Color.tokenSlate)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                HStack(alignment: .center, spacing: 0) {
+                    // Left half: number + label, anchored leading
+                    HStack(alignment: .lastTextBaseline, spacing: 10) {
+                        BigNumeral(value: count)
+                            .animation(reduceMotion ? nil : Motion.snappy, value: count)
+                            .fixedSize()
+                        Text(thingLabel)
+                            .font(.bodySub)
+                            .foregroundStyle(Color.tokenSlate)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    // Right half: ring centered in its half
+                    ActivityRing(progress: progress, diameter: 110, strokeWidth: 10)
+                        .frame(maxWidth: .infinity)
                 }
             }
 
-            Spacer().frame(height: 20)
-            insightView
+            Spacer().frame(height: 15)
+            insightRowView
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(label). \(count) \(count == 1 ? "thing" : "things") today. \(subtext)")
-    }
-
-    @ViewBuilder
-    private func ringCluster(count: Int, progress: Double) -> some View {
-        ZStack {
-            ActivityRing(progress: progress, diameter: 168, strokeWidth: 14)
-            BigNumeral(value: count)
-        }
-        .frame(width: 168, height: 168)
     }
 
     // MARK: - Reflect hero
@@ -152,5 +156,22 @@ public struct Hero: View {
             .id(subtext)
             .transition(.opacity)
             .animation(reduceMotion ? nil : .easeInOut(duration: 0.3), value: subtext)
+    }
+
+    private var insightRowView: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 0) {
+            Text(subtext)
+                .font(.motivational)
+                .foregroundStyle(Color.tokenSlate)
+                .lineLimit(2)
+                .id(subtext)
+                .transition(.opacity)
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.3), value: subtext)
+            Spacer()
+            Image(systemName: "heart.fill")
+                .font(.system(size: 16))
+                .foregroundStyle(Color.tokenSage600)
+        }
+        .frame(maxWidth: .infinity)
     }
 }

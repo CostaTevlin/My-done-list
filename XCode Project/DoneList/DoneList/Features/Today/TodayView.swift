@@ -72,7 +72,20 @@ struct TodayView: View {
                 .listRowInsets(EdgeInsets(
                     top: 20,
                     leading: Spacing.xxl,
-                    bottom: Spacing.xxxl,
+                    bottom: 30,
+                    trailing: Spacing.xxl
+                ))
+                .listRowBackground(Color.tokenSurface)
+
+            // Separator between hero and items.
+            Rectangle()
+                .fill(Color.tokenMist)
+                .frame(height: 1)
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets(
+                    top: 0,
+                    leading: Spacing.xxl,
+                    bottom: 0,
                     trailing: Spacing.xxl
                 ))
                 .listRowBackground(Color.tokenSurface)

@@ -7,18 +7,18 @@
 import SwiftUI
 
 public extension Font {
-    /// 44pt · Regular · top page title
-    static let display      = Font.system(size: 44, weight: .regular,  design: .default)
+    /// 44pt · Light · top page title
+    static let display      = Font.system(size: 44, weight: .light,  design: .default)
     /// 28pt · Regular · empty state heading / modal title
     static let displaySub   = Font.system(size: 28, weight: .regular,  design: .default)
-    /// 96pt · Regular · the big counter (monospaced digits)
-    static let bigNumeral   = Font.system(size: 96, weight: .regular,  design: .default).monospacedDigit()
-    /// 17pt · Regular · body text
-    static let bodyText     = Font.system(size: 17, weight: .regular,  design: .default)
-    /// 14pt · Regular · sub-copy
-    static let bodySub      = Font.system(size: 14, weight: .regular,  design: .default)
-    /// 17pt · Regular · rotating motivational copy
-    static let motivational = Font.system(size: 17, weight: .regular,  design: .default)
+    /// 160pt · Light · the big counter (monospaced digits)
+    static let bigNumeral   = Font.system(size: 160, weight: .light,  design: .default).monospacedDigit()
+    /// 16pt · Regular · body text
+    static let bodyText     = Font.system(size: 16, weight: .regular,  design: .default)
+    /// 13pt · Regular · sub-copy
+    static let bodySub      = Font.system(size: 13, weight: .regular,  design: .default)
+    /// 16pt · Regular · rotating motivational copy
+    static let motivational = Font.system(size: 16, weight: .regular,  design: .default)
     /// 10pt · Medium · zero-padded item rank
     static let num          = Font.system(size: 10, weight: .medium,   design: .default).monospacedDigit()
     /// 11pt · Regular · HH:mm timestamps

@@ -105,22 +105,3 @@ public struct BrandTabBar: View {
     }
 }
 
-// MARK: - Preview
-
-#Preview("Today selected") {
-    @Previewable @State var selection: BrandTabBar.Tab = .today
-    BrandTabBar(selection: $selection, onLog: {})
-        .background(Color.tokenSurface)
-}
-
-#Preview("Reflect selected") {
-    @Previewable @State var selection: BrandTabBar.Tab = .reflect
-    BrandTabBar(selection: $selection, onLog: {})
-        .background(Color.tokenSurface)
-}
-
-#Preview("More selected") {
-    @Previewable @State var selection: BrandTabBar.Tab = .more
-    BrandTabBar(selection: $selection, onLog: {})
-        .background(Color.tokenSurface)
-}

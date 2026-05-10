@@ -1,5 +1,6 @@
 // DesignSystemTests.swift
 // Phase 1: smoke tests that the package compiles and exposes the expected API.
+// Phase 5: updated to use sage palette tokens (tokenInk, tokenSlate, etc.)
 // Real tests landed in Phase 9 (a11y + Dynamic Type) and per-component as needed.
 // See: engineering/Testing strategy.md
 
@@ -12,42 +13,35 @@ final class DesignSystemTests: XCTestCase {
     // MARK: - Tokens compile + resolve
 
     func test_colorTokens_areAccessible() {
-        // Compile-time check: all 9 brand color tokens exist.
-        _ = Color.tokenWhite
-        _ = Color.tokenOffWhite
-        _ = Color.tokenBorder
-        _ = Color.tokenBorderLight
-        _ = Color.tokenCharcoal
-        _ = Color.tokenDark
-        _ = Color.tokenMid
-        _ = Color.tokenLight
+        // Compile-time check: all 8 brand color tokens exist (Phase 5 sage palette).
+        _ = Color.tokenInk
+        _ = Color.tokenSlate
+        _ = Color.tokenMist
+        _ = Color.tokenSage50
+        _ = Color.tokenSage300
+        _ = Color.tokenSage600
+        _ = Color.tokenSurface
         _ = Color.tokenDanger
     }
 
     func test_typographyTokens_areAccessible() {
-        // All 11 type tokens from Tokens.md.
-        _ = Font.tokenDisplay
-        _ = Font.tokenDisplaySub
-        _ = Font.tokenBigNumeral
-        _ = Font.tokenBody
-        _ = Font.tokenBodySub
-        _ = Font.tokenMotivational
-        _ = Font.tokenNum
-        _ = Font.tokenTime
-        _ = Font.tokenLabel
-        _ = Font.tokenChartCount
-        _ = Font.tokenChartDayLabel
+        // All 11 type tokens from Tokens.md (Phase 5 SF Pro scale).
+        _ = Font.display
+        _ = Font.displaySub
+        _ = Font.bigNumeral
+        _ = Font.body
+        _ = Font.bodySub
+        _ = Font.motivational
+        _ = Font.num
+        _ = Font.time
+        _ = Font.label
+        _ = Font.chartCount
+        _ = Font.chartDayLabel
     }
 
     func test_kerningConstants_matchSpec() {
-        XCTAssertEqual(TypographyKerning.display, -2.2)
-        XCTAssertEqual(TypographyKerning.bigNumeral, -6.0)
+        // Phase 5: only .label kerning survives the SF Pro migration.
         XCTAssertEqual(TypographyKerning.label, 0.88)
-    }
-
-    func test_lineHeightConstants_matchSpec() {
-        XCTAssertEqual(TypographyLineHeight.bigNumeral, 0.82)
-        XCTAssertEqual(TypographyLineHeight.body, 1.45)
     }
 
     // MARK: - Spacing scale

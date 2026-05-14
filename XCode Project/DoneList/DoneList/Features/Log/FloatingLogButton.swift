@@ -16,7 +16,7 @@ struct FloatingLogButton: View {
 
     var body: some View {
         Button(action: action) {
-            Image(systemName: "mic.fill")
+            Image(systemName: "plus")
                 .font(.system(size: 22, weight: .semibold))
                 .foregroundStyle(Color.tokenSurface)
                 .frame(width: 56, height: 56)

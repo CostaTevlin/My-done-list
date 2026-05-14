@@ -2,11 +2,9 @@
 // Top-level navigation shell: two-branch implementation per ADR-0006.
 //
 // iOS 26 (if #available):
-//   Native TabView with charcoal tint. Uses iOS 26's `Tab(role: .search)`
-//   API to get a SECOND floating glass pill rendered as a sibling to the
-//   main tab bar (same pattern Apple Music uses for its search button) —
-//   we hijack it as the "Log" affordance so the system positions and styles
-//   the button for us, eliminating manual alignment math.
+//   Native TabView (Today / Reflect / More) + FloatingLogButton overlay
+//   anchored above the tab bar via Spacing.bottomSafe. Gives full control
+//   over the FAB appearance vs relying on Tab(role: .search) system styling.
 //
 // iOS 18-25 (else):
 //   Custom BrandTabBar (editorial typographic, no system chrome) with
@@ -17,7 +15,7 @@
 // DoneListApp's WindowGroup.
 //
 // Phase: 3 (shell), 4 (Log + confetti), 5 (pill moved), 6 (two-branch),
-//        7 (More tab), 8 (Tab(role: .search) hijack on iOS 26)
+//        7 (More tab), 4.5 (overlay FAB on iOS 26)
 // See: engineering/Architecture.md  ·  design-system/Liquid Glass mapping.md
 //      design-system/Components.md (BrandTabBar)  · ADR-0006
 
@@ -66,13 +64,13 @@ struct RootTabView: View {
         showLog = true
     }
 
-    // MARK: - iOS 26: Native TabView with charcoal tint + search-role Log pill
+    // MARK: - iOS 26: Native TabView + overlay FAB
 
     @ViewBuilder
     private var ios26Shell: some View {
         #if os(iOS)
         if #available(iOS 26.0, *) {
-            IOS26ShellContent(onLog: openLog, onEdit: openEdit, showLog: $showLog)
+            IOS26ShellContent(onLog: openLog, onEdit: openEdit)
         }
         #endif
     }
@@ -99,57 +97,34 @@ struct RootTabView: View {
     }
 }
 
-// MARK: - iOS 26 shell content (extracted so `Tab(role:)` is only compiled on 26+)
+// MARK: - iOS 26 shell content (extracted so Tab API is only compiled on 26+)
 
 #if os(iOS)
 @available(iOS 26.0, *)
 private struct IOS26ShellContent: View {
     let onLog: (InputMode) -> Void
     let onEdit: (DoneItem) -> Void
-    @Binding var showLog: Bool
 
-    /// Selection model for the iOS 26 shell. Includes a synthetic `.log`
-    /// case bound to the search-role tab. When the user taps the search
-    /// pill, selection briefly flips to `.log`, we present the LogSheet,
-    /// and immediately revert to whichever real tab they were on.
-    enum IOS26Tab: Hashable { case today, reflect, more, log }
-
+    enum IOS26Tab: Hashable { case today, reflect, more }
     @State private var selection: IOS26Tab = .today
-    @State private var lastRealTab: IOS26Tab = .today
 
     var body: some View {
         TabView(selection: $selection) {
             Tab("Today", systemImage: "calendar.badge.checkmark", value: IOS26Tab.today) {
                 TodayView(onLog: onLog, onEditItem: onEdit)
             }
-
             Tab("Reflect", systemImage: "chart.bar.xaxis", value: IOS26Tab.reflect) {
                 ReflectView()
             }
-
             Tab("More", systemImage: "ellipsis", value: IOS26Tab.more) {
                 NavigationStack { SettingsView() }
             }
-
-            // Search-role hijack: renders as a separate floating glass
-            // pill (Apple Music pattern), perfectly inline with the main
-            // tab bar. We never actually navigate to it — the .onChange
-            // handler intercepts, fires the LogSheet, and snaps selection
-            // back to the previous real tab.
-            Tab("Log", systemImage: "mic.fill", value: IOS26Tab.log, role: .search) {
-                Color.clear // unused; we revert before this could appear
-            }
         }
         .tint(Color.tokenInk)
-        .onChange(of: selection) { oldValue, newValue in
-            guard newValue == .log else {
-                lastRealTab = newValue
-                return
-            }
-            showLog = true
-            // Revert immediately so the empty `.log` content never shows.
-            // Use the last known real tab; if there isn't one, default to .today.
-            selection = (oldValue == .log) ? lastRealTab : oldValue
+        .overlay(alignment: .bottomTrailing) {
+            FloatingLogButton { onLog(.voice) }
+                .padding(.trailing, Spacing.xxl)
+                .padding(.bottom, Spacing.bottomSafe)
         }
     }
 }

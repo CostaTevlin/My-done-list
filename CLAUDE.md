@@ -28,6 +28,7 @@ Read the rule file when its trigger fires. Don't read it speculatively.
 - **IF starting any non-trivial task** (>1 file, >30 min, anything user-visible) → create a contract per `.claude/rules/contracts.md` before coding.
 - **IF writing or editing Swift code** → `.claude/rules/coding.md`
 - **IF touching tokens, components, or anything visual** → `.claude/rules/design-system.md`
+- **IF asked design questions or to review / critique design** → `Redesign/References/` (organized by phase: voice-input, celebrations-animations, charts-metrics, navigation). Reference against Figma and vault.
 - **IF using iOS 26 / Liquid Glass APIs** → `.claude/rules/liquid-glass.md`
 - **IF making a non-trivial architectural choice** (new dep, new pattern, ADR deviation) → `.claude/rules/adrs.md`
 - **IF writing or running tests** → `.claude/rules/testing.md`
@@ -67,6 +68,12 @@ My done list/
 ├── DesignSystem/                  ← Swift Package (separate target)
 │   └── Sources/DesignSystem/{Components,Tokens,Resources}
 ├── DoneListWidget/                ← Widget extension
+├── Redesign/
+│   └── References/                ← organized reference screenshots by phase
+│       ├── voice-input/           ← Phase 4.5 voice input patterns
+│       ├── celebrations-animations/ ← completion feedback & motivational UX
+│       ├── charts-metrics/        ← Phase 5 data visualization
+│       └── navigation/            ← tab bars, modals, structure patterns
 ├── index.html, sw.js, manifest.json, icon-*.png  ← LEGACY PWA — read-only reference
 └── .claude/
     ├── rules/                     ← rule files this CLAUDE.md routes to

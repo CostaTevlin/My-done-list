@@ -64,13 +64,13 @@ struct RootTabView: View {
         showLog = true
     }
 
-    // MARK: - iOS 26: Native TabView + overlay FAB
+    // MARK: - iOS 26: Native TabView + expanding FAB card
 
     @ViewBuilder
     private var ios26Shell: some View {
         #if os(iOS)
         if #available(iOS 26.0, *) {
-            IOS26ShellContent(onLog: openLog, onEdit: openEdit)
+            IOS26ShellContent(onEdit: openEdit)
         }
         #endif
     }
@@ -102,16 +102,16 @@ struct RootTabView: View {
 #if os(iOS)
 @available(iOS 26.0, *)
 private struct IOS26ShellContent: View {
-    let onLog: (InputMode) -> Void
     let onEdit: (DoneItem) -> Void
 
     enum IOS26Tab: Hashable { case today, reflect, more }
     @State private var selection: IOS26Tab = .today
+    @State private var showLogCard = false
 
     var body: some View {
         TabView(selection: $selection) {
             Tab("Today", systemImage: "calendar.badge.checkmark", value: IOS26Tab.today) {
-                TodayView(onLog: onLog, onEditItem: onEdit)
+                TodayView(onLog: { _ in showLogCard = true }, onEditItem: onEdit)
             }
             Tab("Reflect", systemImage: "chart.bar.xaxis", value: IOS26Tab.reflect) {
                 ReflectView()
@@ -121,10 +121,8 @@ private struct IOS26ShellContent: View {
             }
         }
         .tint(Color.tokenInk)
-        .overlay(alignment: .bottomTrailing) {
-            FloatingLogButton { onLog(.voice) }
-                .padding(.trailing, Spacing.xxl)
-                .padding(.bottom, Spacing.bottomSafe)
+        .overlay {
+            LogFABOverlay(isExpanded: $showLogCard)
         }
     }
 }

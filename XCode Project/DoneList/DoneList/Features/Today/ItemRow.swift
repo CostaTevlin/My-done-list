@@ -13,12 +13,14 @@ struct ItemRow: View {
     let text: String
     let time: String
     let showsDivider: Bool
+    var onTap: (() -> Void)?
 
-    init(rank: Int, text: String, time: String, showsDivider: Bool = true) {
+    init(rank: Int, text: String, time: String, showsDivider: Bool = true, onTap: (() -> Void)? = nil) {
         self.rank = rank
         self.text = text
         self.time = time
         self.showsDivider = showsDivider
+        self.onTap = onTap
     }
 
     var body: some View {
@@ -41,6 +43,7 @@ struct ItemRow: View {
             }
             .padding(.vertical, 14)
             .contentShape(Rectangle())   // full-row swipe hit-target
+            .onTapGesture { onTap?() }
 
             if showsDivider {
                 Rectangle()
@@ -50,6 +53,7 @@ struct ItemRow: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(rank), \(text), at \(time)")
+        .accessibilityHint(onTap != nil ? "Double-tap to edit" : "")
     }
 
     private func padded(_ n: Int) -> String {

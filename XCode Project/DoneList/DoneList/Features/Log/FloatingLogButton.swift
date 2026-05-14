@@ -16,15 +16,15 @@ struct FloatingLogButton: View {
 
     var body: some View {
         Button(action: action) {
-            Image(systemName: "plus")
-                .font(.system(size: 24, weight: .semibold))
+            Image(systemName: "mic.fill")
+                .font(.system(size: 22, weight: .semibold))
                 .foregroundStyle(Color.tokenSurface)
                 .frame(width: 56, height: 56)
                 .background(
                     Circle()
                         .fill(Color.tokenInk)
                         .shadow(
-                            color: Color.black.opacity(0.2),
+                            color: Color.black.opacity(0.12),
                             radius: 12,
                             x: 0,
                             y: 4
@@ -33,6 +33,7 @@ struct FloatingLogButton: View {
         }
         .buttonStyle(FABButtonStyle(reduceMotion: reduceMotion))
         .accessibilityLabel("Log something you did")
+        .accessibilityHint("Opens voice capture")
     }
 }
 

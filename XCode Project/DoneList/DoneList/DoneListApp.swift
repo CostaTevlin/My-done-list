@@ -38,7 +38,7 @@ struct DoneListApp: App {
         WindowGroup {
             Group {
                 if hasOnboarded {
-                    RootTabView()
+                    RootView()
                 } else {
                     OnboardingFlow()
                 }

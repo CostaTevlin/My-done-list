@@ -148,6 +148,40 @@ enum CopyBank {
         count == 1 ? "win today" : "wins today"
     }
 
+    // MARK: - Voice capture (ADR-0010, Phase 4.5)
+
+    /// Sheet title shown in LogSheet for both add and edit.
+    static let logSheetTitle = "Add a done"
+
+    /// Ghost input row placeholder text. Mirrors design-system/Copy bank.md.
+    static let ghostInputPlaceholder = "Type something you did\u{2026}"
+
+    /// Label shown above the static voice prompt example.
+    static let voiceTrySayingLabel = "Try saying"
+
+    /// Single static example shown in voice idle state. Never rotates.
+    static let voiceTrySayingExample = "Finished the deck for tomorrow\u{2019}s review"
+
+    /// Bold caption shown under the PulseRing while listening.
+    static let voiceListeningCaption = "Listening\u{2026}"
+
+    /// Supporting caption shown under the PulseRing.
+    static let voiceListeningSubcaption = "Say what you just did."
+
+    /// Mode toggle label shown in voice mode to switch to text input.
+    static let voiceModeToggleToText = "Type instead"
+
+    /// Mode toggle label shown in text mode to switch to voice input.
+    static let voiceModeToggleToVoice = "Use voice"
+
+    /// NSSpeechRecognitionUsageDescription for Info.plist.
+    static let speechRecognitionUsageDescription =
+        "My Done List uses speech recognition to let you quickly log what you\u{2019}ve done by speaking."
+
+    /// NSMicrophoneUsageDescription for Info.plist.
+    static let microphoneUsageDescription =
+        "My Done List uses the microphone to capture your voice when logging a done item."
+
     private static func heroInsightPool(for count: Int) -> [String] {
         switch count {
         case 0:

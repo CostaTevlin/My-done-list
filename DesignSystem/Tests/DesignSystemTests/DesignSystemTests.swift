@@ -1,6 +1,6 @@
 // DesignSystemTests.swift
 // Phase 1: smoke tests that the package compiles and exposes the expected API.
-// Phase 5: updated to use sage palette tokens (tokenInk, tokenSlate, etc.)
+// Phase 5: two-tier refactor — palette (internal) + semantic tokens (public).
 // Real tests landed in Phase 9 (a11y + Dynamic Type) and per-component as needed.
 // See: engineering/Testing strategy.md
 
@@ -13,15 +13,16 @@ final class DesignSystemTests: XCTestCase {
     // MARK: - Tokens compile + resolve
 
     func test_colorTokens_areAccessible() {
-        // Compile-time check: all 8 brand color tokens exist (Phase 5 sage palette).
-        _ = Color.tokenInk
-        _ = Color.tokenSlate
-        _ = Color.tokenMist
-        _ = Color.tokenSage50
-        _ = Color.tokenSage300
-        _ = Color.tokenSage600
-        _ = Color.tokenSurface
-        _ = Color.tokenDanger
+        // Compile-time check: all 9 semantic color tokens exist (Phase 5 two-tier refactor).
+        _ = Color.textPrimary
+        _ = Color.textSecondary
+        _ = Color.borderDefault
+        _ = Color.surfaceApp
+        _ = Color.accentPrimary
+        _ = Color.ringLow
+        _ = Color.ringMid
+        _ = Color.ringComplete
+        _ = Color.actionDestructive
     }
 
     func test_typographyTokens_areAccessible() {

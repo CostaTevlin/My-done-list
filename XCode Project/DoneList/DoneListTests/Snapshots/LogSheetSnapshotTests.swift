@@ -42,7 +42,7 @@ final class LogSheetSnapshotTests: XCTestCase {
         let view = LogSheet(initialMode: .voice)
             .environment(store)
             .frame(width: canvasWidth, height: canvasHeight)
-            .background(Color.tokenSurface)
+            .background(Color.surfaceApp)
         try render(view, name: "LogSheet_voice_idle_iOS18")
     }
 
@@ -53,7 +53,7 @@ final class LogSheetSnapshotTests: XCTestCase {
         let view = LogSheet(initialMode: .text)
             .environment(store)
             .frame(width: canvasWidth, height: canvasHeight)
-            .background(Color.tokenSurface)
+            .background(Color.surfaceApp)
         try render(view, name: "LogSheet_text_iOS18")
     }
 
@@ -73,7 +73,7 @@ final class LogSheetSnapshotTests: XCTestCase {
         let view = LogSheet(initialMode: .text, editingItem: item)
             .environment(store)
             .frame(width: canvasWidth, height: canvasHeight)
-            .background(Color.tokenSurface)
+            .background(Color.surfaceApp)
         try render(view, name: "LogSheet_editMode_iOS18")
     }
 }

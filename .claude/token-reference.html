@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slowly — Design Tokens</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; background: #f5f5f5; color: #1c1c1e; font-size: 13px; }
+
+  .page { max-width: 1160px; margin: 0 auto; padding: 40px 32px 80px; }
+
+  h1 { font-size: 28px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .subtitle { color: #6b6b6b; font-size: 13px; margin-bottom: 48px; }
+
+  h2 { font-size: 11px; font-weight: 600; letter-spacing: 0.88px; text-transform: uppercase; color: #6b6b6b; margin-bottom: 16px; margin-top: 48px; padding-bottom: 8px; border-bottom: 1px solid #e8e9e6; }
+
+  /* Swift code chip */
+  code { font-family: 'SF Mono', 'Fira Mono', monospace; font-size: 10px; background: #f0f0f0; color: #1c1c1e; padding: 1px 5px; border-radius: 4px; white-space: nowrap; }
+  code.green { background: #eaf3ec; color: #3a7049; }
+  code.dim   { background: #f5f5f5; color: #9a9a9a; border: 1px solid #e8e9e6; }
+
+  /* ── Two-tier layout ── */
+  .tier-wrap { display: grid; grid-template-columns: 1fr 32px 1fr; gap: 0; align-items: start; margin-bottom: 8px; }
+
+  /* ── Palette swatches ── */
+  .palette-grid { display: flex; flex-direction: column; gap: 6px; }
+  .pal-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: white; border-radius: 8px; border: 1px solid #e8e9e6; }
+  .swatch-pair { display: flex; gap: 3px; flex-shrink: 0; }
+  .swatch { width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); }
+  .swatch.dark-swatch { border: 1px solid rgba(255,255,255,0.12); }
+  .pal-info { flex: 1; min-width: 0; }
+  .pal-name { font-weight: 500; font-size: 12px; color: #1c1c1e; margin-bottom: 3px; }
+  .pal-values { font-size: 10px; color: #6b6b6b; font-feature-settings: "tnum"; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .mode-badge { font-size: 9px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #9a9a9a; }
+
+  /* ── Semantic tokens ── */
+  .sem-grid { display: flex; flex-direction: column; gap: 6px; }
+  .sem-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: white; border-radius: 8px; border: 1px solid #e8e9e6; }
+  .sem-info { flex: 1; min-width: 0; }
+  .sem-top  { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 3px; }
+  .sem-name { font-weight: 500; font-size: 12px; color: #1c1c1e; }
+  .sem-bottom { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .sem-alias { font-size: 11px; color: #4f8a61; font-weight: 500; }
+  .sem-desc { font-size: 11px; color: #9a9a9a; }
+
+  /* Arrow column */
+  .arrow-col { display: flex; align-items: flex-start; justify-content: center; padding-top: 36px; }
+
+  /* ── Spacing ── */
+  .spacing-grid { display: flex; flex-direction: column; gap: 6px; }
+  .sp-row { display: flex; align-items: center; gap: 16px; padding: 8px 10px; background: white; border-radius: 8px; border: 1px solid #e8e9e6; }
+  .sp-bar-wrap { width: 160px; flex-shrink: 0; }
+  .sp-bar { height: 14px; background: #dde7da; border-radius: 3px; border: 1px solid #a7c5a1; }
+  .sp-labels { display: flex; gap: 6px; align-items: center; min-width: 160px; }
+  .sp-val { font-size: 12px; color: #4f8a61; font-weight: 600; font-feature-settings: "tnum"; width: 44px; flex-shrink: 0; }
+  .sp-desc { font-size: 11px; color: #9a9a9a; }
+
+  /* ── Radius ── */
+  .radius-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+  .rad-card { background: white; border: 1px solid #e8e9e6; padding: 16px 20px; text-align: center; min-width: 150px; border-radius: 8px; }
+  .rad-box { width: 72px; height: 72px; background: #dde7da; border: 2px solid #a7c5a1; margin: 0 auto 12px; }
+  .rad-name { font-weight: 500; font-size: 12px; margin-bottom: 3px; }
+  .rad-val { font-size: 11px; color: #4f8a61; font-weight: 600; margin-bottom: 4px; }
+  .rad-desc { font-size: 11px; color: #9a9a9a; margin-bottom: 6px; }
+
+  /* ── Typography ── */
+  .type-grid { display: flex; flex-direction: column; gap: 1px; }
+  .type-row { display: grid; grid-template-columns: 220px 110px 1fr 1fr; align-items: center; gap: 16px; padding: 10px 12px; background: white; border-bottom: 1px solid #f0f0f0; }
+  .type-row:first-child { border-radius: 8px 8px 0 0; }
+  .type-row:last-child  { border-radius: 0 0 8px 8px; border-bottom: none; }
+  .type-token { display: flex; flex-direction: column; gap: 3px; }
+  .type-figma { font-size: 10px; color: #9a9a9a; }
+  .type-spec  { font-size: 11px; color: #6b6b6b; }
+  .type-preview { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #1c1c1e; }
+  .type-desc  { font-size: 11px; color: #9a9a9a; }
+
+  .section-note { font-size: 11px; color: #9a9a9a; margin-bottom: 12px; }
+  .collection-tag { display: inline-block; background: #f0f0f0; border-radius: 4px; padding: 2px 7px; font-size: 10px; font-weight: 600; letter-spacing: 0.3px; color: #6b6b6b; margin-bottom: 10px; }
+  .collection-tag.semantic { background: #eaf3ec; color: #4f8a61; }
+
+  .dot { color: #d0d0d0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Slowly — Design Tokens</h1>
+  <p class="subtitle">Two-tier system &nbsp;·&nbsp; Live reference (code + Figma aligned) &nbsp;·&nbsp; May 2026</p>
+
+  <!-- ════════════════════════════════════════════════════════ COLOR -->
+  <h2>Color</h2>
+  <p class="section-note">Palette holds raw scale values (internal to DesignSystem). Semantic tokens are the public API — alias into palette. Mode switching lives on the Palette collection in Figma.</p>
+
+  <div class="tier-wrap">
+
+    <!-- ── Palette ── -->
+    <div>
+      <div class="collection-tag">Slowly — Palette &nbsp;·&nbsp; xcassets + Color+Palette.swift (internal)</div>
+      <div class="palette-grid">
+
+        <div class="pal-row">
+          <div class="swatch-pair">
+            <div><div class="mode-badge">L</div><div class="swatch" style="background:#DDE7DA"></div></div>
+            <div><div class="mode-badge">D</div><div class="swatch dark-swatch" style="background:#1F2A22"></div></div>
+          </div>
+          <div class="pal-info">
+            <div class="pal-name">sage / 50</div>
+            <div class="pal-values"><code class="dim">.paletteSage50</code> <span class="dot">·</span> L #DDE7DA <span class="dot">·</span> D #1F2A22</div>
+          </div>
+        </div>
+
+        <div class="pal-row">
+          <div class="swatch-pair">
+            <div><div class="mode-badge">L</div><div class="swatch" style="background:#A7C5A1"></div></div>
+            <div><div class="mode-badge">D</div><div class="swatch dark-swatch" style="background:#5C8466"></div></div>
+          </div>
+          <div class="pal-info">
+            <div class="pal-name">sage / 300</div>
+            <div class="pal-values"><code class="dim">.paletteSage300</code> <span class="dot">·</span> L #A7C5A1 <span class="dot">·</span> D #5C8466</div>
+          </div>
+        </div>
+
+        <div class="pal-row">
+          <div class="swatch-pair">
+            <div><div class="mode-badge">L</div><div class="swatch" style="background:#4F8A61"></div></div>
+            <div><div class="mode-badge">D</div><div class="swatch dark-swatch" style="background:#7CB089"></div></div>
+          </div>
+          <div class="pal-info">
+            <div class="pal-name">sage / 600</div>
+            <div class="pal-values"><code class="dim">.paletteSage600</code> <span class="dot">·</span> L #4F8A61 <span class="dot">·</span> D #7CB089</div>
+          </div>
+        </div>
+
+        <div class="pal-row">
+          <div class="swatch-pair">
+            <div><div class="mode-badge">L</div><div class="swatch" style="background:#FAFAFA;border-color:#ddd"></div></div>
+            <div><div class="mode-badge">D</div><div class="swatch dark-swatch" style="background:#0E1110"></div></div>
+          </div>
+          <div class="pal-info">
+            <div class="pal-name">neutral / 50</div>
+            <div class="pal-values"><code class="dim">.paletteNeutral50</code> <span class="dot">·</span> L #FAFAFA <span class="dot">·</span> D #0E1110</div>
+          </div>
+        </div>
+
+        <div class="pal-row">
+          <div class="swatch-pair">
+            <div><div class="mode-badge">L</div><div class="swatch" style="background:#E8E9E6"></div></div>
+            <div><div class="mode-badge">D</div><div class="swatch dark-swatch" style="background:#2A2A2A"></div></div>
+          </div>
+          <div class="pal-info">
+            <div class="pal-name">neutral / 100</div>
+            <div class="pal-values"><code class="dim">.paletteNeutral100</code> <span class="dot">·</span> L #E8E9E6 <span class="dot">·</span> D #2A2A2A</div>
+          </div>
+        </div>
+
+        <div class="pal-row">
+          <div class="swatch-pair">
+            <div><div class="mode-badge">L</div><div class="swatch" style="background:#6B6B6B"></div></div>
+            <div><div class="mode-badge">D</div><div class="swatch dark-swatch" style="background:#9A9A9A"></div></div>
+          </div>
+          <div class="pal-info">
+            <div class="pal-name">neutral / 500</div>
+            <div class="pal-values"><code class="dim">.paletteNeutral500</code> <span class="dot">·</span> L #6B6B6B <span class="dot">·</span> D #9A9A9A</div>
+          </div>
+        </div>
+
+        <div class="pal-row">
+          <div class="swatch-pair">
+            <div><div class="mode-badge">L</div><div class="swatch" style="background:#1C1C1E"></div></div>
+            <div><div class="mode-badge">D</div><div class="swatch dark-swatch" style="background:#F2F2F2"></div></div>
+          </div>
+          <div class="pal-info">
+            <div class="pal-name">neutral / 900</div>
+            <div class="pal-values"><code class="dim">.paletteNeutral900</code> <span class="dot">·</span> L #1C1C1E <span class="dot">·</span> D #F2F2F2</div>
+          </div>
+        </div>
+
+        <div class="pal-row">
+          <div class="swatch-pair">
+            <div><div class="mode-badge">L</div><div class="swatch" style="background:#CC4444"></div></div>
+            <div><div class="mode-badge">D</div><div class="swatch dark-swatch" style="background:#E66666"></div></div>
+          </div>
+          <div class="pal-info">
+            <div class="pal-name">red / 500</div>
+            <div class="pal-values"><code class="dim">.paletteRed500</code> <span class="dot">·</span> L #CC4444 <span class="dot">·</span> D #E66666</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Arrow ── -->
+    <div class="arrow-col">
+      <svg width="24" viewBox="0 0 24 440" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:440px">
+        <line x1="12" y1="0" x2="12" y2="428" stroke="#a7c5a1" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <polygon points="5,422 12,434 19,422" fill="#a7c5a1"/>
+      </svg>
+    </div>
+
+    <!-- ── Semantic ── -->
+    <div>
+      <div class="collection-tag semantic">Slowly · Semantic — Color+Tokens.swift (public)</div>
+      <div class="sem-grid">
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#1C1C1E;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.08)"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / text / primary</span><code class="green">.textPrimary</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ neutral / 900</span><span class="sem-desc">Primary text, headlines, ring stroke</span></div>
+          </div>
+        </div>
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#6B6B6B;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.08)"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / text / secondary</span><code class="green">.textSecondary</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ neutral / 500</span><span class="sem-desc">Secondary text, supporting labels</span></div>
+          </div>
+        </div>
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#E8E9E6;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.08)"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / border / default</span><code class="green">.borderDefault</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ neutral / 100</span><span class="sem-desc">Dividers, ring track, soft surfaces</span></div>
+          </div>
+        </div>
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#FAFAFA;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid #ddd"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / surface / app</span><code class="green">.surfaceApp</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ neutral / 50</span><span class="sem-desc">App background, card surfaces</span></div>
+          </div>
+        </div>
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#4F8A61;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.08)"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / accent / primary</span><code class="green">.accentPrimary</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ sage / 600</span><span class="sem-desc">CTA, active states, motivational text</span></div>
+          </div>
+        </div>
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#DDE7DA;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.08)"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / ring / low</span><code class="green">.ringLow</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ sage / 50</span><span class="sem-desc">Low-progress ring fill, reward halo</span></div>
+          </div>
+        </div>
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#A7C5A1;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.08)"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / ring / mid</span><code class="green">.ringMid</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ sage / 300</span><span class="sem-desc">Mid-progress ring fill</span></div>
+          </div>
+        </div>
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#4F8A61;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.08)"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / ring / complete</span><code class="green">.ringComplete</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ sage / 600</span><span class="sem-desc">Ring at/over threshold (same hue as accentPrimary)</span></div>
+          </div>
+        </div>
+
+        <div class="sem-row">
+          <div class="swatch" style="background:#CC4444;flex-shrink:0;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.08)"></div>
+          <div class="sem-info">
+            <div class="sem-top"><span class="sem-name">color / action / destructive</span><code class="green">.actionDestructive</code></div>
+            <div class="sem-bottom"><span class="sem-alias">→ red / 500</span><span class="sem-desc">Swipe-to-delete only</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /tier-wrap -->
+
+
+  <!-- ════════════════════════════════════════════════════════ SPACING -->
+  <h2>Spacing</h2>
+  <p class="section-note">Single-tier · Slowly collection in Figma · <code>Spacing.*</code> in Swift (Spacing.swift) · 4pt base scale</p>
+  <div class="spacing-grid">
+
+    <div class="sp-row">
+      <div class="sp-labels"><code>Spacing.xs</code></div>
+      <div class="sp-val">4 pt</div>
+      <div class="sp-bar-wrap"><div class="sp-bar" style="width:4px"></div></div>
+      <div class="sp-desc">Tight icon-text gaps</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-labels"><code>Spacing.sm</code></div>
+      <div class="sp-val">8 pt</div>
+      <div class="sp-bar-wrap"><div class="sp-bar" style="width:8px"></div></div>
+      <div class="sp-desc">Row inner padding</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-labels"><code>Spacing.md</code></div>
+      <div class="sp-val">12 pt</div>
+      <div class="sp-bar-wrap"><div class="sp-bar" style="width:12px"></div></div>
+      <div class="sp-desc">Item row gap</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-labels"><code>Spacing.lg</code></div>
+      <div class="sp-val">16 pt</div>
+      <div class="sp-bar-wrap"><div class="sp-bar" style="width:16px"></div></div>
+      <div class="sp-desc">Section spacing</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-labels"><code>Spacing.xl</code></div>
+      <div class="sp-val">24 pt</div>
+      <div class="sp-bar-wrap"><div class="sp-bar" style="width:24px"></div></div>
+      <div class="sp-desc">Modal vertical rhythm</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-labels"><code>Spacing.xxl</code></div>
+      <div class="sp-val">28 pt</div>
+      <div class="sp-bar-wrap"><div class="sp-bar" style="width:28px"></div></div>
+      <div class="sp-desc">Screen horizontal padding — max(28, safe-area-inset)</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-labels"><code>Spacing.xxxl</code></div>
+      <div class="sp-val">40 pt</div>
+      <div class="sp-bar-wrap"><div class="sp-bar" style="width:40px"></div></div>
+      <div class="sp-desc">Section dividers</div>
+    </div>
+    <div class="sp-row">
+      <div class="sp-labels"><code>Spacing.bottomSafe</code></div>
+      <div class="sp-val">100 pt</div>
+      <div class="sp-bar-wrap"><div class="sp-bar" style="width:100px"></div></div>
+      <div class="sp-desc">Tab bar + accessory pill clearance</div>
+    </div>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════ RADIUS -->
+  <h2>Radius</h2>
+  <p class="section-note">Single-tier · Slowly collection in Figma · <code>Radius.*</code> in Swift (Radius.swift)</p>
+  <div class="radius-grid">
+
+    <div class="rad-card">
+      <div class="rad-box" style="border-radius:8px"></div>
+      <div class="rad-name">Radius / chip</div>
+      <div class="rad-val">8 pt</div>
+      <div class="rad-desc">Small inline chips (reserved v1)</div>
+      <code>Radius.chip</code>
+    </div>
+
+    <div class="rad-card">
+      <div class="rad-box" style="border-radius:14px"></div>
+      <div class="rad-name">Radius / card</div>
+      <div class="rad-val">14 pt</div>
+      <div class="rad-desc">Modal corners, chart bar corners</div>
+      <code>Radius.card</code>
+    </div>
+
+    <div class="rad-card">
+      <div class="rad-box" style="border-radius:9999px;width:72px;height:36px;margin-top:20px;margin-bottom:28px"></div>
+      <div class="rad-name">Radius / pill</div>
+      <div class="rad-val">9999 pt</div>
+      <div class="rad-desc">Pill — use <code style="font-size:9px">.clipShape(.capsule)</code> in code</div>
+      <code>Radius.pill</code>
+    </div>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════ TYPOGRAPHY -->
+  <h2>Typography</h2>
+  <p class="section-note">Figma: Slowly/Typography/* · Swift: <code>Font.*</code> (Font+System.swift) · Family: SF Pro · Kerning only on <code>Font.label</code> (0.88px)</p>
+  <div class="type-grid">
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.display</code><span class="type-figma">Slowly/Typography/display</span></div>
+      <div class="type-spec">44pt · Light</div>
+      <div class="type-preview" style="font-size:28px;font-weight:300;line-height:1">Done</div>
+      <div class="type-desc">Top page title</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.displaySub</code><span class="type-figma">Slowly/Typography/displaySub</span></div>
+      <div class="type-spec">28pt · Regular</div>
+      <div class="type-preview" style="font-size:20px;font-weight:400;line-height:1">Nothing yet today</div>
+      <div class="type-desc">Empty state heading / modal title</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.bigNumeral</code><span class="type-figma">Slowly/Typography/bigNumeral</span></div>
+      <div class="type-spec">160pt · Light</div>
+      <div class="type-preview" style="font-size:48px;font-weight:300;font-variant-numeric:tabular-nums;line-height:1">07</div>
+      <div class="type-desc">Big counter — monospaced digits</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.bodyText</code><span class="type-figma">Slowly/Typography/bodyText</span></div>
+      <div class="type-spec">16pt · Regular</div>
+      <div class="type-preview" style="font-size:16px;font-weight:400">Sent the proposal to the client</div>
+      <div class="type-desc">Body text</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.bodySub</code><span class="type-figma">Slowly/Typography/bodySub</span></div>
+      <div class="type-spec">13pt · Regular</div>
+      <div class="type-preview" style="font-size:13px;font-weight:400;color:#6b6b6b">Supporting copy</div>
+      <div class="type-desc">Sub-copy</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.motivational</code><span class="type-figma">Slowly/Typography/motivational</span></div>
+      <div class="type-spec">16pt · Regular</div>
+      <div class="type-preview" style="font-size:16px;font-weight:400;color:#4f8a61">You're on a roll.</div>
+      <div class="type-desc">Rotating motivational copy</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.num</code><span class="type-figma">Slowly/Typography/num</span></div>
+      <div class="type-spec">10pt · Medium</div>
+      <div class="type-preview" style="font-size:10px;font-weight:500;font-variant-numeric:tabular-nums">003</div>
+      <div class="type-desc">Zero-padded item rank — monospaced digits</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.time</code><span class="type-figma">Slowly/Typography/time</span></div>
+      <div class="type-spec">11pt · Regular</div>
+      <div class="type-preview" style="font-size:11px;font-weight:400;font-variant-numeric:tabular-nums;color:#6b6b6b">14:32</div>
+      <div class="type-desc">HH:mm timestamps — monospaced digits</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.label</code><span class="type-figma">Slowly/Typography/label</span></div>
+      <div class="type-spec">11pt · Medium · 0.88px</div>
+      <div class="type-preview" style="font-size:11px;font-weight:500;letter-spacing:0.88px;text-transform:uppercase">Today</div>
+      <div class="type-desc">Uppercase labels / greetings · pair with <code style="font-size:9px">TypographyKerning.label</code></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.chartCount</code><span class="type-figma">Slowly/Typography/chartCount</span></div>
+      <div class="type-spec">13pt · Medium</div>
+      <div class="type-preview" style="font-size:13px;font-weight:500;font-variant-numeric:tabular-nums">12</div>
+      <div class="type-desc">Count above chart bar — monospaced digits</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-token"><code>Font.chartDayLabel</code><span class="type-figma">Slowly/Typography/chartDayLabel</span></div>
+      <div class="type-spec">11pt · Regular</div>
+      <div class="type-preview" style="font-size:11px;font-weight:400;color:#6b6b6b">Mon</div>
+      <div class="type-desc">Day labels under chart bars</div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

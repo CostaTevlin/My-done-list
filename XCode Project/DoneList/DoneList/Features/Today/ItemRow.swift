@@ -28,18 +28,18 @@ struct ItemRow: View {
             HStack(alignment: .firstTextBaseline, spacing: Spacing.md) {
                 Text(padded(rank))
                     .font(.num)
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
 
                 Text(text)
                     .font(.bodyText)
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(time)
                     .font(.time)
-                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                    .foregroundStyle(Color.textSecondary.opacity(0.6))
             }
             .padding(.vertical, 14)
             .contentShape(Rectangle())   // full-row swipe hit-target
@@ -47,7 +47,7 @@ struct ItemRow: View {
 
             if showsDivider {
                 Rectangle()
-                    .fill(Color.tokenMist)
+                    .fill(Color.borderDefault)
                     .frame(height: 1)
             }
         }
@@ -68,5 +68,5 @@ struct ItemRow: View {
         ItemRow(rank: 5, text: "Replied to overdue emails", time: "10:02", showsDivider: false)
     }
     .padding(.horizontal, Spacing.xxl)
-    .background(Color.tokenSurface)
+    .background(Color.surfaceApp)
 }

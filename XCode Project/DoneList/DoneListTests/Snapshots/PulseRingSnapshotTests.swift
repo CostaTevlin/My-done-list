@@ -28,7 +28,7 @@ final class PulseRingSnapshotTests: XCTestCase {
     func testSnapshot_pulsing() throws {
         let view = PulseRing(isPulsing: true)
             .padding(Spacing.xl)
-            .background(Color.tokenSurface)
+            .background(Color.surfaceApp)
 
         try render(view, name: "PulseRing_pulsing")
     }
@@ -38,7 +38,7 @@ final class PulseRingSnapshotTests: XCTestCase {
     func testSnapshot_idle() throws {
         let view = PulseRing(isPulsing: false)
             .padding(Spacing.xl)
-            .background(Color.tokenSurface)
+            .background(Color.surfaceApp)
 
         try render(view, name: "PulseRing_idle")
     }
@@ -50,7 +50,7 @@ final class PulseRingSnapshotTests: XCTestCase {
     func testSnapshot_static_doubleRing() throws {
         let view = PulseRing(isPulsing: false)
             .padding(Spacing.xl)
-            .background(Color.tokenSurface)
+            .background(Color.surfaceApp)
 
         try render(view, name: "PulseRing_static_doubleRing")
     }

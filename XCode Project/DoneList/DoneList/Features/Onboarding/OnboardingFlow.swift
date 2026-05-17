@@ -21,7 +21,7 @@ struct OnboardingFlow: View {
 
     var body: some View {
         ZStack {
-            Color.tokenSurface.ignoresSafeArea()
+            Color.surfaceApp.ignoresSafeArea()
 
             switch step {
             case 0:
@@ -58,11 +58,11 @@ private struct WelcomeStep: View {
 
             Text("My done list")
                 .font(.display)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
 
             Text("A quiet place for the things you actually got done.")
                 .font(.motivational)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
                 .frame(maxWidth: 300, alignment: .leading)
 
             Spacer()
@@ -106,28 +106,28 @@ private struct FirstLogStep: View {
 
             Text("Try it out")
                 .font(.display)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
 
             Text("Type something you did today.")
                 .font(.motivational)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
 
             VStack(alignment: .leading, spacing: 0) {
                 TextField(
                     "",
                     text: $text,
                     prompt: Text("Took a 10-min walk")
-                        .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                        .foregroundStyle(Color.textSecondary.opacity(0.6))
                 )
                 .font(SwiftUI.Font.body)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
                 .focused($focused)
                 .submitLabel(.done)
                 .onSubmit(submit)
                 .padding(.vertical, Spacing.md)
 
                 Rectangle()
-                    .fill(focused ? Color.tokenInk : Color.tokenMist)
+                    .fill(focused ? Color.textPrimary : Color.borderDefault)
                     .frame(height: 1)
                     .animation(reduceMotion ? nil : Motion.snappy, value: focused)
             }
@@ -144,7 +144,7 @@ private struct FirstLogStep: View {
 
             Button("Skip for now", action: onSkip)
                 .font(.bodySub)
-                .foregroundStyle(Color.tokenSlate)
+                .foregroundStyle(Color.textSecondary)
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, Spacing.lg)
         }
@@ -201,17 +201,17 @@ private struct NotificationsStep: View {
 
             Text("Get a daily nudge")
                 .font(.display)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
 
             Text("We'll send a single, quiet reminder at the time you choose. Nothing else. Ever.")
                 .font(.motivational)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
                 .frame(maxWidth: 320, alignment: .leading)
 
             HStack {
                 Text("Reminder time")
                     .font(.bodyText)
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
                 Spacer()
                 DatePicker(
                     "Reminder time",
@@ -233,7 +233,7 @@ private struct NotificationsStep: View {
 
             Button("Maybe later", action: onComplete)
                 .font(.bodySub)
-                .foregroundStyle(Color.tokenSlate)
+                .foregroundStyle(Color.textSecondary)
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, Spacing.lg)
         }

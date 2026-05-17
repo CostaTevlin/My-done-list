@@ -70,7 +70,7 @@ struct ReflectView: View {
             .padding(.top, 20)
             .padding(.bottom, Spacing.bottomSafe)
         }
-        .background(Color.tokenSurface.ignoresSafeArea())
+        .background(Color.surfaceApp.ignoresSafeArea())
     }
 
     // MARK: - Hero block
@@ -94,7 +94,7 @@ struct ReflectView: View {
             .font(.label)
             .kerning(TypographyKerning.label)
             .textCase(.uppercase)
-            .foregroundStyle(Color.tokenSlate.opacity(0.6))
+            .foregroundStyle(Color.textSecondary.opacity(0.6))
 
         Spacer().frame(height: Spacing.lg)
 
@@ -144,7 +144,7 @@ struct ReflectView: View {
     private var divider: some View {
         Spacer().frame(height: 32)
         Rectangle()
-            .fill(Color.tokenMist)
+            .fill(Color.borderDefault)
             .frame(height: 1)
     }
 
@@ -156,7 +156,7 @@ struct ReflectView: View {
             Spacer().frame(height: 48)
             Text(selectedDayOffset == nil ? "Nothing to reflect on yet. Go to Today and log your first win." : "No items for that day.")
                 .font(.bodyText)
-                .foregroundStyle(Color.tokenSlate)
+                .foregroundStyle(Color.textSecondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer().frame(height: 48)
         } else {
@@ -164,7 +164,7 @@ struct ReflectView: View {
             if selectedDayOffset != nil {
                 Button("Clear filter") { selectedDayOffset = nil }
                     .font(Font.system(size: 13, weight: .regular))
-                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                    .foregroundStyle(Color.textSecondary.opacity(0.6))
                     .padding(.bottom, Spacing.sm)
             }
             VStack(spacing: 0) {
@@ -176,7 +176,7 @@ struct ReflectView: View {
             Spacer().frame(height: Spacing.xl)
             Text("\(todayCount) \(todayCount == 1 ? "thing" : "things") done \(selectedDayOffset == nil ? "today" : "that day")")
                 .font(Font.system(size: 13, weight: .regular))
-                .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                .foregroundStyle(Color.textSecondary.opacity(0.6))
         }
     }
 
@@ -186,19 +186,19 @@ struct ReflectView: View {
             HStack(alignment: .firstTextBaseline, spacing: Spacing.lg) {
                 Text(time)
                     .font(.time)
-                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                    .foregroundStyle(Color.textSecondary.opacity(0.6))
                     .frame(minWidth: 40, alignment: .leading)
 
                 Text(text)
                     .font(Font.system(size: 15, weight: .regular))
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.vertical, 14)
 
             if showsDivider {
                 Rectangle()
-                    .fill(Color.tokenMist)
+                    .fill(Color.borderDefault)
                     .frame(height: 1)
             }
         }
@@ -213,7 +213,7 @@ struct ReflectView: View {
         Spacer().frame(height: Spacing.xxxl)
         Text("See you tomorrow")
             .font(Font.system(size: 13, weight: .regular))
-            .foregroundStyle(Color.tokenSlate.opacity(0.6))
+            .foregroundStyle(Color.textSecondary.opacity(0.6))
     }
 }
 
@@ -236,7 +236,7 @@ private struct WeeklyBarCell: View {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(isSelected ? Color.tokenInk.opacity(0.25) : .clear, lineWidth: 1)
+                    .stroke(isSelected ? Color.textPrimary.opacity(0.25) : .clear, lineWidth: 1)
             )
             .contentShape(Rectangle())
             .onTapGesture(perform: onTap)
@@ -246,7 +246,7 @@ private struct WeeklyBarCell: View {
             )
 
             Circle()
-                .fill(isSelected ? Color.tokenInk : .clear)
+                .fill(isSelected ? Color.textPrimary : .clear)
                 .frame(width: 4, height: 4)
                 .accessibilityHidden(true)
         }

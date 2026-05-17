@@ -40,11 +40,11 @@ public struct PulseRing: View {
     private var micFill: some View {
         ZStack {
             Circle()
-                .fill(Color.tokenInk)
+                .fill(Color.textPrimary)
                 .frame(width: 56, height: 56)
             Image(systemName: "mic.fill")
                 .font(.system(size: 22, weight: .medium))
-                .foregroundStyle(Color.tokenSurface)
+                .foregroundStyle(Color.surfaceApp)
         }
     }
 
@@ -52,10 +52,10 @@ public struct PulseRing: View {
     private var staticRings: some View {
         ZStack {
             Circle()
-                .stroke(Color.tokenInk.opacity(0.15), lineWidth: 1.5)
+                .stroke(Color.textPrimary.opacity(0.15), lineWidth: 1.5)
                 .frame(width: 72, height: 72)
             Circle()
-                .stroke(Color.tokenInk.opacity(0.08), lineWidth: 1.5)
+                .stroke(Color.textPrimary.opacity(0.08), lineWidth: 1.5)
                 .frame(width: 88, height: 88)
         }
     }
@@ -80,7 +80,7 @@ public struct PulseRing: View {
                     )
                     ctx.stroke(
                         Path(ellipseIn: rect),
-                        with: .color(Color.tokenInk.opacity(opacity * 0.3)),
+                        with: .color(Color.textPrimary.opacity(opacity * 0.3)),
                         lineWidth: 1.5
                     )
                 }
@@ -93,14 +93,14 @@ public struct PulseRing: View {
 
 #Preview("Pulsing (animated)") {
     ZStack {
-        Color.tokenSurface.ignoresSafeArea()
+        Color.surfaceApp.ignoresSafeArea()
         PulseRing(isPulsing: true)
     }
 }
 
 #Preview("Idle / Reduce Motion (static rings)") {
     ZStack {
-        Color.tokenSurface.ignoresSafeArea()
+        Color.surfaceApp.ignoresSafeArea()
         PulseRing(isPulsing: false)
     }
 }

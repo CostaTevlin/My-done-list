@@ -49,7 +49,7 @@ struct SearchView: View {
             ForEach(grouped, id: \.key) { section in
                 Section(header: Text(sectionTitle(for: section.key))
                     .font(.label)
-                    .foregroundStyle(Color.tokenSlate)
+                    .foregroundStyle(Color.textSecondary)
                     .textCase(.none)
                 ) {
                     ForEach(section.items, id: \.persistentModelID) { item in
@@ -59,11 +59,11 @@ struct SearchView: View {
                             HStack(alignment: .firstTextBaseline, spacing: Spacing.md) {
                                 Text(item.text)
                                     .font(.bodyText)
-                                    .foregroundStyle(Color.tokenInk)
+                                    .foregroundStyle(Color.textPrimary)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Text(item.time)
                                     .font(.time)
-                                    .foregroundStyle(Color.tokenSlate)
+                                    .foregroundStyle(Color.textSecondary)
                             }
                             .contentShape(Rectangle())
                         }

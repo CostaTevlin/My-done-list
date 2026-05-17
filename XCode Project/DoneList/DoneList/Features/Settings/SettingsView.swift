@@ -120,15 +120,15 @@ struct SettingsView: View {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "person.crop.circle.fill")
                     .font(.system(size: 36))
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Your done list")
                         .font(.bodyText)
-                        .foregroundStyle(Color.tokenInk)
+                        .foregroundStyle(Color.textPrimary)
                     Text("Saved on this device")
                         .font(.bodySub)
-                        .foregroundStyle(Color.tokenSlate)
+                        .foregroundStyle(Color.textSecondary)
                 }
             }
             .padding(.vertical, Spacing.xs)
@@ -167,7 +167,7 @@ struct SettingsView: View {
                     Text("Daily target")
                     Spacer()
                     Text(dailyTarget == 0 ? "Off" : "\(dailyTarget)")
-                        .foregroundStyle(Color.tokenSlate)
+                        .foregroundStyle(Color.textSecondary)
                         .monospacedDigit()
                 }
             }

@@ -57,7 +57,7 @@ struct TodayView: View {
                     populatedList
                 }
             }
-            .background(Color.tokenSurface.ignoresSafeArea())
+            .background(Color.surfaceApp.ignoresSafeArea())
             .toolbarBackground(.hidden, for: .navigationBar)
         }
     }
@@ -71,21 +71,21 @@ struct TodayView: View {
             header
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets(top: 20, leading: Spacing.xxl, bottom: 30, trailing: Spacing.xxl))
-                .listRowBackground(Color.tokenSurface)
+                .listRowBackground(Color.surfaceApp)
 
             // Thin divider between hero and content
             Rectangle()
-                .fill(Color.tokenMist)
+                .fill(Color.borderDefault)
                 .frame(height: 1)
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets(top: 0, leading: Spacing.xxl, bottom: 0, trailing: Spacing.xxl))
-                .listRowBackground(Color.tokenSurface)
+                .listRowBackground(Color.surfaceApp)
 
             // GhostInputRow — persistent text-mode entry point above the item list
             GhostInputRow { onLog(.text) }
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets(top: Spacing.md, leading: Spacing.xxl, bottom: Spacing.md, trailing: Spacing.xxl))
-                .listRowBackground(Color.tokenSurface)
+                .listRowBackground(Color.surfaceApp)
 
             // Items
             ForEach(Array(todayItems.enumerated()), id: \.element.persistentModelID) { offset, item in
@@ -101,7 +101,7 @@ struct TodayView: View {
                 )
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets(top: 0, leading: Spacing.xxl, bottom: 0, trailing: Spacing.xxl))
-                .listRowBackground(Color.tokenSurface)
+                .listRowBackground(Color.surfaceApp)
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .destructive) {
                         withAnimation(reduceMotion ? nil : Motion.snappy) {
@@ -116,7 +116,7 @@ struct TodayView: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(Color.tokenSurface)
+        .background(Color.surfaceApp)
         .contentMargins(.bottom, Spacing.bottomSafe, for: .scrollContent)
         .animation(reduceMotion ? nil : Motion.entranceCurve, value: todayItems.count)
     }
@@ -144,11 +144,11 @@ struct TodayView: View {
 
                 Text("Your day starts here")
                     .font(.displaySub)
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
 
                 Text("What's one thing you've already done today? Even getting out of bed counts.")
                     .font(.bodySub)
-                    .foregroundStyle(Color.tokenSlate)
+                    .foregroundStyle(Color.textSecondary)
                     .frame(maxWidth: 260, alignment: .leading)
 
                 Spacer().frame(height: Spacing.lg)

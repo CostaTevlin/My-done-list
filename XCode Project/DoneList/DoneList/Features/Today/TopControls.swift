@@ -30,7 +30,7 @@ struct TopControls: View {
         Button(action: action) {
             Image(systemName: icon)
                 .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
                 // 44pt minimum hit-target
                 .frame(width: 44, height: 44)
         }
@@ -48,7 +48,7 @@ struct TopControls: View {
                 .fill(.thinMaterial)
                 .overlay(
                     Capsule()
-                        .fill(Color.tokenInk.opacity(0.06))
+                        .fill(Color.textPrimary.opacity(0.06))
                 )
                 .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 2)
         }
@@ -62,7 +62,7 @@ struct TopControls: View {
 
 #Preview {
     ZStack(alignment: .topTrailing) {
-        Color.tokenSurface.ignoresSafeArea()
+        Color.surfaceApp.ignoresSafeArea()
         TopControls(onSearch: {}, onReflect: {}, onMore: {})
             .padding()
     }

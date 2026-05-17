@@ -38,7 +38,7 @@ final class RootViewSnapshotTests: XCTestCase {
             .environment(store)
             .modelContainer(container)
             .frame(width: canvasWidth, height: canvasHeight)
-            .background(Color.tokenSurface)
+            .background(Color.surfaceApp)
 
         try render(view, name: "RootView_empty_iOS18")
     }
@@ -59,7 +59,7 @@ final class RootViewSnapshotTests: XCTestCase {
             .environment(store)
             .modelContainer(container)
             .frame(width: canvasWidth, height: canvasHeight)
-            .background(Color.tokenSurface)
+            .background(Color.surfaceApp)
 
         try render(view, name: "RootView_populated_iOS18")
     }

@@ -120,7 +120,7 @@ private struct IOS26ShellContent: View {
                 NavigationStack { SettingsView() }
             }
         }
-        .tint(Color.tokenInk)
+        .tint(Color.textPrimary)
         .overlay {
             LogFABOverlay(isExpanded: $showLogCard)
         }

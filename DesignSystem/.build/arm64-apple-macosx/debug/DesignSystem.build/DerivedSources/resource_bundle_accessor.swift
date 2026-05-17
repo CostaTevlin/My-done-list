@@ -1,9 +1,9 @@
 import Foundation
 
 extension Foundation.Bundle {
-    static let module: Bundle = {
+    static nonisolated let module: Bundle = {
         let mainPath = Bundle.main.bundleURL.appendingPathComponent("DesignSystem_DesignSystem.bundle").path
-        let buildPath = "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem_DesignSystem.bundle"
+        let buildPath = "/Users/papabear/GitHub Private/Side Projects/My-done-list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem_DesignSystem.bundle"
 
         let preferredBundle = Bundle(path: mainPath)
 

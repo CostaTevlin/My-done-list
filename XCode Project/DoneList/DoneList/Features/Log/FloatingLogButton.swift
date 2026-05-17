@@ -18,11 +18,11 @@ struct FloatingLogButton: View {
         Button(action: action) {
             Image(systemName: "plus")
                 .font(.system(size: 22, weight: .semibold))
-                .foregroundStyle(Color.tokenSurface)
+                .foregroundStyle(Color.surfaceApp)
                 .frame(width: 56, height: 56)
                 .background(
                     Circle()
-                        .fill(Color.tokenInk)
+                        .fill(Color.textPrimary)
                         .shadow(
                             color: Color.black.opacity(0.12),
                             radius: 12,
@@ -53,7 +53,7 @@ private struct FABButtonStyle: ButtonStyle {
 
 #Preview {
     ZStack {
-        Color.tokenSurface.ignoresSafeArea()
+        Color.surfaceApp.ignoresSafeArea()
         FloatingLogButton {}
     }
 }

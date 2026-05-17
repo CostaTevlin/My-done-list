@@ -52,11 +52,11 @@ struct LogFABOverlay: View {
             Button { isExpanded = true } label: {
                 ZStack {
                     Circle()
-                        .fill(Color.tokenInk)
+                        .fill(Color.textPrimary)
                         .shadow(color: .black.opacity(0.15), radius: 8, y: 4)
                     Image(systemName: "plus")
                         .font(.system(size: 22, weight: .semibold))
-                        .foregroundStyle(Color.tokenSurface)
+                        .foregroundStyle(Color.surfaceApp)
                 }
                 .frame(width: 56, height: 56)
             }

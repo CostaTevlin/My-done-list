@@ -23,7 +23,7 @@ final class HeroSnapshotTests: XCTestCase {
         )
         .padding(.horizontal, 28)
         .padding(.vertical, 20)
-        .background(Color.tokenSurface)
+        .background(Color.surfaceApp)
         .frame(width: canvasWidth, height: canvasHeight, alignment: .topLeading)
 
         let renderer = ImageRenderer(content: view)
@@ -40,7 +40,7 @@ final class HeroSnapshotTests: XCTestCase {
         )
         .padding(.horizontal, 28)
         .padding(.vertical, 20)
-        .background(Color.tokenSurface)
+        .background(Color.surfaceApp)
         .frame(width: canvasWidth, height: canvasHeight, alignment: .topLeading)
 
         let renderer = ImageRenderer(content: view)

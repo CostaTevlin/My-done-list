@@ -99,11 +99,11 @@ struct LogSheet: View {
             Button(action: { dismiss() }) {
                 ZStack {
                     Circle()
-                        .fill(Color.tokenMist)
+                        .fill(Color.borderDefault)
                         .frame(width: 32, height: 32)
                     Image(systemName: "xmark")
                         .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(Color.tokenInk)
+                        .foregroundStyle(Color.textPrimary)
                 }
             }
             .buttonStyle(.plain)
@@ -115,7 +115,7 @@ struct LogSheet: View {
             Text(CopyBank.logSheetTitle)
                 .font(.bodyText)
                 .fontWeight(.semibold)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
 
             Spacer()
 
@@ -134,11 +134,11 @@ struct LogSheet: View {
         Button(action: toggleMode) {
             Text(mode == .voice ? CopyBank.voiceModeToggleToText : CopyBank.voiceModeToggleToVoice)
                 .font(.bodySub)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
                 .padding(.horizontal, Spacing.md)
                 .padding(.vertical, Spacing.xs + 2)
                 .background(
-                    Capsule().fill(Color.tokenMist)
+                    Capsule().fill(Color.borderDefault)
                 )
         }
         .buttonStyle(.plain)
@@ -181,11 +181,11 @@ struct LogSheet: View {
 
             Text(CopyBank.voiceTrySayingLabel)
                 .font(.bodySub)
-                .foregroundStyle(Color.tokenSlate)
+                .foregroundStyle(Color.textSecondary)
 
             Text(CopyBank.voiceTrySayingExample)
                 .font(.bodyText)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -196,7 +196,7 @@ struct LogSheet: View {
             Spacer(minLength: Spacing.xxxl)
             Text(text)
                 .font(.bodyText)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -207,10 +207,10 @@ struct LogSheet: View {
             Text(CopyBank.voiceListeningCaption)
                 .font(.bodyText)
                 .fontWeight(.bold)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
             Text(CopyBank.voiceListeningSubcaption)
                 .font(.bodySub)
-                .foregroundStyle(Color.tokenSlate)
+                .foregroundStyle(Color.textSecondary)
         }
         .multilineTextAlignment(.center)
     }
@@ -221,11 +221,11 @@ struct LogSheet: View {
             Button(action: restartRecording) {
                 ZStack {
                     Circle()
-                        .fill(Color.tokenMist)
+                        .fill(Color.borderDefault)
                         .frame(width: 44, height: 44)
                     Image(systemName: "arrow.counterclockwise")
                         .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(Color.tokenSlate)
+                        .foregroundStyle(Color.textSecondary)
                 }
             }
             .buttonStyle(.plain)
@@ -240,11 +240,11 @@ struct LogSheet: View {
             Button(action: submit) {
                 ZStack {
                     Circle()
-                        .fill(canSubmit ? Color.tokenInk : Color.tokenMist)
+                        .fill(canSubmit ? Color.textPrimary : Color.borderDefault)
                         .frame(width: 44, height: 44)
                     Image(systemName: "checkmark")
                         .font(.system(size: 16, weight: .semibold))
-                        .foregroundStyle(canSubmit ? Color.tokenSurface : Color.tokenSlate)
+                        .foregroundStyle(canSubmit ? Color.surfaceApp : Color.textSecondary)
                 }
             }
             .disabled(!canSubmit)
@@ -265,10 +265,10 @@ struct LogSheet: View {
                         "",
                         text: $text,
                         prompt: Text("Took a 10-min walk")
-                            .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                            .foregroundStyle(Color.textSecondary.opacity(0.6))
                     )
                     .font(.bodyText)
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
                     .focused($textFocused)
                     .submitLabel(.done)
                     .onSubmit(submit)
@@ -276,7 +276,7 @@ struct LogSheet: View {
                     .accessibilityLabel("What did you do?")
 
                     Rectangle()
-                        .fill(textFocused ? Color.tokenInk : Color.tokenMist)
+                        .fill(textFocused ? Color.textPrimary : Color.borderDefault)
                         .frame(height: 1)
                         .animation(reduceMotion ? nil : Motion.snappy, value: textFocused)
                 }

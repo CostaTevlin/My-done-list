@@ -1,12 +1,12 @@
 {
   "": {
-    "swift-dependencies": "/Users/papabear/GitHub Private/Side Projects/My-done-list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/primary.swiftdeps"
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/primary.swiftdeps"
   },
-  "/Users/papabear/GitHub Private/Side Projects/My-done-list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift": {
-    "dependencies": "/Users/papabear/GitHub Private/Side Projects/My-done-list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.d",
-    "object": "/Users/papabear/GitHub Private/Side Projects/My-done-list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o",
-    "swiftmodule": "/Users/papabear/GitHub Private/Side Projects/My-done-list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests~partial.swiftmodule",
-    "swift-dependencies": "/Users/papabear/GitHub Private/Side Projects/My-done-list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swiftdeps",
-    "diagnostics": "/Users/papabear/GitHub Private/Side Projects/My-done-list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.dia"
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.dia"
   }
 }

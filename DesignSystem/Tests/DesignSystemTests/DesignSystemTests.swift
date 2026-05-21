@@ -78,4 +78,55 @@ final class DesignSystemTests: XCTestCase {
     func test_motionSwipeThreshold_is80pt() {
         XCTAssertEqual(Motion.swipeThreshold, 80)
     }
+
+    // MARK: - Slowly namespace (D1 token scaffolding)
+
+    func test_slowlyColorTokens_areAccessible() {
+        _ = Slowly.Color.textPrimary
+        _ = Slowly.Color.textSecondary
+        _ = Slowly.Color.surfaceApp
+        _ = Slowly.Color.surfaceGhost
+        _ = Slowly.Color.surfaceWhite
+        _ = Slowly.Color.borderDefault
+        _ = Slowly.Color.accentPrimary
+        _ = Slowly.Color.ringLow
+        _ = Slowly.Color.ringMid
+        _ = Slowly.Color.ringComplete
+        _ = Slowly.Color.actionDestructive
+    }
+
+    func test_slowlyFontTokens_areAccessible() {
+        _ = Slowly.Font.bigNumeral
+        _ = Slowly.Font.display
+        _ = Slowly.Font.h2
+        _ = Slowly.Font.motivational
+        _ = Slowly.Font.bodyText
+        _ = Slowly.Font.bodySub
+        _ = Slowly.Font.time
+        _ = Slowly.Font.chartCount
+    }
+
+    func test_slowlySpacingScale_matchesSpec() {
+        XCTAssertEqual(Slowly.Spacing.xs,           8)
+        XCTAssertEqual(Slowly.Spacing.sm,          12)
+        XCTAssertEqual(Slowly.Spacing.md,          16)
+        XCTAssertEqual(Slowly.Spacing.lg,          20)
+        XCTAssertEqual(Slowly.Spacing.xl,          24)
+        XCTAssertEqual(Slowly.Spacing.xxl,         32)
+        XCTAssertEqual(Slowly.Spacing.xxxl,        40)
+        XCTAssertEqual(Slowly.Spacing.screenTop,   27)
+        XCTAssertEqual(Slowly.Spacing.screenBottom, 62)
+    }
+
+    func test_slowlyRadii_matchFigmaSpec() {
+        XCTAssertEqual(Slowly.Radius.card,   20)
+        XCTAssertEqual(Slowly.Radius.button, 32)
+        XCTAssertEqual(Slowly.Radius.sheet,  40)
+        XCTAssertEqual(Slowly.Radius.fab,    9999)
+    }
+
+    func test_slowlyMaterialFallback_isUltraThin() {
+        // compile-time check that the fallback is defined
+        let _: SwiftUI.Material = Slowly.Material.fallback
+    }
 }

@@ -65,6 +65,9 @@ struct SettingsView: View {
             experienceSection
             dataSection
             aboutSection
+            #if DEBUG
+            debugSection
+            #endif
         }
         .navigationTitle("Account")
         .navigationBarTitleDisplayMode(.inline)
@@ -211,6 +214,19 @@ struct SettingsView: View {
             }
         }
     }
+
+    // MARK: - Debug (DEBUG builds only)
+
+    #if DEBUG
+    @ViewBuilder
+    private var debugSection: some View {
+        Section("Debug") {
+            NavigationLink("Token Preview") {
+                TokenPreviewView()
+            }
+        }
+    }
+    #endif
 
     // MARK: - Actions
 

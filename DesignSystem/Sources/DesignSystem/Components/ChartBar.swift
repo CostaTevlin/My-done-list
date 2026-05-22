@@ -36,17 +36,17 @@ public struct ChartBar: View {
     private var hasActivity: Bool { count > 0 }
 
     private var countColor: Color {
-        if isToday { return .tokenInk }
-        return hasActivity ? .tokenInk : .tokenSlate.opacity(0.6)
+        if isToday { return .textPrimary }
+        return hasActivity ? .textPrimary : .textSecondary.opacity(0.6)
     }
 
     private var barColor: Color {
-        if isToday { return .tokenInk }
-        return hasActivity ? .tokenMist : .clear
+        if isToday { return .textPrimary }
+        return hasActivity ? .borderDefault : .clear
     }
 
     private var labelColor: Color {
-        isToday ? .tokenInk : .tokenSlate.opacity(0.6)
+        isToday ? .textPrimary : .textSecondary.opacity(0.6)
     }
 
     private var barFraction: CGFloat {
@@ -69,7 +69,7 @@ public struct ChartBar: View {
             // Track
             ZStack(alignment: .bottom) {
                 RoundedRectangle(cornerRadius: Radius.card, style: .continuous)
-                    .fill(Color.tokenSurface)
+                    .fill(Color.surfaceApp)
 
                 // Fill bar — grows from the bottom, capped to the track radius.
                 GeometryReader { proxy in

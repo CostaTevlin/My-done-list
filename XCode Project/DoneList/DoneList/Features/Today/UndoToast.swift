@@ -18,7 +18,7 @@ struct UndoToast: View {
         HStack(spacing: Spacing.lg) {
             Text("Deleted")
                 .font(.bodySub)
-                .foregroundStyle(Color.tokenSurface)
+                .foregroundStyle(Color.surfaceApp)
 
             Spacer()
 
@@ -27,14 +27,14 @@ struct UndoToast: View {
             }
             .font(.bodySub)
             .fontWeight(.semibold)
-            .foregroundStyle(Color.tokenSurface)
+            .foregroundStyle(Color.surfaceApp)
             .accessibilityLabel("Undo delete")
         }
         .padding(.horizontal, Spacing.xl)
         .padding(.vertical, Spacing.md)
         .background(
             Capsule()
-                .fill(Color.tokenInk)
+                .fill(Color.textPrimary)
                 .shadow(color: Color.black.opacity(0.15), radius: 8, y: 3)
         )
         .padding(.horizontal, Spacing.xxl)
@@ -61,7 +61,7 @@ struct UndoToast: View {
 
 #Preview {
     ZStack(alignment: .bottom) {
-        Color.tokenSurface.ignoresSafeArea()
+        Color.surfaceApp.ignoresSafeArea()
         UndoToast(onUndo: {}, onDismiss: {})
             .padding(.bottom, Spacing.lg)
     }

@@ -16,11 +16,11 @@ struct GhostInputRow: View {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "plus")
                     .font(.system(size: 14, weight: .regular))
-                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                    .foregroundStyle(Color.textSecondary.opacity(0.6))
 
                 Text("Type something you did\u{2026}")
                     .font(.bodyText)
-                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                    .foregroundStyle(Color.textSecondary.opacity(0.6))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.horizontal, Spacing.lg)
@@ -31,7 +31,7 @@ struct GhostInputRow: View {
                     .strokeBorder(
                         style: StrokeStyle(lineWidth: 1, dash: [5, 4])
                     )
-                    .foregroundStyle(Color.tokenMist)
+                    .foregroundStyle(Color.borderDefault)
             )
         }
         .buttonStyle(.plain)
@@ -47,5 +47,5 @@ struct GhostInputRow: View {
         GhostInputRow {}
     }
     .padding(.horizontal, Spacing.xxl)
-    .background(Color.tokenSurface)
+    .background(Color.surfaceApp)
 }

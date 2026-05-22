@@ -29,13 +29,13 @@ public struct HeroBlock: View {
 
             Text(supportingLabel)
                 .font(.bodySub)
-                .foregroundStyle(Color.tokenSlate)
+                .foregroundStyle(Color.textSecondary)
 
             Spacer().frame(height: Spacing.lg)      // 16pt — visual separation before insight
 
             Text(insight)
                 .font(.motivational)
-                .foregroundStyle(Color.tokenInk)
+                .foregroundStyle(Color.textPrimary)
                 .multilineTextAlignment(.leading)
                 .lineLimit(2)
                 .frame(maxWidth: 260, alignment: .leading)

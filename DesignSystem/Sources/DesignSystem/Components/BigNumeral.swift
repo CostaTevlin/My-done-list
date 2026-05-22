@@ -15,7 +15,7 @@ public struct BigNumeral: View {
     public var body: some View {
         Text(display(value))
             .font(.bigNumeral)
-            .foregroundStyle(Color.tokenInk)
+            .foregroundStyle(Color.textPrimary)
             .contentTransition(.numericText())
             .dynamicTypeSize(.xSmall ... DynamicTypeSize.xxLarge)
             .accessibilityLabel("\(value) \(value == 1 ? "thing" : "things") logged today")

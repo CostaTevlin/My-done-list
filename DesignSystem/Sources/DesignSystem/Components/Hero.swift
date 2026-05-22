@@ -58,7 +58,7 @@ public struct Hero: View {
                         .animation(reduceMotion ? nil : Motion.snappy, value: count)
                     Text(thingLabel)
                         .font(.bodySub)
-                        .foregroundStyle(Color.tokenSlate)
+                        .foregroundStyle(Color.textSecondary)
                     ActivityRing(progress: progress, diameter: 120, strokeWidth: 10)
                 }
             } else {
@@ -70,7 +70,7 @@ public struct Hero: View {
                             .fixedSize()
                         Text(thingLabel)
                             .font(.bodySub)
-                            .foregroundStyle(Color.tokenSlate)
+                            .foregroundStyle(Color.textSecondary)
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -111,14 +111,14 @@ public struct Hero: View {
 
                 Text(headline)
                     .font(.display)
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
                     .frame(maxWidth: 220, alignment: .leading)
 
                 Spacer().frame(height: 20)
 
                 Text(subtext)
                     .font(.motivational)
-                    .foregroundStyle(Color.tokenSlate)
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(2)
                     .frame(maxWidth: 220, alignment: .leading)
                     .id(subtext)
@@ -138,19 +138,19 @@ public struct Hero: View {
         Text(label)
             .font(.label)
             .kerning(TypographyKerning.label)
-            .foregroundStyle(Color.tokenSlate)
+            .foregroundStyle(Color.textSecondary)
     }
 
     private var headlineView: some View {
         Text(headline)
             .font(.display)
-            .foregroundStyle(Color.tokenInk)
+            .foregroundStyle(Color.textPrimary)
     }
 
     private var insightView: some View {
         Text(subtext)
             .font(.motivational)
-            .foregroundStyle(Color.tokenSlate)
+            .foregroundStyle(Color.textSecondary)
             .lineLimit(2)
             .frame(maxWidth: .infinity, alignment: .leading)
             .id(subtext)
@@ -162,7 +162,7 @@ public struct Hero: View {
         HStack(alignment: .firstTextBaseline, spacing: 0) {
             Text(subtext)
                 .font(.motivational)
-                .foregroundStyle(Color.tokenSlate)
+                .foregroundStyle(Color.textSecondary)
                 .lineLimit(2)
                 .id(subtext)
                 .transition(.opacity)
@@ -170,7 +170,7 @@ public struct Hero: View {
             Spacer()
             Image(systemName: "heart.fill")
                 .font(.system(size: 16))
-                .foregroundStyle(Color.tokenSage600)
+                .foregroundStyle(Color.accentPrimary)
         }
         .frame(maxWidth: .infinity)
     }

@@ -46,7 +46,7 @@ public struct BrandTabBar: View {
             .frame(maxWidth: .infinity)
             .background(
                 Capsule(style: .continuous)
-                    .fill(Color.tokenMist)
+                    .fill(Color.borderDefault)
             )
 
             // Circle Log FAB — brand tokenInk, tokenSurface plus.
@@ -60,12 +60,12 @@ public struct BrandTabBar: View {
             Button(action: onLog) {
                 Image(systemName: "plus")
                     .font(.system(size: 24, weight: .semibold))
-                    .foregroundStyle(Color.tokenSurface)
+                    .foregroundStyle(Color.surfaceApp)
                     .frame(width: 60, height: 60)
                     .background(
                         Circle()
-                            .fill(Color.tokenInk)
-                            .shadow(color: Color.tokenInk.opacity(0.18), radius: 10, y: 4)
+                            .fill(Color.textPrimary)
+                            .shadow(color: Color.textPrimary.opacity(0.18), radius: 10, y: 4)
                     )
             }
             .offset(y: -85)
@@ -74,7 +74,7 @@ public struct BrandTabBar: View {
         .padding(.horizontal, Spacing.lg)
         .padding(.top, Spacing.md)
         .padding(.bottom, Spacing.lg)
-        .background(Color.tokenSurface)
+        .background(Color.surfaceApp)
     }
 
     private func tabItem(_ tab: Tab, label: String, icon: String) -> some View {
@@ -82,18 +82,18 @@ public struct BrandTabBar: View {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 20, weight: .semibold))
-                    .foregroundStyle(selection == tab ? Color.tokenInk : Color.tokenSlate)
+                    .foregroundStyle(selection == tab ? Color.textPrimary : Color.textSecondary)
                 Text(label)
                     .font(.label)
-                    .foregroundStyle(selection == tab ? Color.tokenInk : Color.tokenSlate)
+                    .foregroundStyle(selection == tab ? Color.textPrimary : Color.textSecondary)
             }
             .padding(.vertical, Spacing.sm + 2)
             .frame(maxWidth: .infinity, minHeight: 52)
             .background {
                 if selection == tab {
                     Capsule(style: .continuous)
-                        .fill(Color.tokenSurface)
-                        .shadow(color: Color.tokenInk.opacity(0.06), radius: 4, y: 1)
+                        .fill(Color.surfaceApp)
+                        .shadow(color: Color.textPrimary.opacity(0.06), radius: 4, y: 1)
                 }
             }
             .contentShape(Rectangle())

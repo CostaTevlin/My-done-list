@@ -13,12 +13,14 @@ struct ItemRow: View {
     let text: String
     let time: String
     let showsDivider: Bool
+    var onTap: (() -> Void)?
 
-    init(rank: Int, text: String, time: String, showsDivider: Bool = true) {
+    init(rank: Int, text: String, time: String, showsDivider: Bool = true, onTap: (() -> Void)? = nil) {
         self.rank = rank
         self.text = text
         self.time = time
         self.showsDivider = showsDivider
+        self.onTap = onTap
     }
 
     var body: some View {
@@ -26,30 +28,32 @@ struct ItemRow: View {
             HStack(alignment: .firstTextBaseline, spacing: Spacing.md) {
                 Text(padded(rank))
                     .font(.num)
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
 
                 Text(text)
                     .font(.bodyText)
-                    .foregroundStyle(Color.tokenInk)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(time)
                     .font(.time)
-                    .foregroundStyle(Color.tokenSlate.opacity(0.6))
+                    .foregroundStyle(Color.textSecondary.opacity(0.6))
             }
             .padding(.vertical, 14)
             .contentShape(Rectangle())   // full-row swipe hit-target
+            .onTapGesture { onTap?() }
 
             if showsDivider {
                 Rectangle()
-                    .fill(Color.tokenMist)
+                    .fill(Color.borderDefault)
                     .frame(height: 1)
             }
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(rank), \(text), at \(time)")
+        .accessibilityHint(onTap != nil ? "Double-tap to edit" : "")
     }
 
     private func padded(_ n: Int) -> String {
@@ -64,5 +68,5 @@ struct ItemRow: View {
         ItemRow(rank: 5, text: "Replied to overdue emails", time: "10:02", showsDivider: false)
     }
     .padding(.horizontal, Spacing.xxl)
-    .background(Color.tokenSurface)
+    .background(Color.surfaceApp)
 }

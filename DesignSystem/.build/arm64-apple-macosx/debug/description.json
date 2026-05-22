@@ -1,23 +1,23 @@
 {
   "builtTestProducts" : [
     {
-      "binaryPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.xctest/Contents/MacOS/DesignSystemPackageTests",
-      "packagePath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem",
+      "binaryPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.xctest/Contents/MacOS/DesignSystemPackageTests",
+      "packagePath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem",
       "productName" : "DesignSystemPackageTests"
     }
   ],
   "copyCommands" : {
-    "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem_DesignSystem.bundle/Assets.xcassets" : {
+    "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem_DesignSystem.bundle/Assets.xcassets" : {
       "inputs" : [
         {
           "kind" : "directory",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Resources/Assets.xcassets"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Resources/Assets.xcassets"
         }
       ],
       "outputs" : [
         {
           "kind" : "directory",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem_DesignSystem.bundle/Assets.xcassets"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem_DesignSystem.bundle/Assets.xcassets"
         }
       ]
     }
@@ -35,65 +35,121 @@
   ],
   "swiftCommands" : {
     "C.DesignSystem-arm64-apple-macosx-debug.module" : {
-      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
-      "fileList" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/sources",
-      "importPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/sources",
+      "importPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Radius.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DerivedSources/resource_bundle_accessor.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PulseRing.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/TokenPreviewView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Palette.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Radius.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Color.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Font.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Material.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Radii.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Spacing.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DerivedSources/resource_bundle_accessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "virtual",
@@ -101,26 +157,40 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/sources"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "DesignSystem",
-      "moduleOutputPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule",
+      "moduleOutputPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule",
       "objects" : [
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Motion.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Radius.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Spacing.swift.o",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/resource_bundle_accessor.swift.o"
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSButton.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PulseRing.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/TokenPreviewView.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Palette.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Motion.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Radius.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Color.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Font.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Material.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Radii.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Spacing.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Spacing.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/resource_bundle_accessor.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -129,7 +199,7 @@
         "-enable-batch-mode",
         "-serialize-diagnostics",
         "-index-store-path",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-j10",
@@ -137,27 +207,33 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
         "-module-cache-path",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-emit-objc-header",
         "-emit-objc-header-path",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/include/DesignSystem-Swift.h",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/include/DesignSystem-Swift.h",
         "-swift-version",
         "6",
-        "-I",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-        "-L",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
         "-plugin-path",
-        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
         "-sdk",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
         "-g",
         "-Xcc",
         "-isysroot",
         "-Xcc",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
         "-Xcc",
         "-fPIC",
         "-Xcc",
@@ -165,111 +241,181 @@
         "-package-name",
         "designsystem"
       ],
-      "outputFileMapPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSButton.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Motion.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Radius.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Spacing.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/resource_bundle_accessor.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PulseRing.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/TokenPreviewView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Palette.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Motion.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Radius.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Color.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Font.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Material.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Radii.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Spacing.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Spacing.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/resource_bundle_accessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Radius.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DerivedSources/resource_bundle_accessor.swift"
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PulseRing.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/TokenPreviewView.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Palette.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Radius.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Color.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Font.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Material.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Radii.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Spacing.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DerivedSources/resource_bundle_accessor.swift"
       ],
-      "tempsPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build",
+      "tempsPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build",
       "wholeModuleOptimization" : false
     },
     "C.DesignSystemPackageTests-arm64-apple-macosx-debug.module" : {
-      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
-      "fileList" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/sources",
-      "importPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/sources",
+      "importPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemTests.swiftmodule"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemTests.swiftmodule"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/sources"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "DesignSystemPackageTests",
-      "moduleOutputPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemPackageTests.swiftmodule",
+      "moduleOutputPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemPackageTests.swiftmodule",
       "objects" : [
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/runner.swift.o"
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/runner.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -278,7 +424,7 @@
         "-enable-batch-mode",
         "-serialize-diagnostics",
         "-index-store-path",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-Xfrontend",
@@ -288,25 +434,31 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-module-cache-path",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-emit-objc-header",
         "-emit-objc-header-path",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/include/DesignSystemPackageTests-Swift.h",
-        "-I",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-        "-L",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/include/DesignSystemPackageTests-Swift.h",
         "-plugin-path",
-        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
         "-sdk",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
         "-g",
         "-Xcc",
         "-isysroot",
         "-Xcc",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
         "-Xcc",
         "-fPIC",
         "-Xcc",
@@ -314,51 +466,56 @@
         "-package-name",
         "designsystem"
       ],
-      "outputFileMapPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/runner.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/runner.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemPackageTests.swiftmodule"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemPackageTests.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift"
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift"
       ],
-      "tempsPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build",
+      "tempsPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build",
       "wholeModuleOptimization" : false
     },
     "C.DesignSystemTests-arm64-apple-macosx-debug.module" : {
-      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
-      "fileList" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/sources",
-      "importPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/sources",
+      "importPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/sources"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/sources"
         }
       ],
       "isLibrary" : true,
       "moduleName" : "DesignSystemTests",
-      "moduleOutputPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemTests.swiftmodule",
+      "moduleOutputPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemTests.swiftmodule",
       "objects" : [
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o"
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DSComponentTests.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -367,7 +524,7 @@
         "-enable-batch-mode",
         "-serialize-diagnostics",
         "-index-store-path",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-Xfrontend",
@@ -377,24 +534,30 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-module-cache-path",
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-parse-as-library",
         "-swift-version",
         "6",
-        "-I",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-        "-L",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
         "-plugin-path",
-        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
         "-sdk",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
         "-g",
         "-Xcc",
         "-isysroot",
         "-Xcc",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
         "-Xcc",
         "-fPIC",
         "-Xcc",
@@ -402,22 +565,27 @@
         "-package-name",
         "designsystem"
       ],
-      "outputFileMapPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DSComponentTests.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemTests.swiftmodule"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystemTests.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift"
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift"
       ],
-      "tempsPath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build",
+      "tempsPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build",
       "wholeModuleOptimization" : false
     }
   },
@@ -426,34 +594,48 @@
   },
   "swiftTargetScanArgs" : {
     "DesignSystem" : [
-      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
       "-module-name",
       "DesignSystem",
       "-package-name",
       "designsystem",
       "-c",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Radius.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DerivedSources/resource_bundle_accessor.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PulseRing.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/TokenPreviewView.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Palette.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Radius.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Color.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Font.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Material.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Radii.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Spacing.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DerivedSources/resource_bundle_accessor.swift",
       "-I",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx14.0",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
       "-index-store-path",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-j10",
@@ -461,27 +643,33 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
       "-module-cache-path",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-emit-objc-header",
       "-emit-objc-header-path",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/include/DesignSystem-Swift.h",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/include/DesignSystem-Swift.h",
       "-swift-version",
       "6",
-      "-I",
-      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-      "-L",
-      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
       "-plugin-path",
-      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
       "-sdk",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
       "-g",
       "-Xcc",
       "-isysroot",
       "-Xcc",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
       "-Xcc",
       "-fPIC",
       "-Xcc",
@@ -489,25 +677,25 @@
       "-package-name",
       "designsystem",
       "-driver-use-frontend-path",
-      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
     ],
     "DesignSystemPackageTests" : [
-      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
       "-module-name",
       "DesignSystemPackageTests",
       "-package-name",
       "designsystem",
       "-c",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift",
       "-I",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx14.0",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
       "-index-store-path",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-Xfrontend",
@@ -517,25 +705,31 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-module-cache-path",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-emit-objc-header",
       "-emit-objc-header-path",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/include/DesignSystemPackageTests-Swift.h",
-      "-I",
-      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-      "-L",
-      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/include/DesignSystemPackageTests-Swift.h",
       "-plugin-path",
-      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
       "-sdk",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
       "-g",
       "-Xcc",
       "-isysroot",
       "-Xcc",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
       "-Xcc",
       "-fPIC",
       "-Xcc",
@@ -543,25 +737,26 @@
       "-package-name",
       "designsystem",
       "-driver-use-frontend-path",
-      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
     ],
     "DesignSystemTests" : [
-      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
       "-module-name",
       "DesignSystemTests",
       "-package-name",
       "designsystem",
       "-c",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift",
       "-I",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx14.0",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
       "-index-store-path",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-Xfrontend",
@@ -571,24 +766,30 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-module-cache-path",
-      "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-parse-as-library",
       "-swift-version",
       "6",
-      "-I",
-      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-      "-L",
-      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
       "-plugin-path",
-      "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
       "-sdk",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
       "-g",
       "-Xcc",
       "-isysroot",
       "-Xcc",
-      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
       "-Xcc",
       "-fPIC",
       "-Xcc",
@@ -596,7 +797,7 @@
       "-package-name",
       "designsystem",
       "-driver-use-frontend-path",
-      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
     ]
   },
   "targetDependencyMap" : {
@@ -615,14 +816,14 @@
 
   },
   "testEntryPointCommands" : {
-    "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift" : {
+    "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift" : {
       "inputs" : [
 
       ],
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift"
         }
       ]
     }
@@ -633,7 +834,7 @@
     }
   },
   "writeCommands" : {
-    "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/sources" : {
+    "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -642,60 +843,116 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Radius.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DerivedSources/resource_bundle_accessor.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PulseRing.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/TokenPreviewView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Palette.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Tokens.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Font+System.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Motion.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Radius.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Color.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Font.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Material.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Radii.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Spacing.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DerivedSources/resource_bundle_accessor.swift"
         }
       ],
-      "outputFilePath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/sources"
+      "outputFilePath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/sources"
     },
-    "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/sources" : {
+    "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -704,12 +961,12 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.derived/runner.swift"
         }
       ],
-      "outputFilePath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/sources"
+      "outputFilePath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/sources"
     },
-    "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.product/Objects.LinkFileList" : {
+    "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.product/Objects.LinkFileList" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -718,68 +975,128 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Palette.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSButton.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Motion.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Radius.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Spacing.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/resource_bundle_accessor.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Font+System.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/runner.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Motion.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/PulseRing.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Radius.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Color.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Font.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Material.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Radii.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Spacing.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Spacing.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/TokenPreviewView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/resource_bundle_accessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DSComponentTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o"
         }
       ],
-      "outputFilePath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.product/Objects.LinkFileList"
+      "outputFilePath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemPackageTests.product/Objects.LinkFileList"
     },
-    "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/sources" : {
+    "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -788,12 +1105,16 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift"
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift"
         }
       ],
-      "outputFilePath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/sources"
+      "outputFilePath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/sources"
     },
-    "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt" : {
+    "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
       "alwaysOutOfDate" : true,
       "inputs" : [
         {
@@ -802,10 +1123,10 @@
         },
         {
           "kind" : "file",
-          "name" : "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
         }
       ],
-      "outputFilePath" : "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+      "outputFilePath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
     }
   }
 }

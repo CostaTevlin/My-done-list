@@ -3,7 +3,7 @@ import Foundation
 extension Foundation.Bundle {
     static let module: Bundle = {
         let mainPath = Bundle.main.bundleURL.appendingPathComponent("DesignSystem_DesignSystem.bundle").path
-        let buildPath = "/Users/konstantinnaumenko/Documents/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem_DesignSystem.bundle"
+        let buildPath = "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem_DesignSystem.bundle"
 
         let preferredBundle = Bundle(path: mainPath)
 

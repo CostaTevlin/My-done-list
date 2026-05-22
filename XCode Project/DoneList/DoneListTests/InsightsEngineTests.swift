@@ -6,6 +6,7 @@ import XCTest
 import SwiftData
 @testable import DoneList
 
+@MainActor
 final class InsightsEngineTests: XCTestCase {
 
     private var container: ModelContainer!

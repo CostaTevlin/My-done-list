@@ -17,5 +17,9 @@
     <false/>
     <key>UIRequiresFullScreen</key>
     <true/>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>My Done List uses speech recognition to let you quickly log what you've done by speaking.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>My Done List uses the microphone to capture your voice when logging a done item.</string>
 </dict>
 </plist>

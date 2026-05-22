@@ -215,9 +215,9 @@ struct SettingsView: View {
         }
     }
 
-    // MARK: - Debug (DEBUG builds only)
+    // MARK: - Internal (DEBUG + Beta builds)
 
-    #if DEBUG
+    #if DEBUG || INTERNAL
     @ViewBuilder
     private var debugSection: some View {
         Section("Debug") {

@@ -58,6 +58,13 @@
     "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/PulseRing.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/PulseRing.dia"
   },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/TokenPreviewView.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/TokenPreviewView.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/TokenPreviewView.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/TokenPreviewView~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/TokenPreviewView.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/TokenPreviewView.dia"
+  },
   "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Color+Palette.swift": {
     "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Color+Palette.d",
     "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Color+Palette.swift.o",
@@ -93,12 +100,40 @@
     "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Radius.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Radius.dia"
   },
-  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Color+Tokens.swift": {
-    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.d",
-    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swift.o",
-    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens~partial.swiftmodule",
-    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.swiftdeps",
-    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Color+Tokens.dia"
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Color.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Color.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Color.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Color~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Color.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Color.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Font.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Font.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Font.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Font~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Font.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Font.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Material.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Material.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Material.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Material~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Material.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Material.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Radii.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Radii.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Radii.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Radii~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Radii.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Radii.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Slowly/Slowly+Spacing.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Spacing.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Spacing.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Spacing~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Spacing.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Slowly+Spacing.dia"
   },
   "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Tokens/Spacing.swift": {
     "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Spacing.d",

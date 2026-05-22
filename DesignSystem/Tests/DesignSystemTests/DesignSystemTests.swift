@@ -82,28 +82,36 @@ final class DesignSystemTests: XCTestCase {
     // MARK: - Slowly namespace (D1 token scaffolding)
 
     func test_slowlyColorTokens_areAccessible() {
+        // names match Figma exactly — nodes 17:2463 + 17:3265
         _ = Slowly.Color.textPrimary
         _ = Slowly.Color.textSecondary
+        _ = Slowly.Color.textPrimaryWhite
+        _ = Slowly.Color.textSecondaryWhite
         _ = Slowly.Color.surfaceApp
         _ = Slowly.Color.surfaceGhost
-        _ = Slowly.Color.surfaceWhite
         _ = Slowly.Color.borderDefault
         _ = Slowly.Color.accentPrimary
         _ = Slowly.Color.ringLow
         _ = Slowly.Color.ringMid
         _ = Slowly.Color.ringComplete
+        _ = Slowly.Color.neutral50
+        _ = Slowly.Color.sage50
         _ = Slowly.Color.actionDestructive
     }
 
     func test_slowlyFontTokens_areAccessible() {
-        _ = Slowly.Font.bigNumeral
-        _ = Slowly.Font.display
-        _ = Slowly.Font.h2
-        _ = Slowly.Font.motivational
-        _ = Slowly.Font.bodyText
-        _ = Slowly.Font.bodySub
-        _ = Slowly.Font.time
-        _ = Slowly.Font.chartCount
+        // names match Figma exactly — nodes 17:2463 + 17:3265
+        _ = Slowly.Font.bigNumeral      // 130pt Light Display
+        _ = Slowly.Font.titleDisplay    // 60pt  Light Display
+        _ = Slowly.Font.title1Light     // 40pt  Light
+        _ = Slowly.Font.title2Light     // 30pt  Light
+        _ = Slowly.Font.headlineRegular // 18pt  Regular
+        _ = Slowly.Font.bodyRegular     // 16pt  Regular
+        _ = Slowly.Font.bodyMedium      // 16pt  Medium
+        _ = Slowly.Font.footnoteRegular // 13pt  Regular
+        _ = Slowly.Font.footnoteMedium  // 13pt  Medium
+        _ = Slowly.Font.captionRegular  // 11pt  Regular
+        _ = Slowly.Font.captionBold     // 11pt  Bold
     }
 
     func test_slowlySpacingScale_matchesSpec() {

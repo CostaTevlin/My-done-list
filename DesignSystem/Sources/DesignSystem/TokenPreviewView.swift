@@ -31,17 +31,20 @@ public struct TokenPreviewView: View {
 
 private struct ColorTokensSection: View {
     private let swatches: [(String, SwiftUI.Color)] = [
-        ("textPrimary",       Slowly.Color.textPrimary),
-        ("textSecondary",     Slowly.Color.textSecondary),
-        ("surfaceApp",        Slowly.Color.surfaceApp),
-        ("surfaceGhost",      Slowly.Color.surfaceGhost),
-        ("surfaceWhite",      Slowly.Color.surfaceWhite),
-        ("borderDefault",     Slowly.Color.borderDefault),
-        ("accentPrimary",     Slowly.Color.accentPrimary),
-        ("ringLow",           Slowly.Color.ringLow),
-        ("ringMid",           Slowly.Color.ringMid),
-        ("ringComplete",      Slowly.Color.ringComplete),
-        ("actionDestructive", Slowly.Color.actionDestructive),
+        ("textPrimary",          Slowly.Color.textPrimary),
+        ("textSecondary",        Slowly.Color.textSecondary),
+        ("textPrimaryWhite",     Slowly.Color.textPrimaryWhite),
+        ("textSecondaryWhite",   Slowly.Color.textSecondaryWhite),
+        ("surfaceApp",           Slowly.Color.surfaceApp),
+        ("surfaceGhost",         Slowly.Color.surfaceGhost),
+        ("borderDefault",        Slowly.Color.borderDefault),
+        ("accentPrimary",        Slowly.Color.accentPrimary),
+        ("ringLow",              Slowly.Color.ringLow),
+        ("ringMid",              Slowly.Color.ringMid),
+        ("ringComplete",         Slowly.Color.ringComplete),
+        ("neutral50",            Slowly.Color.neutral50),
+        ("sage50",               Slowly.Color.sage50),
+        ("actionDestructive",    Slowly.Color.actionDestructive),
     ]
 
     var body: some View {
@@ -63,14 +66,17 @@ private struct ColorTokensSection: View {
 
 private struct FontTokensSection: View {
     private let specimens: [(String, SwiftUI.Font)] = [
-        ("bigNumeral 130",  Slowly.Font.bigNumeral),
-        ("display 40",      Slowly.Font.display),
-        ("h2 30",           Slowly.Font.h2),
-        ("motivational 18", Slowly.Font.motivational),
-        ("bodyText 16",     Slowly.Font.bodyText),
-        ("bodySub 13",      Slowly.Font.bodySub),
-        ("time 11",         Slowly.Font.time),
-        ("chartCount 13",   Slowly.Font.chartCount),
+        ("bigNumeral 130",      Slowly.Font.bigNumeral),
+        ("titleDisplay 60",     Slowly.Font.titleDisplay),
+        ("title1Light 40",      Slowly.Font.title1Light),
+        ("title2Light 30",      Slowly.Font.title2Light),
+        ("headlineRegular 18",  Slowly.Font.headlineRegular),
+        ("bodyRegular 16",      Slowly.Font.bodyRegular),
+        ("bodyMedium 16·md",    Slowly.Font.bodyMedium),
+        ("footnoteRegular 13",  Slowly.Font.footnoteRegular),
+        ("footnoteMedium 13·md",Slowly.Font.footnoteMedium),
+        ("captionRegular 11",   Slowly.Font.captionRegular),
+        ("captionBold 11·bd",   Slowly.Font.captionBold),
     ]
 
     var body: some View {

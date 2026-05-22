@@ -14,7 +14,7 @@ public struct PillButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.bodyText.weight(.medium))
-            .foregroundStyle(colorScheme == .dark ? Color.textPrimary : Color.surfaceApp)
+            .foregroundStyle(colorScheme == .dark ? Slowly.Color.textPrimary : Slowly.Color.surfaceApp)
             .padding(.horizontal, Spacing.xl + 4)   // 28
             .padding(.vertical, Spacing.md + 2)     // 14
             .background(pillBackground(isPressed: configuration.isPressed))
@@ -27,10 +27,10 @@ public struct PillButtonStyle: ButtonStyle {
         if colorScheme == .dark {
             // Endel-style: tokenInk stroke ring, transparent fill
             Capsule()
-                .strokeBorder(Color.textPrimary.opacity(isPressed ? 0.5 : 1.0), lineWidth: 1.5)
+                .strokeBorder(Slowly.Color.textPrimary.opacity(isPressed ? 0.5 : 1.0), lineWidth: 1.5)
         } else {
             Capsule()
-                .fill(Color.textPrimary.opacity(isPressed ? 0.85 : 1.0))
+                .fill(Slowly.Color.textPrimary.opacity(isPressed ? 0.85 : 1.0))
         }
     }
 }

@@ -27,7 +27,7 @@ public struct ActivityRing: View {
         ZStack {
             // Track
             Circle()
-                .stroke(isReward ? Color.borderDefault.opacity(0.5) : Color.borderDefault,
+                .stroke(isReward ? Slowly.Color.borderDefault.opacity(0.5) : Slowly.Color.borderDefault,
                         lineWidth: strokeWidth)
 
             // Fill arc
@@ -36,9 +36,9 @@ public struct ActivityRing: View {
                     .trim(from: 0, to: CGFloat(min(progress, 1)))
                     .stroke(
                         isReward
-                            ? AnyShapeStyle(Color.ringComplete)
+                            ? AnyShapeStyle(Slowly.Color.ringComplete)
                             : AnyShapeStyle(LinearGradient(
-                                colors: [.ringMid, .ringComplete],
+                                colors: [Slowly.Color.ringMid, Slowly.Color.ringComplete],
                                 startPoint: .top,
                                 endPoint: .bottom
                               )),
@@ -51,7 +51,7 @@ public struct ActivityRing: View {
             // Reward halo
             if isReward {
                 Circle()
-                    .stroke(Color.ringLow, lineWidth: strokeWidth + 4)
+                    .stroke(Slowly.Color.ringLow, lineWidth: strokeWidth + 4)
                     .blur(radius: 12)
                     .opacity(0.6)
                     .scaleEffect(breatheScale)

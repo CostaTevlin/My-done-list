@@ -30,6 +30,48 @@
     "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.dia"
   },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSButton.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSButton.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSButton~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSButton.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSButton.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText.dia"
+  },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.dia"
+  },
   "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift": {
     "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.d",
     "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o",

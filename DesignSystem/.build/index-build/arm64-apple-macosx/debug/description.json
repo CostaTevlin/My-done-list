@@ -57,6 +57,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift"
         },
         {
@@ -144,6 +148,7 @@
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o",
@@ -230,6 +235,7 @@
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
@@ -460,6 +466,7 @@
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
@@ -713,6 +720,10 @@
         {
           "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift"
         },
         {
           "kind" : "file",

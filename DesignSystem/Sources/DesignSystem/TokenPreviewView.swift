@@ -13,11 +13,20 @@ public struct TokenPreviewView: View {
     public var body: some View {
         NavigationStack {
             List {
-                NavigationLink("Colors") { ColorTokensSection() }
-                NavigationLink("Typography") { FontTokensSection() }
-                NavigationLink("Spacing") { SpacingTokensSection() }
-                NavigationLink("Radii") { RadiiTokensSection() }
-                NavigationLink("Materials") { MaterialTokensSection() }
+                Section("D1 Tokens") {
+                    NavigationLink("Colors") { ColorTokensSection() }
+                    NavigationLink("Typography") { FontTokensSection() }
+                    NavigationLink("Spacing") { SpacingTokensSection() }
+                    NavigationLink("Radii") { RadiiTokensSection() }
+                    NavigationLink("Materials") { MaterialTokensSection() }
+                }
+                Section("D2 Primitives") {
+                    NavigationLink("Text styles") { D2TextSection() }
+                    NavigationLink("Buttons") { D2ButtonSection() }
+                    NavigationLink("Icons") { D2IconSection() }
+                    NavigationLink("Divider & TextField") { D2UtilitySection() }
+                    NavigationLink("Checkmark") { D2CheckmarkSection() }
+                }
             }
             .navigationTitle("Slowly Tokens")
 #if os(iOS)
@@ -200,6 +209,135 @@ private struct ParamRow: View {
             Spacer()
             Text("\(value, specifier: "%.0f")").foregroundStyle(.secondary)
         }
+    }
+}
+
+// MARK: - D2 Primitives Gallery
+
+private struct D2TextSection: View {
+    var body: some View {
+        List {
+            ForEach(DSTextStyle.allCases, id: \.self) { style in
+                Text("Ag — \(String(describing: style))").dsText(style)
+                    .padding(.vertical, 2)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.3)
+            }
+            DSDivider()
+            Text("textSecondary").dsText(.bodyRegular, color: Slowly.Color.textSecondary)
+            Text("accentPrimary").dsText(.bodyMedium, color: Slowly.Color.accentPrimary)
+        }
+        .navigationTitle("Text styles")
+    }
+}
+
+private struct D2ButtonSection: View {
+    var body: some View {
+        List {
+            Section("Primary") {
+                Button("Save done") {}.buttonStyle(DSButtonStyle(.primary))
+            }
+            Section("Secondary") {
+                Button("Cancel") {}.buttonStyle(DSButtonStyle(.secondary))
+            }
+            Section("FAB — 56pt") {
+                HStack(spacing: Slowly.Spacing.lg) {
+                    DSFABButton(icon: "plus", accessibilityLabel: "Add") {}
+                    DSFABButton(icon: "mic.fill", accessibilityLabel: "Voice log") {}
+                }
+            }
+        }
+        .navigationTitle("Buttons")
+    }
+}
+
+private struct D2IconSection: View {
+    private let symbols = ["mic.fill", "checkmark", "xmark", "magnifyingglass", "chart.bar", "ellipsis"]
+    private let sizes: [(String, DSIcon.Size)] = [("sm 16", .sm), ("md 20", .md), ("lg 24", .lg), ("xl 28", .xl)]
+
+    var body: some View {
+        List {
+            ForEach(sizes, id: \.0) { label, size in
+                Section(label) {
+                    HStack(spacing: Slowly.Spacing.md) {
+                        ForEach(symbols, id: \.self) { sym in
+                            DSIcon(sym, size: size)
+                        }
+                    }
+                    .padding(.vertical, Slowly.Spacing.xs)
+                }
+            }
+            Section("Colors") {
+                HStack(spacing: Slowly.Spacing.md) {
+                    DSIcon("star.fill", size: .md)
+                    DSIcon("star.fill", size: .md, color: Slowly.Color.textSecondary)
+                    DSIcon("star.fill", size: .md, color: Slowly.Color.accentPrimary)
+                    DSIcon("star.fill", size: .md, color: Slowly.Color.actionDestructive)
+                }
+            }
+        }
+        .navigationTitle("Icons")
+    }
+}
+
+private struct D2UtilitySection: View {
+    @State private var text = ""
+
+    var body: some View {
+        List {
+            Section("DSDivider") {
+                VStack(spacing: 0) {
+                    Text("Row").dsText(.bodyRegular).padding(Slowly.Spacing.md)
+                    DSDivider()
+                    Text("Row").dsText(.bodyRegular).padding(Slowly.Spacing.md)
+                }
+                .listRowInsets(.init())
+            }
+            Section("DSTextField") {
+                DSTextField("What did you just finish?", text: $text)
+                    .listRowInsets(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
+                DSTextField("Pre-filled", text: .constant("Reviewed the quarterly report"))
+                    .listRowInsets(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
+            }
+        }
+        .navigationTitle("Divider & TextField")
+    }
+}
+
+private struct D2CheckmarkSection: View {
+    @State private var checked = false
+
+    var body: some View {
+        List {
+            Section("Tap to toggle") {
+                HStack {
+                    DSCheckmark(checked: checked, size: 28)
+                    Text(checked ? "Done" : "Not done").dsText(.bodyRegular)
+                }
+                .onTapGesture { checked.toggle() }
+            }
+            Section("Sizes") {
+                HStack(spacing: Slowly.Spacing.lg) {
+                    VStack {
+                        DSCheckmark(checked: true, size: 20)
+                        Text("20").dsText(.captionRegular, color: Slowly.Color.textSecondary)
+                    }
+                    VStack {
+                        DSCheckmark(checked: true, size: 24)
+                        Text("24").dsText(.captionRegular, color: Slowly.Color.textSecondary)
+                    }
+                    VStack {
+                        DSCheckmark(checked: true, size: 32)
+                        Text("32").dsText(.captionRegular, color: Slowly.Color.textSecondary)
+                    }
+                    VStack {
+                        DSCheckmark(checked: false, size: 24)
+                        Text("off").dsText(.captionRegular, color: Slowly.Color.textSecondary)
+                    }
+                }
+            }
+        }
+        .navigationTitle("Checkmark")
     }
 }
 

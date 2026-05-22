@@ -30,6 +30,13 @@
     "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.dia"
   },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSText.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSText~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSText.dia"
+  },
   "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift": {
     "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Hero.d",
     "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o",

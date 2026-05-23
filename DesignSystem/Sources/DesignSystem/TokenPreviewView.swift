@@ -27,6 +27,17 @@ public struct TokenPreviewView: View {
                     NavigationLink("Divider & TextField") { D2UtilitySection() }
                     NavigationLink("Checkmark") { D2CheckmarkSection() }
                 }
+                Section("D3 Composites") {
+                    NavigationLink("Adaptive Hero") { D3AdaptiveHeroSection() }
+                    NavigationLink("Entry Row") { D3EntryRowSection() }
+                    NavigationLink("Section Header") { D3SectionHeaderSection() }
+                    NavigationLink("Nav Bar Plain") { D3NavBarSection() }
+                    NavigationLink("Tab Bar Main") { D3TabBarSection() }
+                    NavigationLink("Week Bar Chart") { D3WeekBarChartSection() }
+                    NavigationLink("Confirmation Block") { D3ConfirmationSection() }
+                    NavigationLink("Voice Capture Button") { D3VoiceCaptureSection() }
+                    NavigationLink("Empty State Arrow") { D3EmptyStateArrowSection() }
+                }
             }
             .navigationTitle("Slowly Tokens")
 #if os(iOS)
@@ -338,6 +349,181 @@ private struct D2CheckmarkSection: View {
             }
         }
         .navigationTitle("Checkmark")
+    }
+}
+
+// MARK: - D3 Composites Gallery
+
+private struct D3AdaptiveHeroSection: View {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: Slowly.Spacing.xxl) {
+                AdaptiveHero(state: .today(
+                    date: "Monday, 18 May",
+                    count: 7,
+                    headline: "You're on a roll now",
+                    subtitle: "Some motivational subtitle goes here maybe in two lines"
+                ))
+                Divider()
+                AdaptiveHero(state: .reflect(
+                    headline: "What a great week",
+                    subtitle: "Some motivational subtitle."
+                ))
+                Divider()
+                AdaptiveHero(state: .empty)
+            }
+            .padding(Slowly.Spacing.xl)
+        }
+        .background(Slowly.Color.surfaceApp)
+        .navigationTitle("Adaptive Hero")
+    }
+}
+
+private struct D3EntryRowSection: View {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                TimeOfDaySectionHeader(label: "Afternoon", count: 3)
+                    .padding(.horizontal, Slowly.Spacing.xl)
+                    .padding(.vertical, Slowly.Spacing.sm)
+                EntryRow(text: "Took a 10-min walk", timestamp: "00:33", onMenu: {})
+                    .padding(.horizontal, Slowly.Spacing.xl)
+                EntryRow(text: "Paid rent", timestamp: "00:33", onMenu: {})
+                    .padding(.horizontal, Slowly.Spacing.xl)
+                EntryRow(
+                    text: "Did my laundry",
+                    timestamp: "00:33",
+                    isLast: true,
+                    isVoiceCaptured: true,
+                    onMenu: {}
+                )
+                .padding(.horizontal, Slowly.Spacing.xl)
+            }
+        }
+        .background(Slowly.Color.surfaceApp)
+        .navigationTitle("Entry Row")
+    }
+}
+
+private struct D3SectionHeaderSection: View {
+    var body: some View {
+        List {
+            TimeOfDaySectionHeader(label: "Morning", count: 1)
+            TimeOfDaySectionHeader(label: "Afternoon", count: 6)
+            TimeOfDaySectionHeader(label: "Evening", count: 0)
+        }
+        .navigationTitle("Section Header")
+    }
+}
+
+private struct D3NavBarSection: View {
+    var body: some View {
+        List {
+            Section("Title only") {
+                NavBarPlain(title: "Settings")
+                    .listRowInsets(.init())
+            }
+            Section("With trailing action") {
+                NavBarPlain(
+                    title: "Search",
+                    trailingIcon: "xmark",
+                    trailingAction: {},
+                    trailingAccessibilityLabel: "Close"
+                )
+                .listRowInsets(.init())
+            }
+        }
+        .navigationTitle("Nav Bar Plain")
+    }
+}
+
+private struct D3TabBarSection: View {
+    @State private var tab = TabBarMain.Tab.today
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            Slowly.Color.surfaceApp.ignoresSafeArea()
+            VStack {
+                Text("Selected: \(tab.label)")
+                    .font(Slowly.Font.bodyRegular)
+                    .foregroundStyle(Slowly.Color.textSecondary)
+                Spacer()
+            }
+            .padding(Slowly.Spacing.xl)
+
+            TabBarMain(selection: $tab, onLog: {})
+                .padding(.horizontal, Slowly.Spacing.xl)
+                .padding(.bottom, Slowly.Spacing.lg)
+        }
+        .navigationTitle("Tab Bar Main")
+    }
+}
+
+private struct D3WeekBarChartSection: View {
+    var body: some View {
+        List {
+            Section("Normal week") {
+                WeekBarChart(days: [
+                    .init(label: "Wed", count: 2),
+                    .init(label: "Thu", count: 5),
+                    .init(label: "Fri", count: 1),
+                    .init(label: "Sat", count: 4),
+                    .init(label: "Sun", count: 0),
+                    .init(label: "Mon", count: 3),
+                    .init(label: "Today", count: 7, isToday: true),
+                ])
+                .padding(.vertical, Slowly.Spacing.md)
+                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            }
+            Section("All zeros") {
+                WeekBarChart(days: (0..<7).map { .init(label: "D\($0)", count: 0) })
+                    .padding(.vertical, Slowly.Spacing.md)
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            }
+        }
+        .navigationTitle("Week Bar Chart")
+    }
+}
+
+private struct D3ConfirmationSection: View {
+    var body: some View {
+        ZStack {
+            Slowly.Color.surfaceApp.ignoresSafeArea()
+            ConfirmationBlock(
+                headline: "Logged!",
+                subtext: "One more thing done. Keep going.",
+                onDismiss: {}
+            )
+        }
+        .navigationTitle("Confirmation Block")
+    }
+}
+
+private struct D3VoiceCaptureSection: View {
+    @State private var recording = false
+
+    var body: some View {
+        ZStack {
+            Slowly.Color.surfaceApp.ignoresSafeArea()
+            VStack(spacing: Slowly.Spacing.xl) {
+                VoiceCaptureButton(isRecording: recording, onTap: { recording.toggle() })
+                Text(recording ? "Recording — tap to stop" : "Idle — tap to start")
+                    .font(Slowly.Font.footnoteRegular)
+                    .foregroundStyle(Slowly.Color.textSecondary)
+            }
+        }
+        .navigationTitle("Voice Capture Button")
+    }
+}
+
+private struct D3EmptyStateArrowSection: View {
+    var body: some View {
+        ZStack(alignment: .bottomLeading) {
+            Slowly.Color.surfaceApp.ignoresSafeArea()
+            EmptyStateArrow()
+                .padding(Slowly.Spacing.xl)
+        }
+        .navigationTitle("Empty State Arrow")
     }
 }
 

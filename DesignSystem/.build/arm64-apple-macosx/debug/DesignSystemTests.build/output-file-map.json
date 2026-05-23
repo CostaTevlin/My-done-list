@@ -2,6 +2,13 @@
   "": {
     "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/primary.swiftdeps"
   },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/D3CompositeTests.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/D3CompositeTests.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/D3CompositeTests.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/D3CompositeTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/D3CompositeTests.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/D3CompositeTests.dia"
+  },
   "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift": {
     "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DSComponentTests.d",
     "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystemTests.build/DSComponentTests.swift.o",

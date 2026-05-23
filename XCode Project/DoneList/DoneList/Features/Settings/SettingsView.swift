@@ -65,7 +65,7 @@ struct SettingsView: View {
             experienceSection
             dataSection
             aboutSection
-            #if DEBUG
+            #if DEBUG || INTERNAL
             debugSection
             #endif
         }

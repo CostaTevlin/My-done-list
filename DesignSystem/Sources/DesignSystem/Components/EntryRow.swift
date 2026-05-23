@@ -75,7 +75,7 @@ public struct EntryRow: View {
                         .accessibilityHidden(true)
                 }
                 Text(timestamp)
-                    .font(Slowly.Font.captionRegular)
+                    .font(Slowly.Font.footnoteRegular)
                     .foregroundStyle(Slowly.Color.textSecondary)
             }
         }

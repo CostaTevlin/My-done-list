@@ -90,7 +90,7 @@ final class CaptureFlowUITest: XCTestCase {
         } else {
             // Ghost row only shows when there are items (populated state)
             // This branch handles that scenario gracefully
-            XCTSkip("Ghost row not visible in current app state")
+            throw XCTSkip("Ghost row not visible in current app state")
         }
     }
 

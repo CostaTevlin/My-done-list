@@ -24,7 +24,7 @@ public extension TabBarMain {
         var icon: String {
             switch self {
             case .today:   return "calendar.badge.checkmark"
-            case .reflect: return "chart.bar"
+            case .reflect: return "chart.bar.xaxis"
             case .more:    return "ellipsis"
             }
         }

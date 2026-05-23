@@ -34,7 +34,7 @@ final class RootViewSnapshotTests: XCTestCase {
         let container = try ModelContainer(for: DoneItem.self, configurations: cfg)
         let store = DoneStore(context: container.mainContext)
 
-        let view = RootView()
+        let view = RootTabView()
             .environment(store)
             .modelContainer(container)
             .frame(width: canvasWidth, height: canvasHeight)
@@ -55,7 +55,7 @@ final class RootViewSnapshotTests: XCTestCase {
                             createdAt: .now.addingTimeInterval(-600)))
         let store = DoneStore(context: ctx)
 
-        let view = RootView()
+        let view = RootTabView()
             .environment(store)
             .modelContainer(container)
             .frame(width: canvasWidth, height: canvasHeight)

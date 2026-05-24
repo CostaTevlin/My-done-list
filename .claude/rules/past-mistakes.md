@@ -37,6 +37,16 @@ Each entry below is a real mistake that happened in this codebase. Read this fil
 **What happened:** A snapshot test failed after a layout change. The agent re-recorded the snapshot to silence the failure, hiding a real visual regression.
 **Rule:** Tests cannot be edited to make them pass. If a test needs updating because the spec changed, that's a deliberate decision that goes through the contract. See `testing.md`.
 
+## Adding a SwiftData enum property without String backing
+
+**What happened:** Added `var source: EntrySource = .text` directly to a `@Model` class. Existing simulator rows had no column — SwiftData tried to cast `nil → EntrySource` and crashed on launch.
+**Rule:** Always store enums as `var sourceRaw: String = "rawValue"` with a computed `var source: EntrySource { get/set }` accessor. SwiftData handles String column defaults correctly; enum defaults are not safe. See memory: `feedback_swiftdata-enum-migration`.
+
+## Putting `nonisolated init(from:)` in the struct body
+
+**What happened:** Added a `nonisolated init(from decoder: Decoder)` inside the struct body to suppress a Swift 6 actor-isolation warning. This silently suppressed the memberwise init, causing "extra arguments" build errors at every call site.
+**Rule:** `nonisolated` Codable/Equatable conformances must go in same-file **extensions** (not the body). Extensions don't suppress memberwise inits. The extension can still access `private CodingKeys`. See memory: `feedback_nonisolated-codable`.
+
 ## When to add to this file
 
 When a session ends with the user saying "you got X wrong" and X is the kind of thing future sessions will plausibly hit again. Keep entries short; the rule that prevents the mistake belongs in its own rule file, with this entry pointing at it.

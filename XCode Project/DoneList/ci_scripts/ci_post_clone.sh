@@ -1,21 +1,30 @@
 #!/bin/sh
 # ci_post_clone.sh — Xcode Cloud: auto-set build number
 #
-# Xcode Cloud provides $CI_BUILD_NUMBER, which auto-increments with every
-# cloud build. We write it into CURRENT_PROJECT_VERSION across all build
-# configurations so App Store Connect always sees a unique, increasing number.
-# This eliminates the need to manually bump the build number before each upload.
+# Xcode Cloud provides $CI_BUILD_NUMBER (auto-incremented each cloud build).
+# We write it into CURRENT_PROJECT_VERSION so App Store Connect always sees
+# a unique, increasing build number — no manual bumping needed.
 #
 # Reference: https://developer.apple.com/documentation/xcode/setting-the-next-build-number-for-xcode-cloud-builds
 
 set -e
 
-PROJ="$CI_WORKSPACE/XCode Project/DoneList/DoneList.xcodeproj/project.pbxproj"
+echo "ci_post_clone: CI_BUILD_NUMBER=${CI_BUILD_NUMBER}"
+echo "ci_post_clone: CI_WORKSPACE=${CI_WORKSPACE}"
 
-echo "ci_post_clone: setting CURRENT_PROJECT_VERSION to $CI_BUILD_NUMBER"
+PROJ="${CI_WORKSPACE}/XCode Project/DoneList/DoneList.xcodeproj/project.pbxproj"
 
-sed -i '' \
-  "s/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = $CI_BUILD_NUMBER;/g" \
-  "$PROJ"
+echo "ci_post_clone: project path=${PROJ}"
 
-echo "ci_post_clone: done"
+if [ ! -f "${PROJ}" ]; then
+  echo "ERROR: project.pbxproj not found at: ${PROJ}"
+  echo "Listing CI_WORKSPACE:"
+  ls "${CI_WORKSPACE}" || true
+  exit 1
+fi
+
+# Use perl -pi instead of sed -i to avoid BSD/GNU differences
+# and reliably handle file paths that contain spaces.
+perl -pi -e "s/CURRENT_PROJECT_VERSION = \\d+;/CURRENT_PROJECT_VERSION = ${CI_BUILD_NUMBER};/g" "${PROJ}"
+
+echo "ci_post_clone: CURRENT_PROJECT_VERSION set to ${CI_BUILD_NUMBER} — done"

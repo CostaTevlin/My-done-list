@@ -57,14 +57,18 @@ struct RootTabView: View {
                     .environment(store)
                     .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.visible)
-                    .presentationCornerRadius(Radius.card)
+                    .presentationCornerRadius(Slowly.Radius.sheet)
                     .modifier(LiquidGlassSheetBackground())
             }
         }
         .overlay { ConfettiView(isPresented: $showConfetti) }
-        .onChange(of: store.confettiFireCount) { _, newCount in
-            guard newCount > 0 else { return }
-            showConfetti = true
+        // .task(id:) restarts on every counter change, which guarantees a false→true
+        // edge even when two entries are logged in quick succession (M5).
+        .task(id: store.confettiFireCount) {
+            guard store.confettiFireCount > 0 else { return }
+            showConfetti = false                          // force an edge …
+            try? await Task.sleep(for: .milliseconds(16)) // … one frame later …
+            showConfetti = true                           // … then fire
         }
     }
 

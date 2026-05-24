@@ -99,4 +99,10 @@ struct DoneListExportTests {
         let decoded = try DoneListExport.decode(from: data)
         #expect(decoded == original)
     }
+
+    @Test("decode throws on malformed JSON input")
+    func decode_throwsOnMalformedInput() {
+        let garbage = Data("not json at all".utf8)
+        #expect(throws: (any Error).self) { try DoneListExport.decode(from: garbage) }
+    }
 }

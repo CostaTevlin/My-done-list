@@ -17,6 +17,9 @@ struct TodayScreen_New: View {
 
     @Environment(DoneStore.self) private var store
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    // Fetches all rows then filters in Swift rather than using a #Predicate,
+    // because @Query's predicate must be a compile-time constant but todayKeyValue
+    // changes at midnight. The full table is pruned to ≤30 days, so this stays small.
     @Query(sort: \DoneItem.createdAt, order: .reverse) private var allItems: [DoneItem]
 
     var onLog: (InputMode) -> Void = { _ in }
@@ -79,8 +82,9 @@ struct TodayScreen_New: View {
 
     private var sections: [ItemSection] {
         let grouped = Dictionary(grouping: todayItems, by: { Period.from(time: $0.time) })
+        // allCases returns cases in declaration order: evening(2) → afternoon(1) → morning(0).
+        // The sort is intentionally omitted — declaration order is the canonical order here.
         return Period.allCases
-            .sorted { $0.rawValue > $1.rawValue }  // Evening → Afternoon → Morning
             .compactMap { period -> ItemSection? in
                 guard let items = grouped[period], !items.isEmpty else { return nil }
                 return ItemSection(period: period, items: items)
@@ -89,6 +93,9 @@ struct TodayScreen_New: View {
 
     // MARK: - Hero
 
+    // Uses system locale intentionally — the hero date is a display string for the user,
+    // so it should respect their locale. Unlike DoneStore formatters (which force POSIX
+    // for key generation), this one is purely decorative.
     private static let heroDateFormatter: DateFormatter = {
         let f = DateFormatter()
         f.dateFormat = "EEEE, d MMM"

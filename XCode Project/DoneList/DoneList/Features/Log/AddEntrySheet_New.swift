@@ -26,6 +26,11 @@ struct AddEntrySheet_New: View {
 
     init(editingItem: DoneItem? = nil) {
         self.editingItem = editingItem
+        // Initialise state from editingItem here so the values are set before
+        // the first render — avoids a onAppear vs .task ordering race (M3).
+        let isEditing = editingItem != nil
+        self._sheetState = State(initialValue: isEditing ? .textMode : .listening)
+        self._text = State(initialValue: editingItem?.text ?? "")
     }
 
     // MARK: - Environment
@@ -38,8 +43,20 @@ struct AddEntrySheet_New: View {
 
     private enum SheetState { case listening, captured, textMode }
 
+    // Icon-button geometry — named here instead of inline literals (coding.md).
+    private enum Icon {
+        static let outerSmall: CGFloat = 32   // xmark / dismiss circle
+        static let outerLarge: CGFloat = 44   // restart / confirm circles
+        static let sizeSmall: CGFloat  = 13   // xmark glyph
+        static let sizeMedium: CGFloat = 16   // arrow.counterclockwise / checkmark glyph
+    }
+
     @State private var sheetState: SheetState = .listening
     @State private var text: String = ""
+    // Explicit voice-ness flag: set to true only when a transcript arrives while
+    // listening; cleared on any manual mode switch or restart. Safer than
+    // inferring from sheetState at submit time (M1).
+    @State private var enteredViaVoice = false
     @State private var speech = SpeechRecognizer()
     @FocusState private var textFocused: Bool
 
@@ -66,26 +83,23 @@ struct AddEntrySheet_New: View {
             .animation(reduceMotion ? nil : .spring(duration: 0.3, bounce: 0.05), value: sheetState)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .onAppear {
-            if let item = editingItem {
-                text = item.text
-                sheetState = .textMode
-            } else {
-                sheetState = .listening
-            }
-        }
         .task {
             guard sheetState == .listening else { return }
             try? await Task.sleep(for: .milliseconds(350))
             if speech.isAvailable {
                 speech.startRecording()
             } else if speech.authorizationResolved {
+                // Permission was denied; fall through to text mode.
                 sheetState = .textMode
             }
+            // If neither branch fires: isAvailable == false && authorizationResolved == false
+            // means the OS permission prompt is still pending. The onChange(of:
+            // speech.authorizationResolved) handler below covers that recovery path (m8).
         }
         .onChange(of: speech.transcript) { _, newValue in
             guard sheetState == .listening, newValue.count >= 2 else { return }
             text = newValue
+            enteredViaVoice = true   // M1: track voice provenance explicitly
             speech.stopRecording()
             withAnimation(reduceMotion ? nil : .spring(duration: 0.35, bounce: 0.05)) {
                 sheetState = .captured
@@ -104,6 +118,7 @@ struct AddEntrySheet_New: View {
         .onDisappear {
             speech.stopRecording()
             text = ""
+            enteredViaVoice = false
         }
     }
 
@@ -116,9 +131,9 @@ struct AddEntrySheet_New: View {
                 ZStack {
                     Circle()
                         .fill(Slowly.Color.borderDefault)
-                        .frame(width: 32, height: 32)
+                        .frame(width: Icon.outerSmall, height: Icon.outerSmall)
                     Image(systemName: "xmark")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.system(size: Icon.sizeSmall, weight: .semibold))
                         .foregroundStyle(Slowly.Color.textPrimary)
                 }
             }
@@ -241,9 +256,9 @@ struct AddEntrySheet_New: View {
                 ZStack {
                     Circle()
                         .fill(Slowly.Color.borderDefault)
-                        .frame(width: 44, height: 44)
+                        .frame(width: Icon.outerLarge, height: Icon.outerLarge)
                     Image(systemName: "arrow.counterclockwise")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.system(size: Icon.sizeMedium, weight: .medium))
                         .foregroundStyle(Slowly.Color.textSecondary)
                 }
             }
@@ -258,10 +273,10 @@ struct AddEntrySheet_New: View {
             // Disabled confirm (becomes enabled in captured state)
             Circle()
                 .fill(Slowly.Color.borderDefault)
-                .frame(width: 44, height: 44)
+                .frame(width: Icon.outerLarge, height: Icon.outerLarge)
                 .overlay(
                     Image(systemName: "checkmark")
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.system(size: Icon.sizeMedium, weight: .semibold))
                         .foregroundStyle(Slowly.Color.textSecondary)
                 )
                 .frame(maxWidth: .infinity)
@@ -347,12 +362,14 @@ struct AddEntrySheet_New: View {
     // MARK: - Actions
 
     private func switchToText() {
+        enteredViaVoice = false   // M1: switching to text resets voice provenance
         speech.stopRecording()
         sheetState = .textMode
     }
 
     private func switchToVoice() {
         textFocused = false
+        enteredViaVoice = false
         speech.reset()
         text = ""
         sheetState = .listening
@@ -363,6 +380,7 @@ struct AddEntrySheet_New: View {
     }
 
     private func restartRecording() {
+        enteredViaVoice = false   // discarding the transcript resets provenance
         speech.reset()
         text = ""
         sheetState = .listening
@@ -371,12 +389,14 @@ struct AddEntrySheet_New: View {
 
     private func submit() {
         guard canSubmit else { return }
+        // Capture all values before dismiss() — onDisappear clears text (M2).
+        let savedText   = trimmedText
+        let savedSource = enteredViaVoice ? EntrySource.voice : .text
         speech.stopRecording()
-        let capturedViaVoice = sheetState == .captured
         if let item = editingItem {
-            store.update(item, text: trimmedText)
+            store.update(item, text: savedText)
         } else {
-            store.add(text: trimmedText, source: capturedViaVoice ? .voice : .text)
+            store.add(text: savedText, source: savedSource)
             store.fireConfetti()
         }
         HapticEngine.success(reduceMotion: reduceMotion)

@@ -106,6 +106,9 @@ extension DoneListExport {
         items         = try c.decode([Item].self, forKey: .items)
     }
 
+    // Explicit nonisolated == suppresses the Swift 6 warning
+    // "main actor-isolated conformance to Equatable cannot be used in nonisolated context"
+    // that fires when the synthesised == is used inside a nonisolated #expect() macro.
     nonisolated static func == (lhs: DoneListExport, rhs: DoneListExport) -> Bool {
         lhs.exportVersion == rhs.exportVersion &&
         lhs.exportedAt    == rhs.exportedAt &&

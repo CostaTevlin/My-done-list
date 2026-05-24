@@ -5,10 +5,8 @@
 # We write it into CURRENT_PROJECT_VERSION so App Store Connect always sees
 # a unique, increasing build number — no manual bumping needed.
 #
-# Apple sets the working directory to the folder that contains ci_scripts/,
-# which is "XCode Project/DoneList/" — so the project file is reachable via
-# a relative path. We do NOT use $CI_WORKSPACE because its value is the path
-# to the .xcodeproj/.xcworkspace file, not the repository root.
+# Xcode Cloud cd's INTO the ci_scripts/ directory before running this script,
+# so pwd is .../ci_scripts/. The project file is one level up.
 #
 # Reference: https://developer.apple.com/documentation/xcode/setting-the-next-build-number-for-xcode-cloud-builds
 
@@ -25,8 +23,8 @@ if ! [[ "${CI_BUILD_NUMBER}" =~ ^[0-9]+$ ]]; then
   exit 1
 fi
 
-# Relative path — working directory is the parent of ci_scripts/ (Apple guarantee).
-PROJ="DoneList.xcodeproj/project.pbxproj"
+# Xcode Cloud runs this script with pwd = ci_scripts/, so the project is one level up.
+PROJ="../DoneList.xcodeproj/project.pbxproj"
 
 echo "ci_post_clone: project path=$(pwd)/${PROJ}"
 

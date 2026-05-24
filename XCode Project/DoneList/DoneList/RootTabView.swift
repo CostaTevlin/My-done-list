@@ -12,10 +12,11 @@
 //   selection.
 //
 // Both branches: sheet and ConfettiOverlay live here (R4: moved up from DoneListApp).
-// r4TodayEnabled flag switches TodayView→TodayScreen_New and LogSheet→AddEntrySheet_New.
+// R4 D3-composite screens are now canonical: TodayScreen is the only Today path,
+// AddEntrySheet_New is the only log sheet. The r4TodayEnabled flag has been removed.
 //
 // Phase: 3 (shell), 4 (Log + confetti), 5 (pill moved), 6 (two-branch),
-//        7 (More tab), 4.5 (overlay FAB on iOS 26), R4 (flag + D3 screens)
+//        7 (More tab), 4.5 (overlay FAB on iOS 26), R4 (D3 screens, flag removed)
 // See: engineering/Architecture.md  ·  design-system/Liquid Glass mapping.md
 //      design-system/Components.md (BrandTabBar)  · ADR-0006
 
@@ -30,7 +31,6 @@ struct RootTabView: View {
     @State private var editingItem: DoneItem? = nil
     @State private var tabSelection: BrandTabBar.Tab = .today
     @State private var showConfetti = false                        // R4: moved from DoneListApp
-    @AppStorage("r4TodayEnabled") private var r4TodayEnabled = false
 
     var body: some View {
         Group {
@@ -45,21 +45,12 @@ struct RootTabView: View {
             #endif
         }
         .sheet(isPresented: $showLog, onDismiss: { editingItem = nil }) {
-            if r4TodayEnabled {
-                AddEntrySheet_New(editingItem: editingItem)
-                    .environment(store)
-                    .presentationDetents([.medium, .large])
-                    .presentationDragIndicator(.visible)
-                    .presentationCornerRadius(Slowly.Radius.sheet)
-                    .modifier(LiquidGlassSheetBackground())
-            } else {
-                LogSheet(initialMode: logMode, editingItem: editingItem)
-                    .environment(store)
-                    .presentationDetents([.medium, .large])
-                    .presentationDragIndicator(.visible)
-                    .presentationCornerRadius(Slowly.Radius.sheet)
-                    .modifier(LiquidGlassSheetBackground())
-            }
+            AddEntrySheet_New(editingItem: editingItem)
+                .environment(store)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+                .presentationCornerRadius(Slowly.Radius.sheet)
+                .modifier(LiquidGlassSheetBackground())
         }
         .overlay { ConfettiView(isPresented: $showConfetti) }
         // .task(id:) restarts on every counter change, which guarantees a false→true
@@ -90,7 +81,7 @@ struct RootTabView: View {
     private var ios26Shell: some View {
         #if os(iOS)
         if #available(iOS 26.0, *) {
-            IOS26ShellContent(onEdit: openEdit, r4TodayEnabled: r4TodayEnabled)
+            IOS26ShellContent(onEdit: openEdit)
         }
         #endif
     }
@@ -103,11 +94,7 @@ struct RootTabView: View {
             Group {
                 switch tabSelection {
                 case .today:
-                    if r4TodayEnabled {
-                        TodayScreen_New(onLog: openLog, onEditItem: openEdit)
-                    } else {
-                        TodayView(onLog: openLog, onEditItem: openEdit)
-                    }
+                    TodayScreen(onLog: openLog, onEditItem: openEdit)
                 case .reflect:
                     ReflectView()
                 case .more:
@@ -127,7 +114,6 @@ struct RootTabView: View {
 @available(iOS 26.0, *)
 private struct IOS26ShellContent: View {
     let onEdit: (DoneItem) -> Void
-    let r4TodayEnabled: Bool
 
     enum IOS26Tab: Hashable { case today, reflect, more }
     @State private var selection: IOS26Tab = .today
@@ -136,11 +122,7 @@ private struct IOS26ShellContent: View {
     var body: some View {
         TabView(selection: $selection) {
             Tab("Today", systemImage: "calendar.badge.checkmark", value: IOS26Tab.today) {
-                if r4TodayEnabled {
-                    TodayScreen_New(onLog: { _ in showLogCard = true }, onEditItem: onEdit)
-                } else {
-                    TodayView(onLog: { _ in showLogCard = true }, onEditItem: onEdit)
-                }
+                TodayScreen(onLog: { _ in showLogCard = true }, onEditItem: onEdit)
             }
             Tab("Reflect", systemImage: "chart.bar.xaxis", value: IOS26Tab.reflect) {
                 ReflectView()

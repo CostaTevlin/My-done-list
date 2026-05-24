@@ -358,12 +358,15 @@ private struct D3AdaptiveHeroSection: View {
     var body: some View {
         ScrollView {
             VStack(spacing: Slowly.Spacing.xxl) {
-                AdaptiveHero(state: .today(
-                    date: "Monday, 18 May",
-                    count: 7,
-                    headline: "You're on a roll now",
-                    subtitle: "Some motivational subtitle goes here maybe in two lines"
-                ))
+                VStack(alignment: .leading, spacing: 0) {
+                    BigNumeral(value: 7)
+                        .padding(.horizontal, Slowly.Spacing.xl)
+                    AdaptiveHero(state: .today(
+                        date: "Monday, 18 May",
+                        headline: "You're on a roll now",
+                        subtitle: "Some motivational subtitle goes here maybe in two lines"
+                    ))
+                }
                 Divider()
                 AdaptiveHero(state: .reflect(
                     headline: "What a great week",

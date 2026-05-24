@@ -30,7 +30,7 @@ struct RootTabView: View {
     @State private var editingItem: DoneItem? = nil
     @State private var tabSelection: BrandTabBar.Tab = .today
     @State private var showConfetti = false                        // R4: moved from DoneListApp
-    @AppStorage("r4TodayEnabled") private var r4TodayEnabled = false
+    @AppStorage("r4TodayEnabled") private var r4TodayEnabled = true
 
     var body: some View {
         Group {

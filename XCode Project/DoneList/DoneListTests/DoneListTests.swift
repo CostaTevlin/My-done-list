@@ -183,6 +183,22 @@ struct DoneStoreTests {
         #expect(all.first?.text == "hello")
     }
 
+    @Test("add stores the provided source (R4 EntrySource)")
+    func add_storesSource() throws {
+        let (store, ctx) = try makeStore()
+        store.add(text: "Said something out loud", source: .voice)
+        let all = try ctx.fetch(FetchDescriptor<DoneItem>())
+        #expect(all.first?.source == .voice)
+    }
+
+    @Test("add without source defaults to .text (backward-compat)")
+    func add_defaultsToText() throws {
+        let (store, ctx) = try makeStore()
+        store.add(text: "Wrote tests")
+        let all = try ctx.fetch(FetchDescriptor<DoneItem>())
+        #expect(all.first?.source == .text)
+    }
+
     @Test("delete removes the item")
     func delete_removesItem() throws {
         let (store, ctx) = try makeStore()

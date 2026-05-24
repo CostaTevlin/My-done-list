@@ -53,13 +53,15 @@ struct DoneListExport: Codable, Equatable {
 
     /// Build an export from a `DoneItem` array — sorted ascending by
     /// `createdAt` so the file reads chronologically.
+    /// `exportedAt` is truncated to whole seconds so ISO-8601 round-trips are lossless.
     static func from(items: [DoneItem], now: Date = .now) -> DoneListExport {
+        let exportedAt = Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate.rounded(.down))
         let mapped = items
             .sorted { $0.createdAt < $1.createdAt }
             .map { Item(text: $0.text, time: $0.time, date: $0.date, createdAt: $0.createdAt) }
         return DoneListExport(
             exportVersion: currentVersion,
-            exportedAt: now,
+            exportedAt: exportedAt,
             items: mapped
         )
     }
@@ -78,6 +80,53 @@ struct DoneListExport: Codable, Equatable {
         e.outputFormatting = [.prettyPrinted, .sortedKeys]
         e.dateEncodingStrategy = .iso8601
         return try e.encode(self)
+    }
+
+    /// Decodes an export payload produced by `encoded()`.
+    /// Must use `.iso8601` to match the encoder's date strategy.
+    nonisolated static func decode(from data: Data) throws -> DoneListExport {
+        let d = JSONDecoder()
+        d.dateDecodingStrategy = .iso8601
+        return try d.decode(DoneListExport.self, from: data)
+    }
+}
+
+// MARK: - Nonisolated Codable / Equatable
+
+// Swift synthesises Decodable and Equatable conformances as main-actor-isolated
+// unless they are explicitly declared nonisolated. Extensions in the same file
+// can access the private CodingKeys and still leave the struct's memberwise
+// initialisers intact (body-level inits suppress them; extension inits do not).
+
+extension DoneListExport {
+    nonisolated init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        exportVersion = try c.decode(Int.self, forKey: .exportVersion)
+        exportedAt    = try c.decode(Date.self, forKey: .exportedAt)
+        items         = try c.decode([Item].self, forKey: .items)
+    }
+
+    nonisolated static func == (lhs: DoneListExport, rhs: DoneListExport) -> Bool {
+        lhs.exportVersion == rhs.exportVersion &&
+        lhs.exportedAt    == rhs.exportedAt &&
+        lhs.items         == rhs.items
+    }
+}
+
+extension DoneListExport.Item {
+    nonisolated init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        text      = try c.decode(String.self, forKey: .text)
+        time      = try c.decode(String.self, forKey: .time)
+        date      = try c.decode(String.self, forKey: .date)
+        createdAt = try c.decode(Date.self, forKey: .createdAt)
+    }
+
+    nonisolated static func == (lhs: DoneListExport.Item, rhs: DoneListExport.Item) -> Bool {
+        lhs.text == rhs.text &&
+        lhs.time == rhs.time &&
+        lhs.date == rhs.date &&
+        lhs.createdAt == rhs.createdAt
     }
 }
 

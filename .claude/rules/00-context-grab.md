@@ -7,7 +7,7 @@ Run this list **on session start**, **after every compaction**, and **whenever y
 1. **Re-read the active task plan / TodoList.** If a contract exists for the current task (`.claude/contracts/<task>_CONTRACT.md`), re-read it in full.
 2. **Re-read the files you were last editing.** Don't trust your memory of their contents — the file is the truth, your memory of it is not.
 3. **Run `git status` and `git branch --show-current`.** Don't assume the branch or working state. The user may have switched branches, stashed, or pulled in changes.
-4. **Open `~/Documents/Obsidian/my-startups/My Done List/00 — Index.md`** if the Phase in CLAUDE.md feels stale or if the task spans phases. The vault is authoritative for product/design/decision context.
+4. **Open `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/00 — Index.md`** if the Phase in CLAUDE.md feels stale or if the task spans phases. The vault is authoritative for product/design/decision context.
 5. **Identify which routing rules in CLAUDE.md fire for this task.** Read those, and only those. If you're tempted to read more "just in case," stop — that's context bloat.
 
 ## What "don't fill in gaps" means in practice

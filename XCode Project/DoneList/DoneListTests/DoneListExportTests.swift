@@ -96,7 +96,7 @@ struct DoneListExportTests {
         ]
         let original = DoneListExport.from(items: items)
         let data = try original.encoded()
-        let decoded = try JSONDecoder().decode(DoneListExport.self, from: data)
+        let decoded = try DoneListExport.decode(from: data)
         #expect(decoded == original)
     }
 }

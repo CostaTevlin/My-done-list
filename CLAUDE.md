@@ -43,7 +43,7 @@ Read the rule file when its trigger fires. Don't read it speculatively.
 
 ## Knowledge base — Obsidian vault is the source of truth for product, design, decisions
 
-Vault root: `~/Documents/Obsidian/my-startups/My Done List/`. Code is the source of truth for code. The vault is the source of truth for everything else.
+Vault root: `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/`. Code is the source of truth for code. The vault is the source of truth for everything else.
 
 - `00 — Index.md` — Phase tracker is authoritative. Read this when current state above feels stale.
 - `product/PRD.md`, `product/Roadmap.md`

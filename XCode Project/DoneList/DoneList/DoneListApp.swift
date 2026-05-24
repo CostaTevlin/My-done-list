@@ -5,6 +5,7 @@
 // Phase 3: replaces HelloView with RootTabView.
 // Phase 7: gates the root content on `hasOnboarded`; lifts ConfettiOverlay
 //          to the WindowGroup so it covers Onboarding's first-log too.
+// R4: ConfettiOverlay moved into RootTabView (so it is no longer WindowGroup-level).
 //
 // See: engineering/Architecture.md  ·  decisions/0003 — SwiftData persistence
 
@@ -24,7 +25,6 @@ struct DoneListApp: App {
     @State private var store = DoneStore()
     @AppStorage("hasOnboarded") private var hasOnboarded: Bool = false
     @AppStorage("colorSchemePreference") private var colorSchemePreference: String = "dark"
-    @State private var showConfetti = false
 
     private var preferredColorScheme: ColorScheme? {
         switch colorSchemePreference {
@@ -45,11 +45,6 @@ struct DoneListApp: App {
             }
             .environment(store)
             .preferredColorScheme(preferredColorScheme)
-            .overlay { ConfettiView(isPresented: $showConfetti) }
-            .onChange(of: store.confettiFireCount) { _, newCount in
-                guard newCount > 0 else { return }
-                showConfetti = true
-            }
         }
         .modelContainer(DoneStore.container)
         .onChange(of: phase) { _, newPhase in

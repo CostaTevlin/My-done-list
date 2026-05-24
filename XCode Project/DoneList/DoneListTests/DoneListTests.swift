@@ -183,6 +183,66 @@ struct DoneStoreTests {
         #expect(all.first?.text == "hello")
     }
 
+    @Test("add stores the provided source (R4 EntrySource)")
+    func add_storesSource() throws {
+        let (store, ctx) = try makeStore()
+        store.add(text: "Said something out loud", source: .voice)
+        let all = try ctx.fetch(FetchDescriptor<DoneItem>())
+        #expect(all.first?.source == .voice)
+    }
+
+    @Test("add without source defaults to .text (backward-compat)")
+    func add_defaultsToText() throws {
+        let (store, ctx) = try makeStore()
+        store.add(text: "Wrote tests")
+        let all = try ctx.fetch(FetchDescriptor<DoneItem>())
+        #expect(all.first?.source == .text)
+    }
+
+    @Test("add with voice source still rejects text shorter than 2 chars")
+    func add_shortTextRejectedRegardlessOfSource() throws {
+        let (store, ctx) = try makeStore()
+        store.add(text: "a", source: .voice)
+        store.add(text: "",  source: .voice)
+        let all = try ctx.fetch(FetchDescriptor<DoneItem>())
+        #expect(all.isEmpty)
+    }
+
+    @Test("update persists trimmed text on an existing item")
+    func update_persistsTrimmedText() throws {
+        let (store, ctx) = try makeStore()
+        let item = DoneItem(text: "original", time: "10:00", date: DoneStore.todayKey())
+        ctx.insert(item)
+        try ctx.save()
+
+        store.update(item, text: "  revised  ")
+        #expect(item.text == "revised")
+    }
+
+    @Test("update rejects text shorter than 2 chars")
+    func update_ignoresShortText() throws {
+        let (store, ctx) = try makeStore()
+        let item = DoneItem(text: "original", time: "10:00", date: DoneStore.todayKey())
+        ctx.insert(item)
+        try ctx.save()
+
+        store.update(item, text: "x")
+        let all = try ctx.fetch(FetchDescriptor<DoneItem>())
+        #expect(all.first?.text == "original")
+    }
+
+    @Test("update preserves source field")
+    func update_preservesSource() throws {
+        let (store, ctx) = try makeStore()
+        let item = DoneItem(text: "voice entry", time: "10:00", date: DoneStore.todayKey(), source: .voice)
+        ctx.insert(item)
+        try ctx.save()
+
+        store.update(item, text: "edited text")
+        let all = try ctx.fetch(FetchDescriptor<DoneItem>())
+        #expect(all.first?.source == .voice)
+    }
+
     @Test("delete removes the item")
     func delete_removesItem() throws {
         let (store, ctx) = try makeStore()

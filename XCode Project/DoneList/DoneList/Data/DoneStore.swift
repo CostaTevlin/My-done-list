@@ -149,7 +149,8 @@ final class DoneStore {
 
     /// Add a new done item with the current time + todayKey. Mirrors the PWA's
     /// 2-character minimum gate (`index.html` line ~440).
-    func add(text: String) {
+    /// `source` defaults to `.text`; pass `.voice` for voice-captured entries (R4, ADR-0010).
+    func add(text: String, source: EntrySource = .text) {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed.count >= 2 else { return }
 
@@ -158,7 +159,8 @@ final class DoneStore {
             text: trimmed,
             time: Self.timeKey(now: now),
             date: Self.todayKey(now: now),
-            createdAt: now
+            createdAt: now,
+            source: source
         )
         context.insert(item)
         try? context.save()

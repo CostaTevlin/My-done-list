@@ -13,7 +13,8 @@ Native iOS port of the My Done List PWA. SwiftUI + Liquid Glass, iPhone-only v1,
 
 ## Current state (keep this fresh — update when phase changes)
 
-- **Phase:** 4.5 in progress — Voice-first input + FAB navigation (ADR-0010). Phases 0–4 done.
+- **Phase:** R4 complete — D3 composite screen rebuild (TodayScreen_New, AddEntrySheet_New). Phases 0–4.5 done.
+- **Feature flag:** `r4TodayEnabled` (@AppStorage, default `false`) gates R4 screens. Both code paths must stay functional until the flag is removed.
 - **Next:** Phase 5 — Reflect + Charts.
 - **Active branch:** run `git branch --show-current` — don't assume.
 - **Bundle ID:** `com.konstantin.donelist` · **iCloud:** `iCloud.com.konstantin.donelist` · **App Group:** `group.com.konstantin.donelist`
@@ -32,18 +33,21 @@ Read the rule file when its trigger fires. Don't read it speculatively.
 - **IF using iOS 26 / Liquid Glass APIs** → `.claude/rules/liquid-glass.md`
 - **IF making a non-trivial architectural choice** (new dep, new pattern, ADR deviation) → `.claude/rules/adrs.md`
 - **IF writing or running tests** → `.claude/rules/testing.md`
+- **IF writing UI tests that interact with the tab bar** → also check memory `feedback_uitest-tabs` (iOS 26 uses `app.tabBars.buttons["Label"]`; iOS 18 BrandTabBar uses `app.buttons["Label tab"]`)
 - **IF preparing a commit, branch, or PR** → `.claude/rules/git-pr.md`
 - **IF you need build / test / run commands** → `.claude/rules/build-commands.md`
 - **IF you find yourself near `index.html`, `sw.js`, `manifest.json`, `icon-*.png`** at repo root → `.claude/rules/legacy-pwa.md`
 - **IF the user asks you to "find bugs / issues / problems"** or any framing that biases toward a finding → `.claude/rules/neutral-prompting.md`
 - **IF rules feel contradictory, or you're loading >5 rule files for one task** → `.claude/rules/spa-day.md`
 - **IF you feel uncertain about a design call** → `.claude/rules/past-mistakes.md`
+- **IF adding or changing a property on any `@Model` class** → `.claude/rules/past-mistakes.md` (SwiftData enum crash pattern)
+- **IF suppressing a Swift 6 actor-isolation warning with `nonisolated`** → `.claude/rules/past-mistakes.md` (extensions, not struct body)
 
 ---
 
 ## Knowledge base — Obsidian vault is the source of truth for product, design, decisions
 
-Vault root: `~/Documents/Obsidian/my-startups/My Done List/`. Code is the source of truth for code. The vault is the source of truth for everything else.
+Vault root: `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/`. Code is the source of truth for code. The vault is the source of truth for everything else.
 
 - `00 — Index.md` — Phase tracker is authoritative. Read this when current state above feels stale.
 - `product/PRD.md`, `product/Roadmap.md`

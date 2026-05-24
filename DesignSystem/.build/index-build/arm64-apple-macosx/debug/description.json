@@ -45,6 +45,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AdaptiveHero.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift"
         },
         {
@@ -57,7 +61,27 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift"
         },
         {
           "kind" : "file",
@@ -145,10 +169,16 @@
       "moduleOutputPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule",
       "objects" : [
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/AdaptiveHero.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/BrandTabBar.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/ChartBar.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSButton.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSCheckmark.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSDivider.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSIcon.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/PillButton.swift.o",
@@ -232,10 +262,16 @@
       "prepareForIndexing" : true,
       "sources" : [
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AdaptiveHero.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
@@ -361,6 +397,10 @@
       "inputs" : [
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift"
         },
         {
@@ -380,6 +420,7 @@
       "moduleName" : "DesignSystemTests",
       "moduleOutputPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/Modules/DesignSystemTests.swiftmodule",
       "objects" : [
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystemTests.build/DSComponentTests.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystemTests.build/DesignSystemTests.swift.o"
       ],
       "otherArguments" : [
@@ -445,6 +486,7 @@
       ],
       "prepareForIndexing" : true,
       "sources" : [
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift"
       ],
       "tempsPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystemTests.build",
@@ -463,10 +505,16 @@
       "designsystem",
       "-c",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AdaptiveHero.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BrandTabBar.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ChartBar.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/PillButton.swift",
@@ -615,6 +663,7 @@
       "-package-name",
       "designsystem",
       "-c",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DesignSystemTests.swift",
       "-I",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/Modules",
@@ -711,6 +760,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AdaptiveHero.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift"
         },
         {
@@ -723,7 +776,27 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSButton.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSCheckmark.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSDivider.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSIcon.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift"
         },
         {
           "kind" : "file",
@@ -816,6 +889,10 @@
         {
           "kind" : "virtual",
           "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Tests/DesignSystemTests/DSComponentTests.swift"
         },
         {
           "kind" : "file",

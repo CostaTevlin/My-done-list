@@ -90,19 +90,25 @@ final class CaptureFlowUITest: XCTestCase {
         } else {
             // Ghost row only shows when there are items (populated state)
             // This branch handles that scenario gracefully
-            XCTSkip("Ghost row not visible in current app state")
+            throw XCTSkip("Ghost row not visible in current app state")
         }
     }
 
     // MARK: - TopControls accessible
 
     func testTopControls_glyphsAreAccessible() throws {
-        let search  = app.buttons["Search"]
-        let reflect = app.buttons["Reflect"]
-        let more    = app.buttons["More"]
-
-        XCTAssertTrue(search.waitForExistence(timeout: 3),  "Search glyph must be accessible")
-        XCTAssertTrue(reflect.waitForExistence(timeout: 1), "Reflect glyph must be accessible")
-        XCTAssertTrue(more.waitForExistence(timeout: 1),    "More glyph must be accessible")
+        // iOS 26: native TabView — items are in the system tab bar.
+        // iOS 18: BrandTabBar — items are plain Buttons with "<Label> tab" accessibility labels.
+        let tabBar = app.tabBars.firstMatch
+        if tabBar.waitForExistence(timeout: 3) {
+            XCTAssertTrue(tabBar.buttons["Today"].exists,   "Today tab must be accessible")
+            XCTAssertTrue(tabBar.buttons["Reflect"].exists, "Reflect tab must be accessible")
+            XCTAssertTrue(tabBar.buttons["More"].exists,    "More tab must be accessible")
+        } else {
+            // iOS 18 BrandTabBar (custom, no system tabBar element)
+            XCTAssertTrue(app.buttons["Today tab"].waitForExistence(timeout: 3),   "Today tab must be accessible")
+            XCTAssertTrue(app.buttons["Reflect tab"].waitForExistence(timeout: 1), "Reflect tab must be accessible")
+            XCTAssertTrue(app.buttons["More tab"].waitForExistence(timeout: 1),    "More tab must be accessible")
+        }
     }
 }

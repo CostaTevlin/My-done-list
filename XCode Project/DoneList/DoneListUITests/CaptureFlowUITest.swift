@@ -63,8 +63,13 @@ final class CaptureFlowUITest: XCTestCase {
         textField.tap()
         textField.typeText("Wrote end-to-end tests")
 
-        // Submit via Done pill
-        let doneButton = app.buttons["Done"]
+        // Submit via Done pill. On iOS 26 the keyboard's return key exposes
+        // `identifier: "Done"` (label "done", lowercase), so the bare `buttons["Done"]`
+        // subscript matches both the sheet's submit (label "Done", capital D) AND the
+        // keyboard key, raising a multiple-matching-elements error. We match exactly on
+        // the case-sensitive `label` and require enabled state to pick the sheet button.
+        let donePredicate = NSPredicate(format: "label == %@ AND isEnabled == YES", "Done")
+        let doneButton = app.buttons.matching(donePredicate).firstMatch
         XCTAssertTrue(doneButton.waitForExistence(timeout: 2))
         doneButton.tap()
 

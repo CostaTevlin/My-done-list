@@ -48,9 +48,9 @@ final class D3CompositeTests: XCTestCase {
     // MARK: - AdaptiveHero
 
     func test_adaptiveHero_todayStateCompiles() {
+        // BigNumeral is composed by the caller, not inside AdaptiveHero (per Figma 111:8965).
         let _ = AdaptiveHero(state: .today(
             date: "Monday, 18 May",
-            count: 7,
             headline: "You're on a roll now",
             subtitle: "Some motivational subtitle."
         ))
@@ -68,17 +68,15 @@ final class D3CompositeTests: XCTestCase {
     }
 
     func test_adaptiveHeroTodayAccessibilityLabel() {
-        // Verify the accessibility label includes count, headline, and subtitle.
-        // We test the HeroState enum directly since the label is derived from it.
+        // Verify the accessibility label includes headline and subtitle.
+        // The count is announced by the composed BigNumeral, not by AdaptiveHero.
         let state = HeroState.today(
             date: "Monday, 18 May",
-            count: 3,
             headline: "You're on a roll",
             subtitle: "Keep going"
         )
-        if case let .today(_, count, headline, subtitle) = state {
-            let label = "\(count) things today. \(headline). \(subtitle)"
-            XCTAssertTrue(label.contains("3"))
+        if case let .today(_, headline, subtitle) = state {
+            let label = "\(headline). \(subtitle)"
             XCTAssertTrue(label.contains("You're on a roll"))
             XCTAssertTrue(label.contains("Keep going"))
         } else {
@@ -146,9 +144,9 @@ final class D3CompositeTests: XCTestCase {
 
     func test_heroStateEquality() {
         // HeroState is Equatable — verify animation value binding works
-        let a = HeroState.today(date: "Mon", count: 1, headline: "H", subtitle: "S")
-        let b = HeroState.today(date: "Mon", count: 1, headline: "H", subtitle: "S")
-        let c = HeroState.today(date: "Mon", count: 2, headline: "H", subtitle: "S")
+        let a = HeroState.today(date: "Mon", headline: "H", subtitle: "S")
+        let b = HeroState.today(date: "Mon", headline: "H", subtitle: "S")
+        let c = HeroState.today(date: "Tue", headline: "H", subtitle: "S")
         XCTAssertEqual(a, b)
         XCTAssertNotEqual(a, c)
         XCTAssertNotEqual(a, HeroState.empty)

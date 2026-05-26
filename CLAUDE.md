@@ -13,8 +13,7 @@ Native iOS port of the My Done List PWA. SwiftUI + Liquid Glass, iPhone-only v1,
 
 ## Current state (keep this fresh — update when phase changes)
 
-- **Phase:** R4 complete — D3 composite screen rebuild (TodayScreen_New, AddEntrySheet_New). Phases 0–4.5 done.
-- **Feature flag:** `r4TodayEnabled` (@AppStorage, default `false`) gates R4 screens. Both code paths must stay functional until the flag is removed.
+- **Phase:** R4 complete — D3 composite screens are canonical (`TodayScreen`, `AddEntrySheet_New`). `r4TodayEnabled` flag removed; legacy `TodayView` deleted. Persistent native navbar with trailing `AccountButton` (opens Settings sheet) lives on Today. Phases 0–4.5 done.
 - **Next:** Phase 5 — Reflect + Charts.
 - **Active branch:** run `git branch --show-current` — don't assume.
 - **Bundle ID:** `com.konstantin.donelist` · **iCloud:** `iCloud.com.konstantin.donelist` · **App Group:** `group.com.konstantin.donelist`

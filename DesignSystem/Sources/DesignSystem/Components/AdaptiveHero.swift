@@ -15,7 +15,9 @@ public enum HeroState: Equatable {
     case today(date: String, count: Int, headline: String, subtitle: String)
     /// Reflect screen. Shows "Reflect" label, headline, and subtitle. No numeral.
     case reflect(headline: String, subtitle: String)
-    /// Empty state. Shows "No wins yet" and empty-state copy. No numeral or subtitle.
+    /// Empty state. Backdrop only — no eyebrow, headline, or subtitle.
+    /// Matches Figma `111:8965` variant `Type=Expanded` with title hidden.
+    /// Decorative: the screen-level empty hint (e.g. `EmptyStateArrow`) carries the guidance.
     case empty
 }
 
@@ -45,6 +47,7 @@ public struct AdaptiveHero: View {
         .animation(reduceMotion ? nil : .spring(duration: 0.4, bounce: 0.1), value: state)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(a11yLabel)
+        .accessibilityHidden(state == .empty)
     }
 
     // MARK: - Botanical illustration
@@ -113,25 +116,24 @@ public struct AdaptiveHero: View {
         }
     }
 
-    // State-specific headline
+    // State-specific headline — Today and Reflect only; empty hides the title block per Figma 111:8965
+    @ViewBuilder
     private var headline: some View {
-        Text(headlineText)
-            .font(Slowly.Font.title1Light)
-            .foregroundStyle(Slowly.Color.textPrimary)
-            .multilineTextAlignment(.leading)
-            .lineLimit(3)
-            .transition(.opacity)
-    }
-
-    private var headlineText: String {
         switch state {
-        case let .today(_, _, headline, _): return headline
-        case let .reflect(headline, _):    return headline
-        case .empty:                       return "No wins yet"
+        case let .today(_, _, headline, _),
+             let .reflect(headline, _):
+            Text(headline)
+                .font(Slowly.Font.title1Light)
+                .foregroundStyle(Slowly.Color.textPrimary)
+                .multilineTextAlignment(.leading)
+                .lineLimit(3)
+                .transition(.opacity)
+        case .empty:
+            EmptyView()
         }
     }
 
-    // Subtitle — Today and Reflect only
+    // Subtitle — Today and Reflect only; empty hides the title block per Figma 111:8965
     @ViewBuilder
     private var subtitleRow: some View {
         switch state {
@@ -145,12 +147,7 @@ public struct AdaptiveHero: View {
                 .lineLimit(2)
                 .transition(.opacity)
         case .empty:
-            Text("Every small step counts.\nYou've got this.")
-                .font(Slowly.Font.headlineRegular)
-                .foregroundStyle(Slowly.Color.textSecondary)
-                .multilineTextAlignment(.leading)
-                .lineSpacing(6)
-                .transition(.opacity)
+            EmptyView()
         }
     }
 
@@ -163,7 +160,8 @@ public struct AdaptiveHero: View {
         case let .reflect(headline, subtitle):
             return "Reflect. \(headline). \(subtitle)"
         case .empty:
-            return "No wins yet. Every small step counts."
+            // Hero is `.accessibilityHidden(true)` in `.empty`; label is unread but kept defensively.
+            return ""
         }
     }
 }

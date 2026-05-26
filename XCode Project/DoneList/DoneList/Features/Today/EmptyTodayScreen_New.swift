@@ -16,7 +16,7 @@ struct EmptyTodayScreen_New: View {
         ZStack(alignment: .topLeading) {
             Slowly.Color.surfaceApp.ignoresSafeArea()
 
-            // Hero — botanical illustration + "No wins yet" copy
+            // Hero — botanical backdrop only (no text per Figma 111:8965)
             AdaptiveHero(state: .empty)
                 .frame(maxWidth: .infinity, alignment: .leading)
 

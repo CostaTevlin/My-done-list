@@ -97,14 +97,17 @@ final class D3CompositeTests: XCTestCase {
         }
     }
 
-    func test_adaptiveHeroEmptyLabel() {
+    func test_adaptiveHeroEmptyIsDecorative() {
+        // Per Figma 111:8965 (variant Type=Expanded, title hidden), the empty hero
+        // renders backdrop only — no eyebrow, headline, or subtitle. The hero is
+        // hidden from VoiceOver; screen-level empty guidance lives in EmptyStateArrow.
         let state = HeroState.empty
-        if case .empty = state {
-            let label = "No wins yet. Every small step counts."
-            XCTAssertTrue(label.contains("No wins yet"))
-        } else {
+        guard case .empty = state else {
             XCTFail("State should be .empty")
+            return
         }
+        // HeroState.empty carries no associated values — nothing to render or read.
+        XCTAssertEqual(state, HeroState.empty)
     }
 
     // MARK: - NavBarPlain

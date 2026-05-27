@@ -1,17 +1,18 @@
-// TodayScreen_New.swift
-// Today screen — R4 rebuild on D3 composites.
-// Coordinator: branches on item count between populated list and EmptyTodayScreen_New.
+// TodayScreen.swift
+// Today screen — R4 D3-composite (canonical, flag removed).
+// Coordinator: branches on item count between populated list and EmptyTodayScreen.
 // Populated path: AdaptiveHero + time-of-day sections (TimeOfDaySectionHeader + EntryRow).
+// Navbar: persistent native nav bar with trailing AccountButton → SettingsView sheet.
 //
 // Phase: R4
 // See: design-system/Screen specs.md (Today)  ·  ADR-0007 (swipeActions)  ·  ADR-0010
-//      ADR-0011 (ADHD copy via CopyBank)
+//      ADR-0011 (ADHD copy via CopyBank)  ·  ADR-0005 (Liquid Glass gating)
 
 import SwiftUI
 import SwiftData
 import DesignSystem
 
-struct TodayScreen_New: View {
+struct TodayScreen: View {
 
     // MARK: - Environment
 
@@ -25,19 +26,37 @@ struct TodayScreen_New: View {
     var onLog: (InputMode) -> Void = { _ in }
     var onEditItem: (DoneItem) -> Void = { _ in }
 
+    // MARK: - Local state
+
+    @State private var showAccount = false
+
     // MARK: - Body
 
     var body: some View {
         NavigationStack {
             Group {
                 if todayItems.isEmpty {
-                    EmptyTodayScreen_New(onLog: onLog)
+                    EmptyTodayScreen(onLog: onLog)
                 } else {
                     populatedList
                 }
             }
             .background(Slowly.Color.surfaceApp.ignoresSafeArea())
+            // Force the nav bar to render so the trailing AccountButton is laid out.
+            // Without `.toolbar(.visible, ...)`, SwiftUI on iOS 26 inside a `Tab`
+            // collapses the bar entirely when the title is empty and the background
+            // is hidden — taking the toolbar item with it (verified empirically).
+            .toolbar(.visible, for: .navigationBar)
             .toolbarBackground(.hidden, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    AccountButton { showAccount = true }
+                }
+            }
+        }
+        .sheet(isPresented: $showAccount) {
+            NavigationStack { SettingsView() }
         }
     }
 
@@ -175,7 +194,7 @@ struct TodayScreen_New: View {
 // MARK: - Previews
 
 #Preview("Empty") {
-    TodayScreen_New()
+    TodayScreen()
         .modelContainer(for: DoneItem.self, inMemory: true)
         .environment(DoneStore())
 }
@@ -192,7 +211,7 @@ struct TodayScreen_New: View {
         ctx.insert(DoneItem(text: "Took a 10-min walk", time: "19:45", date: today, source: .voice))
         return c
     }()
-    return TodayScreen_New()
+    return TodayScreen()
         .modelContainer(container)
         .environment(DoneStore(context: container.mainContext))
 }

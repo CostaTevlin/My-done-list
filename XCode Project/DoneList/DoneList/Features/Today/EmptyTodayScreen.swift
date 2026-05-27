@@ -1,4 +1,4 @@
-// EmptyTodayScreen_New.swift
+// EmptyTodayScreen.swift
 // Empty Today state — R4 rebuild on D3 composites.
 // AdaptiveHero(.empty) fills the top; EmptyStateArrow floats toward the FAB corner.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import DesignSystem
 
-struct EmptyTodayScreen_New: View {
+struct EmptyTodayScreen: View {
 
     var onLog: (InputMode) -> Void = { _ in }
 
@@ -38,5 +38,5 @@ struct EmptyTodayScreen_New: View {
 // MARK: - Previews
 
 #Preview("Empty — standalone") {
-    EmptyTodayScreen_New()
+    EmptyTodayScreen()
 }

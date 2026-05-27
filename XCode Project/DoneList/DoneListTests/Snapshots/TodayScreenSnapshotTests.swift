@@ -1,5 +1,5 @@
-// TodayScreenNewSnapshotTests.swift
-// Visual capture for R4 screens: TodayScreen_New (empty + populated) and
+// TodayScreenSnapshotTests.swift
+// Visual capture for R4 screens: TodayScreen (empty + populated) and
 // AddEntrySheet_New (text-mode). Mirrors RootViewSnapshotTests pattern.
 //
 // Phase: R4 (ADR-0010)
@@ -11,7 +11,7 @@ import SwiftData
 import DesignSystem
 
 @MainActor
-final class TodayScreenNewSnapshotTests: XCTestCase {
+final class TodayScreenSnapshotTests: XCTestCase {
 
     private let canvasWidth: CGFloat = 393
     private let canvasHeight: CGFloat = 852
@@ -29,22 +29,22 @@ final class TodayScreenNewSnapshotTests: XCTestCase {
 
     // MARK: - Empty state
 
-    func testSnapshot_todayScreenNew_empty_iOS18() throws {
+    func testSnapshot_todayScreen_empty_iOS18() throws {
         let cfg = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: DoneItem.self, configurations: cfg)
         let store = DoneStore(context: container.mainContext)
 
-        let view = TodayScreen_New(onLog: { _ in }, onEditItem: { _ in })
+        let view = TodayScreen(onLog: { _ in }, onEditItem: { _ in })
             .environment(store)
             .modelContainer(container)
             .frame(width: canvasWidth, height: canvasHeight)
 
-        try render(view, name: "TodayScreen_New_empty_iOS18")
+        try render(view, name: "TodayScreen_empty_iOS18")
     }
 
     // MARK: - Populated state (morning + afternoon + voice item)
 
-    func testSnapshot_todayScreenNew_populated_iOS18() throws {
+    func testSnapshot_todayScreen_populated_iOS18() throws {
         let cfg = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: DoneItem.self, configurations: cfg)
         let ctx = container.mainContext
@@ -61,12 +61,12 @@ final class TodayScreenNewSnapshotTests: XCTestCase {
 
         let store = DoneStore(context: ctx)
 
-        let view = TodayScreen_New(onLog: { _ in }, onEditItem: { _ in })
+        let view = TodayScreen(onLog: { _ in }, onEditItem: { _ in })
             .environment(store)
             .modelContainer(container)
             .frame(width: canvasWidth, height: canvasHeight)
 
-        try render(view, name: "TodayScreen_New_populated_iOS18")
+        try render(view, name: "TodayScreen_populated_iOS18")
     }
 
     // MARK: - AddEntrySheet_New text-mode

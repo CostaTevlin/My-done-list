@@ -1,6 +1,6 @@
 // LogFABOverlay.swift
 // iOS 26: dark FAB circle that morphs into LogFABCard via spring animation.
-// Triggered by FAB tap or TodayView's ghost row / empty-state CTA.
+// Triggered by FAB tap or TodayScreen's ghost row / empty-state CTA.
 // Dismiss: tap scrim · swipe-down · close button inside card.
 //
 // Animation: FAB and card are both in the hierarchy simultaneously, driven

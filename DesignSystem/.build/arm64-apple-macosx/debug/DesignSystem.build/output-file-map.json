@@ -2,6 +2,13 @@
   "": {
     "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/primary.swiftdeps"
   },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AccountButton.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AccountButton.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AccountButton.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AccountButton~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AccountButton.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AccountButton.dia"
+  },
   "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift": {
     "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.d",
     "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o",

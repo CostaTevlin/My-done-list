@@ -41,6 +41,10 @@
       "inputs" : [
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AccountButton.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift"
         },
         {
@@ -204,6 +208,7 @@
       "moduleName" : "DesignSystem",
       "moduleOutputPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/Modules/DesignSystem.swiftmodule",
       "objects" : [
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AccountButton.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AdaptiveHero.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/BigNumeral.swift.o",
@@ -293,6 +298,10 @@
       ],
       "outputFileMapPath" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/output-file-map.json",
       "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AccountButton.swift.o"
+        },
         {
           "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/ActivityRing.swift.o"
@@ -448,6 +457,7 @@
       ],
       "prepareForIndexing" : false,
       "sources" : [
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AccountButton.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AdaptiveHero.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
@@ -710,6 +720,7 @@
       "-package-name",
       "designsystem",
       "-c",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AccountButton.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AdaptiveHero.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/BigNumeral.swift",
@@ -964,6 +975,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/AccountButton.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/ActivityRing.swift"
         },
         {
@@ -1133,6 +1148,10 @@
         {
           "kind" : "virtual",
           "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/AccountButton.swift.o"
         },
         {
           "kind" : "file",

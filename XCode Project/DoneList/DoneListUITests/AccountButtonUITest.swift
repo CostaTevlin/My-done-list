@@ -31,7 +31,7 @@ final class AccountButtonUITest: XCTestCase {
     // MARK: - Account button visible on Today
 
     func testAccountButton_isVisibleOnTodayTab() throws {
-        // App launches on the Today tab by default.
+        // Ensure we're on the Today tab (app launches there by default)
         let accountButton = app.buttons["Account"]
         XCTAssertTrue(
             accountButton.waitForExistence(timeout: 5),
@@ -46,10 +46,12 @@ final class AccountButtonUITest: XCTestCase {
         XCTAssertTrue(accountButton.waitForExistence(timeout: 5))
         accountButton.tap()
 
-        // SettingsView has .navigationTitle("Account") — match the nav bar.
-        let settingsNavBar = app.navigationBars["Account"]
+        // SettingsView has .navigationTitle("Account") — look for the nav bar title text.
+        // Use the navigation bar element as a stable identifier; it always reads "Account"
+        // when SettingsView is the root of its NavigationStack.
+        let settingsTitle = app.navigationBars["Account"]
         XCTAssertTrue(
-            settingsNavBar.waitForExistence(timeout: 3),
+            settingsTitle.waitForExistence(timeout: 3),
             "Settings sheet must present with 'Account' navigation bar after tapping Account button"
         )
     }
@@ -61,13 +63,13 @@ final class AccountButtonUITest: XCTestCase {
         XCTAssertTrue(accountButton.waitForExistence(timeout: 5))
         accountButton.tap()
 
-        let settingsNavBar = app.navigationBars["Account"]
-        XCTAssertTrue(settingsNavBar.waitForExistence(timeout: 3))
+        let settingsTitle = app.navigationBars["Account"]
+        XCTAssertTrue(settingsTitle.waitForExistence(timeout: 3))
 
-        // Swipe down to dismiss the sheet.
+        // Swipe down to dismiss the sheet
         app.swipeDown()
 
-        // After dismiss, the Account button is visible again.
+        // After dismiss, the Account button should be visible again
         XCTAssertTrue(
             accountButton.waitForExistence(timeout: 3),
             "Account button must be visible again after dismissing Settings sheet"

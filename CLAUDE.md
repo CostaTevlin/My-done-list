@@ -33,6 +33,7 @@ Read the rule file when its trigger fires. Don't read it speculatively.
 - **IF making a non-trivial architectural choice** (new dep, new pattern, ADR deviation) → `.claude/rules/adrs.md`
 - **IF writing or running tests** → `.claude/rules/testing.md`
 - **IF writing UI tests that interact with the tab bar** → also check memory `feedback_uitest-tabs` (iOS 26 uses `app.tabBars.buttons["Label"]`; iOS 18 BrandTabBar uses `app.buttons["Label tab"]`)
+- **IF writing UI tests that query buttons by label** (e.g. `app.buttons["Done"]`) → also check memory `feedback_uitest-button-ios26` (the iOS 26 keyboard return key exposes `identifier: "Done"`, collides with app buttons; use a case-sensitive predicate. `.accessibilityIdentifier` does NOT propagate through Buttons with custom `ButtonStyle` on iOS 26.)
 - **IF preparing a commit, branch, or PR** → `.claude/rules/git-pr.md`
 - **IF you need build / test / run commands** → `.claude/rules/build-commands.md`
 - **IF you find yourself near `index.html`, `sw.js`, `manifest.json`, `icon-*.png`** at repo root → `.claude/rules/legacy-pwa.md`
@@ -48,15 +49,71 @@ Read the rule file when its trigger fires. Don't read it speculatively.
 
 Vault root: `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/`. Code is the source of truth for code. The vault is the source of truth for everything else.
 
-- `00 — Index.md` — Phase tracker is authoritative. Read this when current state above feels stale.
-- `product/PRD.md`, `product/Roadmap.md`
-- `engineering/Architecture.md`, `engineering/Build & ship runbook.md`, `engineering/Testing strategy.md`, `engineering/Setup — iPhone preview.md`
-- `design-system/Tokens.md` — **canonical** tokens. Single source of truth.
-- `design-system/Components.md`, `design-system/Screen specs.md`, `design-system/Copy bank.md`, `design-system/Liquid Glass mapping.md`
-- `decisions/` — ADRs 0001–0010. Read the relevant ADR before touching that area.
-- `appstore/Submission checklist.md`, `appstore/Review notes draft.md`
+> Paths below are absolute so you can `Read` them directly without a `find` pass. **Only read what your current task actually needs** — loading the whole vault is context bloat. The right pattern is: check this index → identify 1–2 relevant docs → read those.
 
-**Figma:** https://www.figma.com/design/sxbudH3RoGY1uMBcPDWvxq/My-startups?node-id=28-84
+### Top of the funnel — read when current state feels stale
+
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/00 — Index.md` — **authoritative phase tracker**. Read first if Current state above looks out of date.
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/engineering/redesign-migration-plan.md` — **R0–R8 migration plan**. The "what's done / what's next" table for the redesign track. Read alongside the index.
+
+### Product
+
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/product/PRD.md` — what we're building and why
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/product/Roadmap.md` — v1 → v1.1 → v1.2
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/product/User stories.md` — JTBD breakdown
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/product/Opportunity tree.md` — companion to the Canvas tree (RICE-table form)
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/product/Success metrics.md` — DAU, retention, log frequency
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/product/Research brief — ADHD domain validation.md` — domain research notes
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/product/Design discovery - improving ambience.md` — ambience research
+
+### Engineering
+
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/engineering/Architecture.md` — module split, data flow, lifecycle
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/engineering/Phase 1 — project setup.md` — Xcode project + fonts + SwiftPM walkthrough
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/engineering/Phase 5 — Hero contract for Sonnet.md` — phase-specific spec
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/engineering/Testing strategy.md` — unit, snapshot, accessibility
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/engineering/Build & ship runbook.md` — archive, TestFlight, submission
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/engineering/Setup — Xcode preview.md` — Previews + Simulator
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/engineering/Setup — iPhone preview.md` — Personal Team deployment
+
+### Design system (vault — canonical for tokens & component specs)
+
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/design-system/Tokens.md` — **canonical** tokens. Single source of truth.
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/design-system/Components.md` — PillButton, BigNumeral, ItemRow, ChartBar (specs, not code)
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/design-system/Screen specs.md` — Today / Reflect / Log / Settings / Onboarding
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/design-system/Copy bank.md` — greetings, motivational, reflection (verbatim source)
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/design-system/Iconography.md` — app icon variants, marketing icon
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/design-system/Liquid Glass mapping.md` — native containers per screen
+
+### Decisions (ADRs — read the relevant one before touching its area)
+
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/_template — ADR.md` — copy this when writing a new ADR
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0001 — Migrate from PWA to native SwiftUI.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0002 — iOS 18+ target with iOS 26 SDK fallback.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0003 — SwiftData over Core Data + AppStorage.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0004 — Outfit font embed under OFL 1.1.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0005 — Liquid Glass with #available fallback strategy.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0006 — Confetti via TimelineView+Canvas.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0007 — Native swipeActions over custom touch tracking.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0008 — Add notifications + widget + AppIntent for 4.2 risk mitigation.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0009 — iCloud sync via SwiftData + CloudKit.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0010 — Voice-first input + FAB navigation.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/0011 — ADHD-first repositioning.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/decisions/redesign-techdebt-001 — Deferred native-SwiftUI rebuild of botanical illustration.md`
+
+### App Store
+
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/appstore/Submission checklist.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/appstore/Marketing copy.md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/appstore/Privacy policy (source).md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/appstore/Support page (source).md`
+- `/Users/konstantinnaumenko/Obsidian/my-startups/My Done List/appstore/Review notes draft.md`
+
+### Figma
+
+- File: https://www.figma.com/design/sxbudH3RoGY1uMBcPDWvxq/My-startups?node-id=28-84
+- Redesign section root: node `141-1868`
+- Hero (Adaptive) component set: node `111:8965`
 
 ---
 

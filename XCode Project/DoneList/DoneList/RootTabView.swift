@@ -12,7 +12,7 @@
 //   selection.
 //
 // Both branches: sheet and ConfettiOverlay live here (R4: moved up from DoneListApp).
-// R4 D3-composite screens are canonical: TodayScreen is the only Today path,
+// R4 D3-composite screens are now canonical: TodayScreen is the only Today path,
 // AddEntrySheet_New is the only log sheet. The r4TodayEnabled flag has been removed.
 //
 // Phase: 3 (shell), 4 (Log + confetti), 5 (pill moved), 6 (two-branch),

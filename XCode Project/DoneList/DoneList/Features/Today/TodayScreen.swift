@@ -2,7 +2,7 @@
 // Today screen — R4 D3-composite (canonical, flag removed).
 // Coordinator: branches on item count between populated list and EmptyTodayScreen.
 // Populated path: AdaptiveHero + time-of-day sections (TimeOfDaySectionHeader + EntryRow).
-// Navbar: persistent native nav bar with trailing AccountButton → SettingsView sheet.
+// Navbar: trailing AccountButton opens SettingsView sheet.
 //
 // Phase: R4
 // See: design-system/Screen specs.md (Today)  ·  ADR-0007 (swipeActions)  ·  ADR-0010
@@ -48,6 +48,7 @@ struct TodayScreen: View {
             // is hidden — taking the toolbar item with it (verified empirically).
             .toolbar(.visible, for: .navigationBar)
             .toolbarBackground(.hidden, for: .navigationBar)
+            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -124,7 +125,6 @@ struct TodayScreen: View {
     private var heroState: HeroState {
         .today(
             date: Self.heroDateFormatter.string(from: .now),
-            count: todayItems.count,
             headline: CopyBank.message(count: todayItems.count, hour: hour),
             subtitle: CopyBank.todayHeroInsight(count: todayItems.count, hour: hour)
         )
@@ -135,11 +135,16 @@ struct TodayScreen: View {
     @ViewBuilder
     private var populatedList: some View {
         List {
-            // Hero — full-bleed; manages its own horizontal + top padding internally
-            AdaptiveHero(state: heroState)
-                .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: Slowly.Spacing.lg, trailing: 0))
-                .listRowBackground(Slowly.Color.surfaceApp)
+            // BigNumeral + Hero — composed per Figma 111:8965, BigNumeral lives outside the hero component.
+            // AdaptiveHero still manages its own horizontal + top padding internally for the text block.
+            VStack(alignment: .leading, spacing: 0) {
+                BigNumeral(value: todayItems.count)
+                    .padding(.horizontal, Slowly.Spacing.xl)
+                AdaptiveHero(state: heroState)
+            }
+            .listRowSeparator(.hidden)
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: Slowly.Spacing.lg, trailing: 0))
+            .listRowBackground(Slowly.Color.surfaceApp)
 
             // Time-of-day sections
             ForEach(sections) { section in

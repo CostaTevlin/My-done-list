@@ -1,9 +1,13 @@
 // AdaptiveHero.swift
 // Multi-state hero component used on Today, Reflect, and Empty screens.
 // Adapts height automatically (SwiftUI auto-layout) as state changes.
-// Botanical illustration: static PNG asset per ADR redesign-techdebt-001.
+// Backdrop: static PNG asset per ADR redesign-techdebt-001 (Figma intent: concave-arc photo + dark blur — see Components.md).
 // Phase: D3 · R3 Composites
-// Source of truth: Figma Slowly-MVP › node 17:2491 (hero component)
+// Source of truth: Figma Slowly-MVP › node 111:8965 (hero component set — Type=Compact | Expanded).
+// Per Figma, BigNumeral is composed by the consuming screen above this hero — it is not rendered inside.
+// Known deltas vs Figma 111:8965 — see Components.md › Hero (Adaptive) › "Implementation deltas":
+//   - .empty state renders "No wins yet" + subtitle; Figma empty = title hidden, no text.
+//   - Backdrop asset (navBarHero PNG) differs from Figma's concave-arc photo composition.
 
 import SwiftUI
 
@@ -11,13 +15,12 @@ import SwiftUI
 
 /// The three display states of the adaptive hero.
 public enum HeroState: Equatable {
-    /// Today screen with items. Shows date, big count, headline, and subtitle.
-    case today(date: String, count: Int, headline: String, subtitle: String)
-    /// Reflect screen. Shows "Reflect" label, headline, and subtitle. No numeral.
+    /// Today screen with items. Shows date, headline, and subtitle.
+    /// The BigNumeral is composed by the caller above this hero (per Figma 111:8965).
+    case today(date: String, headline: String, subtitle: String)
+    /// Reflect screen. Shows "Reflect" label, headline, and subtitle.
     case reflect(headline: String, subtitle: String)
-    /// Empty state. Backdrop only — no eyebrow, headline, or subtitle.
-    /// Matches Figma `111:8965` variant `Type=Expanded` with title hidden.
-    /// Decorative: the screen-level empty hint (e.g. `EmptyStateArrow`) carries the guidance.
+    /// Empty state. Shows "No wins yet" and empty-state copy. No subtitle.
     case empty
 }
 
@@ -47,7 +50,6 @@ public struct AdaptiveHero: View {
         .animation(reduceMotion ? nil : .spring(duration: 0.4, bounce: 0.1), value: state)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(a11yLabel)
-        .accessibilityHidden(state == .empty)
     }
 
     // MARK: - Botanical illustration
@@ -77,7 +79,6 @@ public struct AdaptiveHero: View {
     private var contentStack: some View {
         VStack(alignment: .leading, spacing: Slowly.Spacing.sm) {
             topLabel
-            numeralRow
             headline
             subtitleRow
         }
@@ -90,7 +91,7 @@ public struct AdaptiveHero: View {
     @ViewBuilder
     private var topLabel: some View {
         switch state {
-        case let .today(date, _, _, _):
+        case let .today(date, _, _):
             Text(date)
                 .font(Slowly.Font.bodyMedium)
                 .foregroundStyle(Slowly.Color.textSecondary)
@@ -103,41 +104,29 @@ public struct AdaptiveHero: View {
         }
     }
 
-    // Big numeral — Today only
-    @ViewBuilder
-    private var numeralRow: some View {
-        if case let .today(_, count, _, _) = state {
-            Text("\(count)")
-                .font(Slowly.Font.bigNumeral)
-                .monospacedDigit()
-                .foregroundStyle(Slowly.Color.textPrimary)
-                .contentTransition(.numericText())
-                .animation(reduceMotion ? nil : .spring(duration: 0.3), value: count)
-        }
-    }
-
-    // State-specific headline — Today and Reflect only; empty hides the title block per Figma 111:8965
-    @ViewBuilder
+    // State-specific headline
     private var headline: some View {
+        Text(headlineText)
+            .font(Slowly.Font.title1Light)
+            .foregroundStyle(Slowly.Color.textPrimary)
+            .multilineTextAlignment(.leading)
+            .lineLimit(3)
+            .transition(.opacity)
+    }
+
+    private var headlineText: String {
         switch state {
-        case let .today(_, _, headline, _),
-             let .reflect(headline, _):
-            Text(headline)
-                .font(Slowly.Font.title1Light)
-                .foregroundStyle(Slowly.Color.textPrimary)
-                .multilineTextAlignment(.leading)
-                .lineLimit(3)
-                .transition(.opacity)
-        case .empty:
-            EmptyView()
+        case let .today(_, headline, _): return headline
+        case let .reflect(headline, _):  return headline
+        case .empty:                     return "No wins yet"
         }
     }
 
-    // Subtitle — Today and Reflect only; empty hides the title block per Figma 111:8965
+    // Subtitle — Today and Reflect only
     @ViewBuilder
     private var subtitleRow: some View {
         switch state {
-        case let .today(_, _, _, subtitle),
+        case let .today(_, _, subtitle),
              let .reflect(_, subtitle):
             Text(subtitle)
                 .font(Slowly.Font.headlineRegular)
@@ -147,21 +136,27 @@ public struct AdaptiveHero: View {
                 .lineLimit(2)
                 .transition(.opacity)
         case .empty:
-            EmptyView()
+            Text("Every small step counts.\nYou've got this.")
+                .font(Slowly.Font.headlineRegular)
+                .foregroundStyle(Slowly.Color.textSecondary)
+                .multilineTextAlignment(.leading)
+                .lineSpacing(6)
+                .transition(.opacity)
         }
     }
 
     // MARK: - Accessibility
 
+    // BigNumeral is composed by the caller and carries its own a11y label, so we
+    // don't repeat the count here.
     private var a11yLabel: String {
         switch state {
-        case let .today(_, count, headline, subtitle):
-            return "\(count) \(count == 1 ? "thing" : "things") today. \(headline). \(subtitle)"
+        case let .today(_, headline, subtitle):
+            return "\(headline). \(subtitle)"
         case let .reflect(headline, subtitle):
             return "Reflect. \(headline). \(subtitle)"
         case .empty:
-            // Hero is `.accessibilityHidden(true)` in `.empty`; label is unread but kept defensively.
-            return ""
+            return "No wins yet. Every small step counts."
         }
     }
 }
@@ -170,23 +165,29 @@ public struct AdaptiveHero: View {
 
 #Preview("Today — populated") {
     ScrollView {
-        AdaptiveHero(state: .today(
-            date: "Monday, 18 May",
-            count: 7,
-            headline: "You're on a roll now",
-            subtitle: "Some motivational subtitle goes here maybe in two lines"
-        ))
+        VStack(alignment: .leading, spacing: 0) {
+            BigNumeral(value: 7)
+                .padding(.horizontal, Slowly.Spacing.xl)
+            AdaptiveHero(state: .today(
+                date: "Monday, 18 May",
+                headline: "You're on a roll now",
+                subtitle: "Some motivational subtitle goes here maybe in two lines"
+            ))
+        }
     }
     .background(Slowly.Color.surfaceApp)
 }
 
 #Preview("Today — one item") {
-    AdaptiveHero(state: .today(
-        date: "Monday, 18 May",
-        count: 1,
-        headline: "Good start",
-        subtitle: "One thing done is one thing done."
-    ))
+    VStack(alignment: .leading, spacing: 0) {
+        BigNumeral(value: 1)
+            .padding(.horizontal, Slowly.Spacing.xl)
+        AdaptiveHero(state: .today(
+            date: "Monday, 18 May",
+            headline: "Good start",
+            subtitle: "One thing done is one thing done."
+        ))
+    }
     .background(Slowly.Color.surfaceApp)
 }
 

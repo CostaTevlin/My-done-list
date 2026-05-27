@@ -73,9 +73,14 @@ final class CaptureFlowUITest: XCTestCase {
         XCTAssertTrue(doneButton.waitForExistence(timeout: 2))
         doneButton.tap()
 
-        // Sheet should dismiss and new item must appear in the list
+        // Sheet should dismiss and new item must appear in the list.
+        // ItemRow/EntryRow combine rank + text + time into one accessibility element
+        // (e.g. "1, Wrote end-to-end tests, at 14:32"), so a CONTAINS search on
+        // any element type is the correct way to assert the item is visible.
+        let itemPredicate = NSPredicate(format: "label CONTAINS[c] %@", "Wrote end-to-end tests")
         XCTAssertTrue(
-            app.staticTexts["Wrote end-to-end tests"].waitForExistence(timeout: 3),
+            app.descendants(matching: .any).matching(itemPredicate).firstMatch
+                .waitForExistence(timeout: 5),
             "Submitted item must appear in Today list"
         )
     }

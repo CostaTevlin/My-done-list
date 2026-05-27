@@ -16,10 +16,15 @@ final class DoneStore {
 
     /// App-wide SwiftData container. Phase 2 uses local-only persistence; Phase 9
     /// flips this to `cloudKitDatabase: .private` (see ADR-0009).
+    ///
+    /// UI tests pass `-UITest_resetStore YES` as a launch argument. When that flag
+    /// is present we use an in-memory store so each test run starts clean and items
+    /// never bleed between test cases.
     @MainActor
     static let container: ModelContainer = {
         let schema = Schema([DoneItem.self])
-        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let inMemory = ProcessInfo.processInfo.arguments.contains("-UITest_resetStore")
+        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: inMemory)
         do {
             return try ModelContainer(for: schema, configurations: [config])
         } catch {

@@ -42,6 +42,11 @@ struct TodayScreen: View {
                 }
             }
             .background(Slowly.Color.surfaceApp.ignoresSafeArea())
+            // Force the nav bar to render so the trailing AccountButton is laid out.
+            // Without `.toolbar(.visible, ...)`, SwiftUI on iOS 26 inside a `Tab`
+            // collapses the bar entirely when the title is empty and the background
+            // is hidden — taking the toolbar item with it (verified empirically).
+            .toolbar(.visible, for: .navigationBar)
             .toolbarBackground(.hidden, for: .navigationBar)
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)

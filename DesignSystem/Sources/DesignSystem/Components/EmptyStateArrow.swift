@@ -1,5 +1,5 @@
 // EmptyStateArrow.swift
-// Empty-state hint below "No wins yet": label + curved arrow pointing to the log FAB.
+// Empty-state hint near the FAB: label + curved arrow pointing to the log FAB.
 // Native SwiftUI — no PNG asset needed. Arrow is a hand-tuned bezier curve.
 // Figma: 128×107 container, 50% opacity, #6b6b6b stroke, "Add your first "Done"" text.
 // Phase: D3 · R3 Composites
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Subtle arrow + label nudging the user toward the log FAB on an empty Today screen.
-/// Rendered at 50% opacity to keep it secondary to the "No wins yet" headline.
+/// Rendered at 50% opacity to keep it visually secondary on the empty Today canvas.
 public struct EmptyStateArrow: View {
 
     public init() {}

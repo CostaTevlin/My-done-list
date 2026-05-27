@@ -1,30 +1,33 @@
 // AccountButton.swift
-// Circular 44×44 trailing navbar button — person silhouette icon.
-// iOS 26: Liquid Glass circle via .glassEffect(.regular, in: .circle) (ADR-0005).
-// iOS 18-25: white circle with soft drop shadow.
+// Circular 44×44 trailing navbar button — Account/avatar entry point.
+// Used by TodayScreen as the trailing ToolbarItem; opens the Settings sheet.
 //
-// Figma: node 111:8622 — Slowly MVP, navbar trailing button.
-//   • 44×44 pt frame, cornerRadius = circle
+// Figma: node 111:8622 (and 112:9873) — Slowly MVP, navbar trailing button.
+//   • 44×44 pt frame, fully circular (cornerRadius = circle)
 //   • DROP_SHADOW { y: 8, blur: 40, color: rgba(0,0,0,0.12) }
-//   • Icon: SF Symbol glyph 􀉭 (U+10026D), 18pt, color textPrimary
-//     Rendered via Text(verbatim:) because the user specified the literal
-//     glyph rather than an SF Symbol name; Text picks it up from the system
-//     font (San Francisco) which ships the SF Symbols private-use range.
+//   • Icon: SF Symbol `person.crop.circle` (glyph 􀉭 / U+10026D), 22pt,
+//     color textPrimary. Rendered via `Image(systemName:)` so iOS resolves
+//     the PUA glyph through the SF Symbols renderer rather than the regular
+//     text font (which doesn't carry the symbol PUA range).
 //   • iOS 26: GLASS { frost: 7, depth: 16, lightAngle: 315°, lightIntensity: 0.8 }
+//
+// Liquid Glass gating (ADR-0005):
+//   • iOS 26 (`#available(iOS 26.0, *)`): provide only the icon — the iOS 26
+//     toolbar wraps the button content in its own Liquid Glass treatment.
+//     `.buttonBorderShape(.circle)` hints the system to render a circular
+//     glass capsule rather than the default rounded-rectangle (which was
+//     observed empirically with our previous custom-shape approach).
+//   • iOS 18–25: custom white-filled circle with the Figma drop shadow.
+//
+// Accessibility: label = "Account", identifier = "Account".
 //
 // Phase: R4 — D3 composite navbar
 // See: design-system/Components.md · design-system/Liquid Glass mapping.md · ADR-0005
 
 import SwiftUI
 
-/// Circular account/avatar button for the Today navbar trailing position.
+/// Circular Account/avatar button for the Today navbar trailing position.
 /// Tapping triggers the provided `action` closure (typically opens Settings sheet).
-///
-/// iOS 26: Liquid Glass circle (`.glassEffect(.regular, in: .circle)`).
-/// iOS 18–25: White circle with a soft drop-shadow (Figma `DROP_SHADOW { blur: 40, y: 8 }`).
-///
-/// Accessibility: label = "Account", identifier = "Account".
-/// See: design-system/Components.md — `AccountButton`
 public struct AccountButton: View {
 
     public let action: () -> Void
@@ -34,66 +37,80 @@ public struct AccountButton: View {
     }
 
     public var body: some View {
-        Button(action: action) {
-            icon
-                .frame(width: 44, height: 44)
-                #if os(iOS)
-                .background(buttonBackground)
-                #else
-                .background(ios18Background)
-                #endif
-                .clipShape(Circle())
+        #if os(iOS)
+        if #available(iOS 26.0, *) {
+            iOS26Button
+        } else {
+            iOS18Button
         }
+        #else
+        iOS18Button
+        #endif
+    }
+
+    // MARK: - iOS 26 path
+
+    #if os(iOS)
+    @available(iOS 26.0, *)
+    private var iOS26Button: some View {
+        // The iOS 26 toolbar wraps Button content in its own Liquid Glass
+        // capsule. We hand it just the SF Symbol and request a circular
+        // border shape so the system renders a circle, not the default
+        // rounded-rectangle. The system also supplies the elevation/shadow.
+        Button(action: action) {
+            Image(systemName: "person.crop.circle")
+                .font(.system(size: 22, weight: .regular))
+                .foregroundStyle(Slowly.Color.textPrimary)
+        }
+        .buttonBorderShape(.circle)
         .accessibilityLabel("Account")
         .accessibilityIdentifier("Account")
     }
-
-    // MARK: - Icon
-
-    private var icon: some View {
-        // SF Symbol U+10026D (literal glyph 􀉭) — rendered as text since the
-        // system font carries the SF Symbols private-use range. Switch to
-        // Image(systemName: "<name>") if/when we want symbol-rendering modes.
-        Text(verbatim: "\u{10026D}")
-            .font(.system(size: 18, weight: .regular))
-            .foregroundStyle(Slowly.Color.textPrimary)
-    }
-
-    // MARK: - Backgrounds
-
-    #if os(iOS)
-    @ViewBuilder
-    private var buttonBackground: some View {
-        if #available(iOS 26.0, *) {
-            Color.clear
-                .glassEffect(.regular, in: .circle)
-        } else {
-            ios18Background
-        }
-    }
     #endif
 
-    private var ios18Background: some View {
-        Circle()
-            .fill(Color.white)
-            .shadow(
-                color: Color.black.opacity(0.12),
-                radius: 20,  // Figma blur:40 → SwiftUI radius ~20
-                x: 0,
-                y: 8
-            )
+    // MARK: - iOS 18 fallback
+
+    private var iOS18Button: some View {
+        Button(action: action) {
+            Image(systemName: "person.crop.circle")
+                .font(.system(size: 22, weight: .regular))
+                .foregroundStyle(Slowly.Color.textPrimary)
+                .frame(width: 44, height: 44)
+                .background(Circle().fill(Color.white))
+                .clipShape(Circle())
+                .shadow(
+                    color: Color.black.opacity(0.12),
+                    radius: 20,           // Figma blur:40 → SwiftUI radius ~20
+                    x: 0,
+                    y: 8
+                )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Account")
+        .accessibilityIdentifier("Account")
     }
 }
 
 // MARK: - Previews
 
-#Preview("iOS 18 style — Light") {
+#Preview("On light surface") {
     AccountButton { }
         .padding()
         .background(Slowly.Color.surfaceApp)
 }
 
-#Preview("iOS 18 style — Dark") {
+#Preview("Over busy backdrop") {
+    ZStack {
+        LinearGradient(
+            colors: [.green.opacity(0.4), .blue.opacity(0.3)],
+            startPoint: .topLeading, endPoint: .bottomTrailing
+        )
+        AccountButton { }
+    }
+    .frame(width: 200, height: 200)
+}
+
+#Preview("Dark") {
     AccountButton { }
         .padding()
         .background(Color.black)

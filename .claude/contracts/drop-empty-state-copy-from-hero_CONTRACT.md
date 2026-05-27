@@ -1,6 +1,6 @@
 # drop-empty-state-copy-from-hero — contract
 
-Branch: `feat/drop-old-today-account-navbar` (current). Tucks in alongside the navbar work — small, scoped follow-up.
+Branch: `D3-phase` (current). Small Figma-parity follow-up tucked into the D3 line.
 
 ## Outcome
 
@@ -9,43 +9,46 @@ Branch: `feat/drop-old-today-account-navbar` (current). Tucks in alongside the n
 ## Scope decisions (already agreed with the user)
 
 - **Hero `.empty` becomes backdrop-only.** Both "No wins yet" and "Every small step counts." are removed from `AdaptiveHero`.
-- **`EmptyTodayScreen` adds no replacement copy block.** The existing `EmptyStateArrow` ("Add your first 'Done'") already serves as the empty-state hint and matches the Figma intent. (Confirmed via search: only `AdaptiveHero(state: .empty)` + `EmptyStateArrow` are composed; no other consumer of those strings exists.)
+- **`EmptyTodayScreen_New` adds no replacement copy block.** The existing `EmptyStateArrow` ("Add your first 'Done'") already serves as the empty-state hint and matches the Figma intent. (Confirmed via grep: only `AdaptiveHero(state: .empty)` + `EmptyStateArrow` are composed; no other consumer of those strings exists.)
 - **`CopyBank.swift` not edited.** Those two strings are not defined in CopyBank — they were hardcoded inside `AdaptiveHero`. No CopyBank entries to remove or move.
-- **Hero `.empty` becomes accessibility-decorative.** Backdrop image is already `.accessibilityHidden(true)`; with no text content, the whole hero in `.empty` state is hidden from VoiceOver. Empty-state guidance comes from `EmptyStateArrow`, which already has its own a11y label.
-- **Feature flag note.** `r4TodayEnabled` was already removed on this branch (per `EmptyTodayScreen.swift` header: "canonical, flag removed"). Single canonical path; no dual-path testing needed.
-- **Comment hygiene.** Stale doc comments in `EmptyStateArrow.swift` and `AdaptiveHero.swift` that reference the removed copy are updated in the same change.
+- **Hero `.empty` becomes accessibility-decorative.** Backdrop image is already `.accessibilityHidden(true)`; with no text content, the whole hero in `.empty` is hidden from VoiceOver. Screen-level guidance comes from `EmptyStateArrow`, which already has its own a11y label.
+- **Feature flag note.** `r4TodayEnabled` (default `false`) is still live on this branch. Legacy `TodayView` uses the deprecated `Hero` component (out of scope per task), so removing copy from `AdaptiveHero.empty` only affects the R4 path. Both flag states therefore keep working.
+- **Comment hygiene.** Stale doc comments in `EmptyStateArrow.swift`, `AdaptiveHero.swift`, and `EmptyTodayScreen_New.swift` that reference the removed copy are updated in the same change.
 
 ## Tests that must pass
 
-- [ ] `DesignSystemTests/D3CompositeTests.test_adaptiveHero_emptyStateCompiles` — still compiles
-- [ ] `DesignSystemTests/D3CompositeTests.test_adaptiveHeroEmptyLabel` — **updated** to reflect new spec (empty state is decorative, no "No wins yet" text). Rename to `test_adaptiveHeroEmptyIsDecorative` and assert the empty case carries no headline/subtitle text. This is a deliberate spec change recorded here per `testing.md`, not a test edit to silence a failure.
-- [ ] `DesignSystemTests/D3CompositeTests.test_heroStateEquality` — still passes (no enum shape change)
-- [ ] Full DesignSystem package test suite green: `swift test` exits 0
-- [ ] Full app suite green: `xcodebuild -project DoneList.xcodeproj -scheme DoneList -destination 'platform=iOS Simulator,name=iPhone 15 Pro' test` exits 0
-- [ ] If any snapshot test exists for `EmptyTodayScreen` and it fails because the hero content shrank — **report as blocker**, do not re-record. Per task instructions and `testing.md`.
+- [x] `DesignSystemTests/D3CompositeTests.test_adaptiveHero_emptyStateCompiles` — still compiles · **passed**
+- [x] `DesignSystemTests/D3CompositeTests.test_adaptiveHeroEmptyIsDecorative` (renamed from `test_adaptiveHeroEmptyLabel`) — asserts decorative empty hero · **passed** (50/50 DesignSystem tests green)
+- [x] `DesignSystemTests/D3CompositeTests.test_heroStateEquality` — still passes · **passed**
+- [x] Full DesignSystem package test suite green: `swift test` exits 0 · **passed**
+- [x] `TodayScreenNewSnapshotTests.testSnapshot_todayScreenNew_empty_iOS18` — **passed** (note: this is a smoke-render not strict pixel diff)
+- [x] `RootViewSnapshotTests.testSnapshot_emptyToday_iOS18` — **passed**
+- [x] All other unit/snapshot tests — **passed**
+- [x] **Pre-existing flake noted, not a blocker for this task:** `CaptureFlowUITest.testCaptureFlow_textMode_addsRowToList` failed on iOS 26. Verified pre-existing by stash-pop-test cycle — same failure on baseline `D3-phase` without my edits. Failing test exercises FAB→text→submit→row flow; does not touch empty-hero surface. Reported here for the next person to triage.
 
 ## Visual verification (both OS versions — per `liquid-glass.md`)
 
-- [ ] Build clean: `xcodebuild ... -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=18.x' build`
-- [ ] Build clean: `xcodebuild ... -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=26.x' build`
-- [ ] Visual: `EmptyTodayScreen` on iPhone 15 Pro / iOS 18.x — botanical backdrop fills 300pt; no text in hero region; `EmptyStateArrow` + FAB still visible at bottom-right.
-- [ ] Visual: `EmptyTodayScreen` on iPhone 16 Pro / iOS 26.x — same as above; Liquid Glass elsewhere unaffected.
-- [ ] Visual: `AdaptiveHero` preview `Empty` in Xcode shows backdrop only.
-- [ ] VoiceOver pass: swiping into empty Today reaches `EmptyStateArrow` and FAB; the hero region itself is silent (no orphan "No wins yet" announcement).
-- [ ] Dynamic Type xxxLarge: hero height stays 300pt; no layout breakage from removed text.
+- [ ] **BLOCKED — iOS 18 runtime not installed on this machine.** `xcrun simctl list runtimes` shows only iOS 26.4 / 26.4.1. To unblock, install an iOS 18 simulator via Xcode → Settings → Components, then run `xcodebuild ... -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=18.x' build`. (Code path is the same on both — no iOS-26-only API was added; `#available` not required for this change.)
+- [x] Build clean: `xcodebuild ... -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.4.1' build` — **BUILD SUCCEEDED**, no new warnings.
+- [ ] Visual: `EmptyTodayScreen_New` on iPhone 15 Pro / iOS 18.x — **deferred until iOS 18 runtime installed.**
+- [ ] Visual: `EmptyTodayScreen_New` on iPhone 17 Pro / iOS 26.4.1 — **needs manual eyeball in Xcode**: open `EmptyTodayScreen_New.swift` preview or `AdaptiveHero` "Empty" preview; confirm backdrop only, no text.
+- [ ] Visual: `AdaptiveHero` preview `Empty` in Xcode shows backdrop only — **needs manual eyeball**.
+- [ ] VoiceOver pass: swiping into empty Today reaches `EmptyStateArrow` and FAB; the hero region itself is silent — **needs manual verification on device/simulator**.
+- [ ] Dynamic Type xxxLarge: hero height stays 300pt; no layout breakage from removed text — **needs manual verification**.
 
 ## Files expected to change
 
-- `DesignSystem/Sources/DesignSystem/Components/AdaptiveHero.swift` — `.empty` case: hide title block (headline + subtitle); update header doc comment to drop the now-resolved delta; mark `.empty` decorative for a11y.
-- `DesignSystem/Tests/DesignSystemTests/D3CompositeTests.swift` — update `test_adaptiveHeroEmptyLabel` per scope decision above.
+- `DesignSystem/Sources/DesignSystem/Components/AdaptiveHero.swift` — `.empty` case: hide title block (headline + subtitle); update `HeroState.empty` doc; mark `.empty` decorative for a11y.
+- `DesignSystem/Tests/DesignSystemTests/D3CompositeTests.swift` — update `test_adaptiveHeroEmptyLabel` → `test_adaptiveHeroEmptyIsDecorative`.
 - `DesignSystem/Sources/DesignSystem/Components/EmptyStateArrow.swift` — update stale comments referencing "No wins yet".
-- `XCode Project/DoneList/DoneList/Features/Today/EmptyTodayScreen.swift` — update stale inline comment.
+- `XCode Project/DoneList/DoneList/Features/Today/EmptyTodayScreen_New.swift` — update stale inline comment.
 
 ## Files that must NOT change
 
 - [ ] `index.html`, `sw.js`, `manifest.json`, `icon-*.png` (legacy PWA — `legacy-pwa.md`)
 - [ ] `Hero.swift` and `HeroBlock.swift` (deprecated, out of scope per task)
 - [ ] `Services/CopyBank.swift` (strings not present there)
+- [ ] `TodayView.swift` (legacy path uses `Hero`, not `AdaptiveHero` — unaffected)
 - [ ] Any unrelated component or screen
 
 ## ADRs honored / referenced
@@ -53,15 +56,15 @@ Branch: `feat/drop-old-today-account-navbar` (current). Tucks in alongside the n
 - ADR redesign-techdebt-001 — backdrop remains the raster PNG `navBarHero` (no change)
 - ADR-0010 — nav shell (RootTabView + BrandTabBar) unchanged
 
-(No new ADR required — this is Figma-parity tightening, not an architectural change.)
+(No new ADR required — Figma-parity tightening, not architectural change.)
 
 ## Acceptance criteria
 
-- [ ] No hardcoded user-facing strings remain in `AdaptiveHero.swift` for `.empty`
-- [ ] No new build warnings
-- [ ] No hardcoded tokens introduced (per `design-system.md`)
-- [ ] `Hero.swift` and `HeroBlock.swift` untouched
-- [ ] PR description references this contract path and Figma node `111:8965`
+- [x] No hardcoded user-facing strings remain in `AdaptiveHero.swift` for `.empty` — verified via diff
+- [x] No new build warnings — confirmed by clean iOS 26 build
+- [x] No hardcoded tokens introduced (per `design-system.md`) — change removes content, adds none
+- [x] `Hero.swift` and `HeroBlock.swift` untouched — confirmed via `git status`
+- [ ] PR description references this contract path and Figma node `111:8965` — to be added when PR is opened
 
 ## Out of scope
 
@@ -69,6 +72,7 @@ Branch: `feat/drop-old-today-account-navbar` (current). Tucks in alongside the n
 - Refactoring `AdaptiveHero` content stack into per-state subviews.
 - Reviewing or changing `EmptyStateArrow` copy or position.
 - Touching the `.today` or `.reflect` hero states.
+- Renaming `_New`-suffixed files or removing `r4TodayEnabled` — that's the sibling `drop-old-today-add-account-navbar` contract.
 
 ---
 

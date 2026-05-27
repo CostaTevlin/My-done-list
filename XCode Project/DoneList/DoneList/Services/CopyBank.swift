@@ -148,6 +148,17 @@ enum CopyBank {
         count == 1 ? "win today" : "wins today"
     }
 
+    // MARK: - Today empty state (per Figma 112:9873)
+
+    /// Headline shown above the sprout illustration on the empty Today screen.
+    /// Sets the emotional tone: a gentle "you're at zero today, that's fine".
+    static let emptyTodayHeadline = "No wins yet"
+
+    /// Subtitle shown below the headline on the empty Today screen.
+    /// Two lines on the design; the literal newline keeps the wrap stable
+    /// across Dynamic Type sizes.
+    static let emptyTodaySubtitle = "Every small step counts.\nYou\u{2019}ve got this."
+
     // MARK: - Voice capture (ADR-0010, Phase 4.5)
 
     /// Sheet title shown in LogSheet for both add and edit.

@@ -2,20 +2,22 @@
 // Circular 44×44 trailing navbar button — Account/avatar entry point.
 // Used by TodayScreen as the trailing ToolbarItem; opens the Settings sheet.
 //
-// Figma: node 111:8622 — Slowly MVP, navbar trailing button.
-//   • 44×44 pt frame, fully circular (cornerRadius = 296pt on a 44pt frame)
+// Figma: node 111:8622 (and 112:9873) — Slowly MVP, navbar trailing button.
+//   • 44×44 pt frame, fully circular (cornerRadius = circle)
 //   • DROP_SHADOW { y: 8, blur: 40, color: rgba(0,0,0,0.12) }
 //   • Icon: SF Symbol `person.crop.circle` (glyph 􀉭 / U+10026D), 22pt,
 //     color textPrimary. Rendered via `Image(systemName:)` so iOS resolves
 //     the PUA glyph through the SF Symbols renderer rather than the regular
-//     text font (which doesn't carry the symbol PUA range — verified
-//     empirically: Text(verbatim:) renders the missing-glyph placeholder).
+//     text font (which doesn't carry the symbol PUA range).
 //   • iOS 26: GLASS { frost: 7, depth: 16, lightAngle: 315°, lightIntensity: 0.8 }
 //
 // Liquid Glass gating (ADR-0005):
-//   • iOS 26 (`#available(iOS 26.0, *)`): `.glassEffect(.regular, in: .circle)`
-//     applied to a `Color.clear` frame, plus the Figma drop shadow for elevation.
-//   • iOS 18–25: white-filled circle + the same drop shadow.
+//   • iOS 26 (`#available(iOS 26.0, *)`): provide only the icon — the iOS 26
+//     toolbar wraps the button content in its own Liquid Glass treatment.
+//     `.buttonBorderShape(.circle)` hints the system to render a circular
+//     glass capsule rather than the default rounded-rectangle (which was
+//     observed empirically with our previous custom-shape approach).
+//   • iOS 18–25: custom white-filled circle with the Figma drop shadow.
 //
 // Accessibility: label = "Account", identifier = "Account".
 //
@@ -35,10 +37,46 @@ public struct AccountButton: View {
     }
 
     public var body: some View {
+        #if os(iOS)
+        if #available(iOS 26.0, *) {
+            iOS26Button
+        } else {
+            iOS18Button
+        }
+        #else
+        iOS18Button
+        #endif
+    }
+
+    // MARK: - iOS 26 path
+
+    #if os(iOS)
+    @available(iOS 26.0, *)
+    private var iOS26Button: some View {
+        // The iOS 26 toolbar wraps Button content in its own Liquid Glass
+        // capsule. We hand it just the SF Symbol and request a circular
+        // border shape so the system renders a circle, not the default
+        // rounded-rectangle. The system also supplies the elevation/shadow.
         Button(action: action) {
-            icon
+            Image(systemName: "person.crop.circle")
+                .font(.system(size: 22, weight: .regular))
+                .foregroundStyle(Slowly.Color.textPrimary)
+        }
+        .buttonBorderShape(.circle)
+        .accessibilityLabel("Account")
+        .accessibilityIdentifier("Account")
+    }
+    #endif
+
+    // MARK: - iOS 18 fallback
+
+    private var iOS18Button: some View {
+        Button(action: action) {
+            Image(systemName: "person.crop.circle")
+                .font(.system(size: 22, weight: .regular))
+                .foregroundStyle(Slowly.Color.textPrimary)
                 .frame(width: 44, height: 44)
-                .background(buttonBackground)
+                .background(Circle().fill(Color.white))
                 .clipShape(Circle())
                 .shadow(
                     color: Color.black.opacity(0.12),
@@ -50,39 +88,6 @@ public struct AccountButton: View {
         .buttonStyle(.plain)
         .accessibilityLabel("Account")
         .accessibilityIdentifier("Account")
-    }
-
-    // MARK: - Icon
-
-    private var icon: some View {
-        // SF Symbol `person.crop.circle` (PUA glyph 􀉭 / U+10026D).
-        // Must be rendered via Image(systemName:) — Text(verbatim:) yields
-        // the missing-glyph placeholder on iOS because the system text font
-        // doesn't carry the SF Symbols PUA range.
-        Image(systemName: "person.crop.circle")
-            .font(.system(size: 22, weight: .regular))
-            .foregroundStyle(Slowly.Color.textPrimary)
-    }
-
-    // MARK: - Background (iOS 18 / 26 split)
-
-    @ViewBuilder
-    private var buttonBackground: some View {
-        #if os(iOS)
-        if #available(iOS 26.0, *) {
-            // iOS 26: Liquid Glass material. Apply to clear surface so the
-            // system renders the glass effect itself.
-            Color.clear.glassEffect(.regular, in: .circle)
-        } else {
-            ios18Background
-        }
-        #else
-        ios18Background
-        #endif
-    }
-
-    private var ios18Background: some View {
-        Circle().fill(Color.white)
     }
 }
 

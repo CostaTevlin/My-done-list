@@ -2,16 +2,20 @@
 // Empty Today state — R4 D3 rebuild per Figma 112:9873.
 //
 // Layout (top to bottom):
-//   1. `AdaptiveHero(.empty)` — botanical backdrop, 300pt.
-//      (Note: Figma 112:9873 renders the hero with a concave-arc bottom
-//      mask. The current AdaptiveHero `.empty` variant has a flat bottom;
-//      the concave variant is a polish follow-up and does not block this
-//      task.)
+//   1. `AdaptiveHero(.empty)` masked with a concave-arc bottom — the
+//      illustration's lower edge curves up ~22pt at the centre, matching
+//      Figma 112:9933's Boolean-Subtract mask (Rectangle minus a wide
+//      Ellipse). Mask is applied here rather than inside AdaptiveHero so
+//      other AdaptiveHero consumers (populated Today, Reflect) keep their
+//      straight bottom edge.
 //   2. Central block — `EmptyStateSproutImage` (140×140) above a heading
 //      ("No wins yet") + subtitle ("Every small step counts. You've got
 //      this.").
-//   3. `EmptyStateArrow` — anchored bottom-trailing as an overlay,
-//      pointing at the FAB.
+//   3. `EmptyStateArrow` — in-flow at bottom-trailing, pointing at the FAB.
+//
+// Typography (per Figma 112:9884/9885):
+//   - Heading:  SF Pro Light 40pt, line-height 125% (50pt)   → Slowly.Font.title1Light
+//   - Subtitle: SF Pro Regular 16pt, line-height 24pt        → Slowly.Font.bodyRegular + lineSpacing(8)
 //
 // Copy lives in `CopyBank.emptyTodayHeadline` / `.emptyTodaySubtitle`.
 //
@@ -34,9 +38,10 @@ struct EmptyTodayScreen: View {
             // the arrow to a fixed bottom inset, which collided with the new
             // sprout + heading + subtitle stack).
             VStack(spacing: 0) {
-                // 1. Botanical backdrop (matches the populated-state hero in height)
+                // 1. Botanical backdrop with concave-arc bottom mask
                 AdaptiveHero(state: .empty)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .mask { ConcaveArcBottomShape() }
 
                 // 2. Central sprout + headline + subtitle block
                 centralBlock
@@ -88,13 +93,44 @@ struct EmptyTodayScreen: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 Text(CopyBank.emptyTodaySubtitle)
-                    .font(Slowly.Font.headlineRegular)
+                    .font(Slowly.Font.bodyRegular)               // 16pt per Figma 112:9885
                     .foregroundStyle(Slowly.Color.textSecondary)
                     .multilineTextAlignment(.center)
+                    .lineSpacing(8)                              // 16pt + 8 ≈ 24pt line-height
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity)
         }
+    }
+}
+
+// MARK: - Concave-arc bottom mask
+
+/// Mask shape: full rect at top, with the bottom edge curving UPWARD by
+/// ~22pt at the centre. Matches the Boolean-Subtract result from Figma
+/// 112:9933 (Rectangle 393×278 minus an Ellipse 1078×600 centred at
+/// (197, 557)). The Ellipse top-edge rises ~21pt above the Rectangle bottom
+/// at the horizontal centre, then drops to meet the corners.
+///
+/// Tuned to feel right at the AdaptiveHero's 300pt height; if the hero is
+/// resized significantly, revisit `arcDepth`.
+private struct ConcaveArcBottomShape: Shape {
+    var arcDepth: CGFloat = 22
+
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        p.move(to: CGPoint(x: 0, y: 0))
+        p.addLine(to: CGPoint(x: rect.width, y: 0))
+        p.addLine(to: CGPoint(x: rect.width, y: rect.height))
+        // Quadratic arc whose midpoint sits `arcDepth` above the bottom edge:
+        // the control point's y is positioned so a quadratic Bézier's midpoint
+        // (avg of endpoints and control × 2) lands at rect.height − arcDepth.
+        p.addQuadCurve(
+            to: CGPoint(x: 0, y: rect.height),
+            control: CGPoint(x: rect.width / 2, y: rect.height - arcDepth * 2)
+        )
+        p.closeSubpath()
+        return p
     }
 }
 

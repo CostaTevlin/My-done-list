@@ -24,7 +24,7 @@ if ! [[ "${CI_BUILD_NUMBER}" =~ ^[0-9]+$ ]]; then
 fi
 
 # Xcode Cloud runs this script with pwd = ci_scripts/, so the project is one level up.
-PROJ="../DoneList.xcodeproj/project.pbxproj"
+PROJ="../Slowly.xcodeproj/project.pbxproj"
 
 echo "ci_post_clone: project path=$(pwd)/${PROJ}"
 

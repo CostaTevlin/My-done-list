@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A984E242F9FE23F0096ED65"
-               BuildableName = "DoneList.app"
-               BlueprintName = "DoneList"
-               ReferencedContainer = "container:DoneList.xcodeproj">
+               BuildableName = "Slowly.app"
+               BlueprintName = "Slowly"
+               ReferencedContainer = "container:Slowly.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A984E332F9FE2400096ED65"
-               BuildableName = "DoneListTests.xctest"
-               BlueprintName = "DoneListTests"
-               ReferencedContainer = "container:DoneList.xcodeproj">
+               BuildableName = "SlowlyTests.xctest"
+               BlueprintName = "SlowlyTests"
+               ReferencedContainer = "container:Slowly.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A984E3D2F9FE2400096ED65"
-               BuildableName = "DoneListUITests.xctest"
-               BlueprintName = "DoneListUITests"
-               ReferencedContainer = "container:DoneList.xcodeproj">
+               BuildableName = "SlowlyUITests.xctest"
+               BlueprintName = "SlowlyUITests"
+               ReferencedContainer = "container:Slowly.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A984E242F9FE23F0096ED65"
-            BuildableName = "DoneList.app"
-            BlueprintName = "DoneList"
-            ReferencedContainer = "container:DoneList.xcodeproj">
+            BuildableName = "Slowly.app"
+            BlueprintName = "Slowly"
+            ReferencedContainer = "container:Slowly.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -87,9 +87,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7A984E242F9FE23F0096ED65"
-            BuildableName = "DoneList.app"
-            BlueprintName = "DoneList"
-            ReferencedContainer = "container:DoneList.xcodeproj">
+            BuildableName = "Slowly.app"
+            BlueprintName = "Slowly"
+            ReferencedContainer = "container:Slowly.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

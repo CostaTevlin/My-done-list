@@ -57,33 +57,34 @@ struct ReflectView: View {
     // MARK: - Body
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                heroBlock
-                weeklyChart
-                divider
-                timelineSection
-                footer
+        // Mirrors TodayScreen: hero is a fixed header OUTSIDE the ScrollView so
+        // its backdrop can bleed into the safe area top (a ScrollView clips its
+        // content to its own frame, which prevents the watercolour from
+        // extending behind the status bar / Dynamic Island). The ScrollView
+        // hosts only the chart + timeline + footer.
+        ZStack {
+            Color.surfaceApp.ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                AdaptiveHero(state: .reflect(
+                    headline: "Your day so far",
+                    subtitle: reflectNote
+                ))
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Spacer().frame(height: 32)
+                        weeklyChart
+                        divider
+                        timelineSection
+                        footer
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, Spacing.xxl)
+                    .padding(.bottom, Spacing.bottomSafe)
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, Spacing.xxl)
-            .padding(.top, 20)
-            .padding(.bottom, Spacing.bottomSafe)
         }
-        .background(Color.surfaceApp.ignoresSafeArea())
-    }
-
-    // MARK: - Hero block
-
-    @ViewBuilder
-    private var heroBlock: some View {
-        Hero(
-            variant: .reflect,
-            label: "REFLECT",
-            headline: "Your day so far",
-            subtext: reflectNote
-        )
-        Spacer().frame(height: 32)
     }
 
     // MARK: - Weekly chart

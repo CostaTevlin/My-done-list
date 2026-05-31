@@ -1,10 +1,13 @@
 // TodayScreen.swift
 // Today screen — R4 D3-composite (canonical, flag removed).
-// Coordinator: branches on item count between populated list and EmptyTodayScreen.
-// Populated path: AdaptiveHero + time-of-day sections (TimeOfDaySectionHeader + EntryRow).
+// Coordinator: hosts a single shared AdaptiveHero above content that swaps
+// between EmptyTodayScreen (sprout/heading/arrow) and the populated List.
+// Because the hero is one instance, its built-in `.animation(value: state)`
+// interpolates the 300pt↔95pt height and content opacity smoothly when the
+// first item is logged or the last is deleted.
 // Navbar: trailing AccountButton opens SettingsView sheet.
 //
-// Phase: R4
+// Phase: R5 (hero-animation refactor — hero hoisted from per-state screens)
 // See: design-system/Screen specs.md (Today)  ·  ADR-0007 (swipeActions)  ·  ADR-0010
 //      ADR-0011 (ADHD copy via CopyBank)  ·  ADR-0005 (Liquid Glass gating)
 
@@ -34,14 +37,42 @@ struct TodayScreen: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if todayItems.isEmpty {
-                    EmptyTodayScreen(onLog: onLog)
-                } else {
-                    populatedList
+            ZStack {
+                // Shared surface bleeds into the safe area so the hero's
+                // watercolour has the same backdrop in either state.
+                Slowly.Color.surfaceApp.ignoresSafeArea()
+
+                VStack(spacing: 0) {
+                    // Single hero instance — switching state animates the
+                    // 95pt↔300pt height via the hero's own .animation modifier.
+                    AdaptiveHero(state: heroState)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    // Content below the hero fades + slides as the hero
+                    // height changes. The transition is per-branch so the
+                    // outgoing view fades out as the incoming one fades in.
+                    if todayItems.isEmpty {
+                        EmptyTodayScreen(onLog: onLog)
+                            .transition(.opacity)
+                    } else {
+                        todayList
+                            .transition(.opacity)
+                    }
                 }
+                // Start the VStack from screen-top (y=0) so the hero occupies
+                // 0–95pt from screen top — matching Figma's hero frame that
+                // starts at y=0 of the canvas. Without this the VStack starts
+                // at the safe-area inset (~59pt) making the hero bottom land at
+                // ~154pt and leaving a large gap before the date text.
+                .ignoresSafeArea(edges: .top)
             }
-            .background(Slowly.Color.surfaceApp.ignoresSafeArea())
+            // Animate the empty↔populated swap. The hero's height interpolates
+            // (via its own animation), the VStack re-layouts its children, and
+            // the if/else branches cross-fade via the .opacity transition.
+            .animation(
+                reduceMotion ? nil : .spring(duration: 0.45, bounce: 0.15),
+                value: todayItems.isEmpty
+            )
             // Force the nav bar to render so the trailing AccountButton is laid out.
             // Without `.toolbar(.visible, ...)`, SwiftUI on iOS 26 inside a `Tab`
             // collapses the bar entirely when the title is empty and the background
@@ -122,29 +153,36 @@ struct TodayScreen: View {
         return f
     }()
 
+    // Hero state derives from item count so a single AdaptiveHero instance can
+    // animate its 300pt↔95pt height when the user logs their first item or
+    // deletes their last. .empty is the Expanded variant; .today(...) is Compact.
     private var heroState: HeroState {
-        .today(
+        if todayItems.isEmpty {
+            return .empty
+        }
+        return .today(
             date: Self.heroDateFormatter.string(from: .now),
             headline: CopyBank.message(count: todayItems.count, hour: hour),
             subtitle: CopyBank.todayHeroInsight(count: todayItems.count, hour: hour)
         )
     }
 
-    // MARK: - Populated list
+    // MARK: - Today list (populated branch — sits below the shared hero)
 
     @ViewBuilder
-    private var populatedList: some View {
+    private var todayList: some View {
         List {
-            // BigNumeral + Hero — composed per Figma 111:8965, BigNumeral lives outside the hero component.
-            // AdaptiveHero still manages its own horizontal + top padding internally for the text block.
-            VStack(alignment: .leading, spacing: 0) {
-                BigNumeral(value: todayItems.count)
-                    .padding(.horizontal, Slowly.Spacing.xl)
-                AdaptiveHero(state: heroState)
-            }
-            .listRowSeparator(.hidden)
-            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: Slowly.Spacing.lg, trailing: 0))
-            .listRowBackground(Slowly.Color.surfaceApp)
+            // Title block sits below the hero band, on the plain surface
+            // (Figma 112:9687): date · BigNumeral · headline · subtitle.
+            todayTitleBlock
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets(
+                    top: Slowly.Spacing.xxxl,
+                    leading: 0,
+                    bottom: Slowly.Spacing.lg,
+                    trailing: 0
+                ))
+                .listRowBackground(Slowly.Color.surfaceApp)
 
             // Time-of-day sections
             ForEach(sections) { section in
@@ -190,9 +228,40 @@ struct TodayScreen: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(Slowly.Color.surfaceApp)
+        // Remove the automatic top inset that NavigationStack injects so the
+        // List's scroll content clears the (hidden) nav bar. Without this, the
+        // first row is pushed ~100pt below the hero, leaving a large empty gap.
+        .contentMargins(.top, 0, for: .scrollContent)
         .contentMargins(.bottom, Slowly.Spacing.screenBottom, for: .scrollContent)
         .animation(reduceMotion ? nil : Motion.entranceCurve, value: todayItems.count)
+    }
+
+    // MARK: - Today title block (composed below the compact hero, per Figma 112:9687)
+
+    @ViewBuilder
+    private var todayTitleBlock: some View {
+        VStack(alignment: .leading, spacing: Slowly.Spacing.sm) {
+            Text(Self.heroDateFormatter.string(from: .now))
+                .font(Slowly.Font.bodyMedium)
+                .foregroundStyle(Slowly.Color.textSecondary)
+
+            BigNumeral(value: todayItems.count)
+
+            Text(CopyBank.message(count: todayItems.count, hour: hour))
+                .font(Slowly.Font.title1Light)
+                .foregroundStyle(Slowly.Color.textPrimary)
+                .multilineTextAlignment(.leading)
+                .lineLimit(3)
+
+            Text(CopyBank.todayHeroInsight(count: todayItems.count, hour: hour))
+                .font(Slowly.Font.headlineRegular)
+                .foregroundStyle(Slowly.Color.textSecondary)
+                .multilineTextAlignment(.leading)
+                .lineSpacing(6)
+                .lineLimit(2)
+        }
+        .padding(.horizontal, Slowly.Spacing.xl)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "navBarHero-imageset 1.png",
+      "filename" : "IMG_9961 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "navBarHero-imageset.png",
+      "filename" : "IMG_9961 1@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "navBarHero-imageset-3x.png",
+      "filename" : "IMG_9961 1@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

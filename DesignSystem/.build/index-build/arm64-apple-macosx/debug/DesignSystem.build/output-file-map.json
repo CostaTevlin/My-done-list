@@ -107,6 +107,13 @@
     "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateArrow.swiftdeps",
     "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateArrow.dia"
   },
+  "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EmptyStateSproutImage.swift": {
+    "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateSproutImage.d",
+    "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateSproutImage.swift.o",
+    "swiftmodule": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateSproutImage~partial.swiftmodule",
+    "swift-dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateSproutImage.swiftdeps",
+    "diagnostics": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateSproutImage.dia"
+  },
   "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EntryRow.swift": {
     "dependencies": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EntryRow.d",
     "object": "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/index-build/arm64-apple-macosx/debug/DesignSystem.build/EntryRow.swift.o",

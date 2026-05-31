@@ -101,6 +101,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EmptyStateSproutImage.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EntryRow.swift"
         },
         {
@@ -223,6 +227,7 @@
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSText.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/DSTextField.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateArrow.swift.o",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateSproutImage.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/EntryRow.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/Hero.swift.o",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/HeroBlock.swift.o",
@@ -360,6 +365,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateSproutImage.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/EntryRow.swift.o"
         },
         {
@@ -472,6 +481,7 @@
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EmptyStateArrow.swift",
+        "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EmptyStateSproutImage.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EntryRow.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
         "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
@@ -735,6 +745,7 @@
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSText.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/DSTextField.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EmptyStateArrow.swift",
+      "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EmptyStateSproutImage.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EntryRow.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/Hero.swift",
       "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/HeroBlock.swift",
@@ -1035,6 +1046,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EmptyStateSproutImage.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/Sources/DesignSystem/Components/EntryRow.swift"
         },
         {
@@ -1216,6 +1231,10 @@
         {
           "kind" : "file",
           "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateArrow.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/konstantinnaumenko/GitHub/My done list/DesignSystem/.build/arm64-apple-macosx/debug/DesignSystem.build/EmptyStateSproutImage.swift.o"
         },
         {
           "kind" : "file",

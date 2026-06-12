@@ -6,3 +6,7 @@ node_modules/
 # Xcode per-user state
 xcuserdata/
 *.xcuserstate
+
+# Self-heal pilot run outputs (keep folder via .gitkeep)
+self-heal-pilot/artifacts/*
+!self-heal-pilot/artifacts/.gitkeep

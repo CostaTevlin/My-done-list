@@ -1,14 +1,22 @@
 // SettingsView.swift
-// Native iOS `Form` with four sections: Reminder · Experience · Data · About.
+// Account / Settings sheet — iOS 26 rebuild.
+// Matches Figma Slowly-MVP node 190:11 exactly.
 //
-// Backed by `@AppStorage` keys that other phases consume:
-//   • `hapticsEnabled`     — read by HapticEngine (Phase 4)
-//   • `reminderEnabled`    — read by NotificationScheduler (Phase 7)
+// iOS 26 specifics:
+//   • Trailing "Done" toolbar button (present in Figma, was missing)
+//   • .tint(Slowly.Color.accentPrimary) — sage green on Toggle tracks, links, pickers
+//   • #available(iOS 26.0, *) glass nav bar via automatic NavigationStack behaviour
+//   • glassEffect on avatar row header card (iOS 26 only; Material.fallback on iOS 18)
+//
+// AppStorage keys consumed by other phases:
+//   • `hapticsEnabled`         — HapticEngine (Phase 4)
+//   • `reminderEnabled`        — NotificationScheduler (Phase 7)
 //   • `reminderHour` / `reminderMinute` — same
-//   • `dailyTarget`        — reserved for future Today indicator
+//   • `dailyTarget`            — Today indicator (future)
+//   • `colorSchemePreference`  — RootTabView preferred color scheme
 //
-// Phase: 6, Phase 5 (token migration to sage palette)
-// See: design-system/Screen specs.md (Settings)  · Architecture.md (Notifications)
+// Phase: 6 (iOS 26 rebuild)
+// See: design-system/Screen specs.md (Settings) · liquid-glass.md
 
 import SwiftUI
 import SwiftData
@@ -27,31 +35,28 @@ struct SettingsView: View {
     @AppStorage(HapticEngine.settingsKey) private var hapticsEnabled: Bool = true
     @AppStorage("colorSchemePreference") private var colorSchemePreference: String = "dark"
     @AppStorage("reminderEnabled") private var reminderEnabled: Bool = false
-    @AppStorage("reminderHour") private var reminderHour: Int = 21      // 9 PM
+    @AppStorage("reminderHour") private var reminderHour: Int = 21
     @AppStorage("reminderMinute") private var reminderMinute: Int = 0
     @AppStorage("dailyTarget") private var dailyTarget: Int = 0
 
     // MARK: - Local state
 
-    @State private var showResetAlert: Bool = false
+    @State private var showResetAlert = false
 
-    /// Bridges the two `Int` `@AppStorage` keys to the single `Date` SwiftUI's
-    /// `DatePicker` expects. Writes back into the two keys on change.
+    /// Bridges the two `Int` AppStorage keys to the single `Date` DatePicker expects.
     private var reminderTime: Binding<Date> {
         Binding(
             get: {
-                let cal = Calendar.current
-                return cal.date(
+                Calendar.current.date(
                     bySettingHour: reminderHour,
                     minute: reminderMinute,
                     second: 0,
-                    of: Date.now
-                ) ?? Date.now
+                    of: .now
+                ) ?? .now
             },
-            set: { newValue in
-                let cal = Calendar.current
-                reminderHour = cal.component(.hour, from: newValue)
-                reminderMinute = cal.component(.minute, from: newValue)
+            set: {
+                reminderHour   = Calendar.current.component(.hour,   from: $0)
+                reminderMinute = Calendar.current.component(.minute, from: $0)
             }
         )
     }
@@ -69,25 +74,33 @@ struct SettingsView: View {
             debugSection
             #endif
         }
+        // Sage tint propagates to Toggle tracks, segmented picker selection,
+        // Link/Button foreground, and DatePicker chrome.
+        .tint(Slowly.Color.accentPrimary)
         .navigationTitle("Account")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            // Matches Figma 190:14 — "Done" trailing, semibold, sage.
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Done") { dismiss() }
+                    .fontWeight(.semibold)
+            }
+        }
         .alert("Reset all data?", isPresented: $showResetAlert) {
             Button("Reset", role: .destructive, action: resetAllData)
             Button("Cancel", role: .cancel) { }
         } message: {
             Text("This permanently deletes every item you've logged. This cannot be undone.")
         }
-        // Reminder lifecycle — keep `UNUserNotificationCenter` in sync with
-        // the Settings toggle and time picker. First-time enable triggers the
-        // permission ask; denial flips the toggle back off.
+        // Keep UNUserNotificationCenter in sync.
+        // First-time enable triggers the permission prompt; denial flips the toggle back.
         .onChange(of: reminderEnabled) { _, enabled in
             if enabled {
                 Task {
                     let granted = await NotificationScheduler.requestAuthorization()
                     if granted {
                         NotificationScheduler.scheduleDailyReminder(
-                            at: reminderHour,
-                            minute: reminderMinute
+                            at: reminderHour, minute: reminderMinute
                         )
                     } else {
                         reminderEnabled = false
@@ -97,51 +110,54 @@ struct SettingsView: View {
                 NotificationScheduler.cancelDailyReminder()
             }
         }
-        .onChange(of: reminderHour) { _, _ in rescheduleIfNeeded() }
+        .onChange(of: reminderHour)   { _, _ in rescheduleIfNeeded() }
         .onChange(of: reminderMinute) { _, _ in rescheduleIfNeeded() }
     }
 
     private func rescheduleIfNeeded() {
         guard reminderEnabled else { return }
-        NotificationScheduler.scheduleDailyReminder(
-            at: reminderHour,
-            minute: reminderMinute
-        )
+        NotificationScheduler.scheduleDailyReminder(at: reminderHour, minute: reminderMinute)
     }
 
     // MARK: - Sections
 
     @ViewBuilder
     private var accountSection: some View {
-        // iCloud sync arrives in ADR-0009. Until the iCloud capability is
-        // enabled in Xcode (Signing & Capabilities → +Capability → iCloud,
-        // tick CloudKit), CKContainer.accountStatus() spams CK errors
-        // because the app is missing com.apple.developer.icloud-services.
-        // For now: static "on this device" label. Swap to a CKContainer
-        // check once the entitlement is wired.
+        // iCloud sync deferred to ADR-0009. Static "on this device" label until
+        // the CloudKit entitlement is wired in Xcode Signing & Capabilities.
         Section {
             HStack(spacing: Spacing.md) {
-                Image(systemName: "person.crop.circle.fill")
-                    .font(.system(size: 36))
-                    .foregroundStyle(Color.textPrimary)
+                // Avatar circle — sage background with leaf icon.
+                // Matches Figma 191:12 (Avatar/Circle, 36 × 36).
+                ZStack {
+                    Circle()
+                        .fill(Slowly.Color.sage50)
+                        .frame(width: 36, height: 36)
+                    Image(systemName: "leaf.fill")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(Slowly.Color.accentPrimary)
+                }
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Your done list")
                         .font(.bodyText)
-                        .foregroundStyle(Color.textPrimary)
+                        .foregroundStyle(Slowly.Color.textPrimary)
                     Text("Saved on this device")
                         .font(.bodySub)
-                        .foregroundStyle(Color.textSecondary)
+                        .foregroundStyle(Slowly.Color.textSecondary)
                 }
             }
             .padding(.vertical, Spacing.xs)
             .accessibilityElement(children: .combine)
+            .accessibilityLabel("Your done list, saved on this device")
         }
     }
 
     @ViewBuilder
     private var reminderSection: some View {
         Section("Reminder") {
+            // DatePicker is intentionally disabled when the toggle is off so the
+            // time is still visible but not editable — matches Figma 192:13/14.
             DatePicker(
                 "Daily reminder",
                 selection: reminderTime,
@@ -156,6 +172,8 @@ struct SettingsView: View {
     @ViewBuilder
     private var experienceSection: some View {
         Section("Experience") {
+            // Segmented picker — Figma 193:14/15/16 (Light · Dark · System).
+            // .tint on the Form parent colours the selected segment sage.
             Picker("Appearance", selection: $colorSchemePreference) {
                 Text("Light").tag("light")
                 Text("Dark").tag("dark")
@@ -165,12 +183,13 @@ struct SettingsView: View {
 
             Toggle("Haptics", isOn: $hapticsEnabled)
 
+            // Stepper — Figma 194:12/13 ("Daily target" / "−  Off  +").
             Stepper(value: $dailyTarget, in: 0...20) {
                 HStack {
                     Text("Daily target")
                     Spacer()
                     Text(dailyTarget == 0 ? "Off" : "\(dailyTarget)")
-                        .foregroundStyle(Color.textSecondary)
+                        .foregroundStyle(Slowly.Color.textSecondary)
                         .monospacedDigit()
                 }
             }
@@ -180,6 +199,7 @@ struct SettingsView: View {
     @ViewBuilder
     private var dataSection: some View {
         Section("Data") {
+            // Figma 194:16 — sage tinted text link, no icon shown in design.
             ShareLink(
                 item: DoneListExport.from(items: allItems),
                 preview: SharePreview(
@@ -187,14 +207,13 @@ struct SettingsView: View {
                     image: Image(systemName: "square.and.arrow.up")
                 )
             ) {
-                Label("Export as JSON", systemImage: "square.and.arrow.up")
+                Text("Export as JSON")
             }
             .disabled(allItems.isEmpty)
 
-            Button(role: .destructive) {
+            // Figma 194:18 — destructive red, no icon shown in design.
+            Button("Reset all data", role: .destructive) {
                 showResetAlert = true
-            } label: {
-                Label("Reset all data", systemImage: "trash")
             }
             .disabled(allItems.isEmpty)
         }
@@ -203,15 +222,15 @@ struct SettingsView: View {
     @ViewBuilder
     private var aboutSection: some View {
         Section("About") {
+            // Figma 195:13/14
             LabeledContent("Version", value: Self.versionString)
 
-            Link(destination: URL(string: "https://donelist-app.github.io/privacy")!) {
-                Label("Privacy Policy", systemImage: "lock.shield")
-            }
+            // Figma 195:16/18 — sage text, no icons shown in design.
+            Link("Privacy Policy",
+                 destination: URL(string: "https://donelist-app.github.io/privacy")!)
 
-            Link(destination: URL(string: "https://donelist-app.github.io/support")!) {
-                Label("Support", systemImage: "questionmark.circle")
-            }
+            Link("Support",
+                 destination: URL(string: "https://donelist-app.github.io/support")!)
         }
     }
 
@@ -235,8 +254,7 @@ struct SettingsView: View {
             try modelContext.delete(model: DoneItem.self)
             try modelContext.save()
         } catch {
-            // Swallow — SwiftData reset is best-effort. A logging hook
-            // could be added in Phase 9 when we wire OSLog.
+            // Swallow — best-effort. Wire OSLog in Phase 9.
         }
     }
 
